@@ -18,6 +18,18 @@ namespace EventHub_App.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Index(string searchByLocation)
+        {
+            ViewData["searchByLocation"] = searchByLocation;
+
+   
+
+            return View();
+
+
+        }
+
         public IActionResult Privacy()
         {
             return View();
