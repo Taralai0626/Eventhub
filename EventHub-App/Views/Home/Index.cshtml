@@ -1,15 +1,71 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Home Page";
 }
 
+
+
+<form method="get" asp-action="Index" name="searchForm">
+   <input type='text'  id="searchBar" name="searchByLocation"/>
+   <input type="submit" class="btn btn-primary" value="Submit"/>
+</form>
+
+<!-- <div>c# - Your search is: @ViewData["searchByLocation"]</div>
+<div>c# - Your city latitude is: @ViewData["cityLat"]</div>
+-->
+
+<div> JS - Your search city is: <span id="city"></span></div>
+<div> It's latitude is: <span id="latitude"></span></div>
+<div>It's longtitude is: <span id="longtitude"></span></div>
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>This is home page.<a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>This is home.<a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
 
-@section scripts{
-    <script type="text/javascript" >
-        alert("hi");
-    </script>
-}
 
+<script>
+
+	window.onload = function() {
+
+		var formHandle = document.forms.searchForm;
+		var inputCity = searchForm.searchByLocation;
+
+        var cityName = document.getElementById("city");
+		var cityLat = document.getElementById("latitude");
+		var cityLon = document.getElementById("longtitude");
+
+		var result;
+
+
+		formHandle.onsubmit = submitForm;
+		 function submitForm(){
+			
+			const options = {
+				method: 'GET',
+				headers: {
+					'X-RapidAPI-Key': '48e44e0db9msh0a550f0e0f01e70p193d8bjsnc47430e4dab3',
+					'X-RapidAPI-Host': 'forward-reverse-geocoding.p.rapidapi.com'
+				}
+			};
+
+			fetch('https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?city='+inputCity.value+'&accept-language=en&polygon_threshold=0.0', options)
+				.then(response => response.json())
+				.then(data => result = data)
+				.then(()=>console.log(result))
+				.then(() => cityLat.innerHTML = result[0].lat)
+				.then(() => cityLon.innerHTML = result[0].lon)
+				.catch(err => console.error(err));
+	
+
+
+			cityName.innerHTML = inputCity.value;
+	
+			
+			return false;
+		}
+
+	}
+	
+
+</script>
