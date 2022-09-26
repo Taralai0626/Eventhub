@@ -35,7 +35,7 @@
 		var cityLat = document.getElementById("latitude");
 		var cityLon = document.getElementById("longtitude");
 
-
+		var result;
 
 
 		formHandle.onsubmit = submitForm;
@@ -49,40 +49,21 @@
 				}
 			};
 
-				 fetch('https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?city='+inputCity.value+'&accept-language=en&polygon_threshold=0.0', options)
+			fetch('https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?city='+inputCity.value+'&accept-language=en&polygon_threshold=0.0', options)
 				.then(response => response.json())
-	.then(response => console.log(response[0]))
-	.catch(err => console.error(err));
+				.then(data => result = data)
+				.then(()=>console.log(result))
+				.then(() => cityLat.innerHTML = result[0].lat)
+				.then(() => cityLon.innerHTML = result[0].lon)
+				.catch(err => console.error(err));
 	
-
-
 
 
 			cityName.innerHTML = inputCity.value;
 	
-
-	
-	
-	
 			
 			return false;
 		}
-
-
-	/*const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '48e44e0db9msh0a550f0e0f01e70p193d8bjsnc47430e4dab3',
-		'X-RapidAPI-Host': 'forward-reverse-geocoding.p.rapidapi.com'
-	}
-};
-
-	fetch('https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?city=toronto&accept-language=en&polygon_threshold=0.0', options)
-	.then(response => response.json())
-	.then(response => console.log(response[0]))
-	.catch(err => console.error(err));
-	*/
-	
 
 	}
 	
