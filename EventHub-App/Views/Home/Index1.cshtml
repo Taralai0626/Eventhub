@@ -1,0 +1,123 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<body onload="initialize()">
+
+	<form method="get" asp-action="Index" name="searchForm">
+		<input type='text' id="searchBar" name="searchByLocation" />
+		<input type="submit" class="btn btn-primary" value="Submit" onclick="codeAddress()" />
+	</form>
+
+	<!-- <div>c# - Your search is: @ViewData["searchByLocation"]</div>
+	<div>c# - Your city latitude is: @ViewData["cityLat"]</div>
+	-->
+
+	<div> JS - Your search city is: <span id="city"></span></div>
+	<div> It's latitude is: <span id="latitude"></span></div>
+	<div>It's longtitude is: <span id="longtitude"></span></div>
+
+	<div class="col" id="map">
+		<p>hi</p>
+	</div>
+
+	<div class="text-center">
+		<h1 class="display-4">Welcome</h1>
+		<p>This is home.<a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+	</div>
+
+
+	<script>
+
+		window.onload = function () {
+
+			var formHandle = document.forms.searchForm;
+			var inputCity = searchForm.searchByLocation;
+
+			var cityName = document.getElementById("city");
+			var cityLat = document.getElementById("latitude");
+			var cityLon = document.getElementById("longtitude");
+
+			var result;
+
+
+			formHandle.onsubmit = submitForm;
+			function submitForm() {
+
+				const options = {
+					method: 'GET',
+					headers: {
+						'X-RapidAPI-Key': '48e44e0db9msh0a550f0e0f01e70p193d8bjsnc47430e4dab3',
+						'X-RapidAPI-Host': 'forward-reverse-geocoding.p.rapidapi.com'
+					}
+				};
+
+				fetch('https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?city=' + inputCity.value + '&accept-language=en&polygon_threshold=0.0', options)
+					.then(response => response.json())
+					.then(data => result = data)
+					.then(() => console.log(result))
+					.then(() => cityLat.innerHTML = result[0].lat)
+					.then(() => cityLon.innerHTML = result[0].lon)
+					.catch(err => console.error(err));
+
+
+
+				cityName.innerHTML = inputCity.value;
+
+
+				return false;
+			}
+
+		}
+
+		// Map
+		var geocoder;
+		var map;
+		var lat = '';
+		var lng = '';
+
+		function initMap() {
+			var map = new google.maps.Map(document.getElementById('map'), {
+				center: { lat: 43.6532, lng: -79.3832 },
+				zoom: 14
+			});
+			var input = document.getElementById('address');
+
+
+			var autocomplete = new google.maps.places.Autocomplete(input);
+			autocomplete.bindTo('bounds', map);
+		}
+
+
+		function initialize() {
+			geocoder = new google.maps.Geocoder();
+			var latlng = new google.maps.LatLng(43.6532, -79.3832);
+			var mapOptions = {
+				zoom: 12,
+				center: latlng
+			}
+			map = new google.maps.Map(document.getElementById('map'), mapOptions);
+		}
+
+		function codeAddress() {
+			var address = document.getElementById('searchBar').value;
+			geocoder.geocode({ 'address': address }, function (results, status) {
+				if (status == 'OK') {
+					lat = results[0].geometry.location.lat();
+					lng = results[0].geometry.location.lng();
+					map.setCenter(results[0].geometry.location);
+					var marker = new google.maps.Marker({
+						map: map,
+						position: results[0].geometry.location
+					});
+				} else {
+					alert('Geocode was not successful for the following reason: ' + status);
+				}
+			});
+		}
+	</script>
+
+	<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDz_qxllhGeL9ZGB7kNBoXaOj0IVYNB1Sw&callback=initMap" async defer>
+	</script>
+</body>
