@@ -13,62 +13,75 @@
         <input type="submit" value="Search" onclick="codeAddress()" class="btn btn-secondary btn-lg" />
       </form>
 
-  <div class="container">
-    <div class="row">
-      <div class="col">
-      </div>
-    <div class="col" id="map">
-    </div>
-  </div>
-  </div>
+    <h3>Current Event</h3>
 
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyD9yKj9LOXFPB8mW9rxxxy2T6IHnjIO7W0&callback=initMap" async defer>
-    </script>
+    <!-- <div class="main">
+    <div class="container"> -->
+    <!-- FOR TICKETMASTER & googleapis -->
+    <p id="location">location there</p>
+    <div id="map"></div>
+    <div id="events"></div>
+    
+  
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq_BgjdIrt6XMzDT5J7RPmMovum-hne1E&callback=initMap&libraries=places&v=weekly"
+            defer></script>
+
     <script>
-        var geocoder;
-        var map;
-        var lat = '';
-        var lng = '';
-
+        
         function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 43.6532, lng: -79.3832 },
-                zoom: 14
-            });
-            var input = document.getElementById('address');
+             var map = new google.maps.Map(document.getElementById("map"), {
+                 center: { lat: -33.8688, lng: 151.2195 },
+                 zoom: 13
+             });
+             var input = document.getElementById("pac-input");
+             // Specify just the place data fields that you need.
+             var autocomplete = new google.maps.places.Autocomplete(input, {
+                 fields: ["place_id", "geometry", "formatted_address", "name"]
+             });
+             autocomplete.bindTo("bounds", map);
+             map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+             var infowindow = new google.maps.InfoWindow();
+             var infowindowContent = document.getElementById("infowindow-content");
+             infowindow.setContent(infowindowContent);
+             var marker = new google.maps.Marker({ map: map });
+             marker.addListener("click", function () {
+                 infowindow.open(map, marker);
+             });
+             autocomplete.addListener("place_changed", function () {
+                 infowindow.close();
+                 var place = autocomplete.getPlace();
+                 if (!place.geometry || !place.geometry.location) {
+                     return;
+                 }
+                 if (place.geometry.viewport) {
+                     map.fitBounds(place.geometry.viewport);
+                 }
+                 else {
+                     map.setCenter(place.geometry.location);
+                     map.setZoom(17);
+                 }
+                 // Set the position of the marker using the place ID and location.
+                 // ts-ignore This should be in typings/googlemaps.
+                 marker.setPlace({
+                     placeId: place.place_id,
+                     location: place.geometry.location
+                 });
+                 marker.setVisible(true);
+                 infowindowContent.children.namedItem("place-name").textContent = place.name;
+                infowindowContent.children.namedItem("place-id").textContent = place.place_id;
+                 infowindowContent.children.namedItem("place-address").textContent = place.formatted_address;
+                 infowindowContent.children.namedItem("place-address").textContent = place.geometry.lat;
+                   console.log(place);
+                 infowindow.open(map, marker);
 
 
-            var autocomplete = new google.maps.places.Autocomplete(input);
-            autocomplete.bindTo('bounds', map);
-        }
+             });
 
 
-        function initialize() {
-            geocoder = new google.maps.Geocoder();
-            var latlng = new google.maps.LatLng(43.6532, -79.3832);
-            var mapOptions = {
-                zoom: 12,
-                center: latlng
-            }
-            map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        }
+         }
+         window.initMap = initMap;
 
-        function codeAddress() {
-            var address = document.getElementById('address').value;
-            geocoder.geocode({ 'address': address }, function (results, status) {
-                if (status == 'OK') {
-                    lat = results[0].geometry.location.lat();
-                    lng = results[0].geometry.location.lng();
-                    map.setCenter(results[0].geometry.location);
-                    var marker = new google.maps.Marker({
-                        map: map,
-                        position: results[0].geometry.location
-                    });
-                } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
-                }
-            });
-        }
-
+         google.maps.event.addDomListener(window, 'load', initMap);
     </script>
 </body>
