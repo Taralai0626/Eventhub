@@ -1,59 +1,55 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    <head runat="server">  
-    <title></title>  
-  
-     <!DOCTYPE link href="https://maps/documentation/javascript/examples/default.css" rel="stylesheet" />  
-<html>  
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>  
-     <script
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq_BgjdIrt6XMzDT5J7RPmMovum-hne1E&callback=initMap&libraries=places&v=weekly"
-  defer ></script>
-    <script>  
-        var mapcode;  
-        var diag;  
-        function initialize() {  
-            mapcode = new google.maps.Geocoder();  
-            var lnt = new google.maps.LatLng(26.45, 82.85);  
-            var diagChoice = {  
-                zoom: 9,  
-                center: lnt,  
-                diagId: google.maps.MapTypeId.ROADMAP  
-            }  
-            diag = new google.maps.Map(document.getElementById('map_populate'), diagChoice);  
-        }  
-        function getmap() {  
-            var completeaddress = document.getElementById('txt_location').value;  
-            mapcode.geocode({ 'address': completeaddress }, function (results, status) {  
-                if (status == google.maps.GeocoderStatus.OK) {  
-                    diag.setCenter(results[0].geometry.location);  
-                    var hint = new google.maps.Marker({  
-                        diag: diag,  
-                        position: results[0].geometry.location  
-                    });  
-                } else {  
-                    alert('Location Not Tracked. ' + status);  
-                }  
-            });  
-        }  
-        google.maps.event.addDomListener(window, 'load', initialize);  
-        window.getmap = getmap;
-    </script>  
-  
-    </html>  
-</head>  
 }
 
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq_BgjdIrt6XMzDT5J7RPmMovum-hne1E&callback=initMap&libraries=places&v=weekly"
+            defer></script>
+    <link href="https://maps/documentation/javascript/examples/default.css" rel="stylesheet" />
+    <title>EventHub</title>
+    <script>var mapcode;
+        var diag;
+        function initialize() {
+            mapcode = new google.maps.Geocoder();
+            var lnt = new google.maps.LatLng(43.7184038, -79.5181432);
+            var diagChoice = {
+                zoom: 12,
+                center: lnt,
+                diagId: google.maps.MapTypeId.ROADMAP
+            }
+            diag = new google.maps.Map(document.getElementById('map_populate'), diagChoice);
+        }
+        function getmap() {
+            var completeaddress = document.getElementById('txt_location').value;
+            mapcode.geocode({ 'address': completeaddress }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    diag.setCenter(results[0].geometry.location);
+                    var hint = new google.maps.Marker({
+                        diag: diag,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert('Location Not Tracked. ' + status);
+                }
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+        window.getmap = getmap;</script>
+</head>
 <body onload="initialize()">
 
     <h1>Current Event</h1>
     <h2>input your city and check out the list of suggested things!</h2>
-    
-      <form id="form1" runat="server" name="address" method="GET">
-       
-            <!-- <label for="address">Search Your City</label> -->
-        <input id="txt_location" name="address" type="text" runat="server"/>
+
+    <form id="form1" runat="server" name="address" method="GET">
+
+        <!-- <label for="address">Search Your City</label> -->
+        <input id="txt_location" name="address" type="text" runat="server" />
         <input type="button" value="Search" onclick="getmap()" class="btn btn-secondary btn-lg" />
-         <div id="map_populate" style="width:100%; height:500px; border: 5px solid #5E5454;"></div>
-      </form>
+        <div id="map_populate" style="width:100%; height:500px; border: 5px solid #5E5454;"></div>
+    </form>
 </body>
+</html>
