@@ -14,6 +14,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9" />
+    <PackageReference Include="ManagePackageSource" Version="0.1.0.12" />
+    <PackageReference Include="NuGet.PackageManagement" Version="6.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="ManagePackageSource" />
+    <None Remove="NuGet.PackageManagement" />
+  </ItemGroup>
 </Project>
