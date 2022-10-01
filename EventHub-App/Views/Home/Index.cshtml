@@ -16,10 +16,14 @@
     <link href="https://maps/documentation/javascript/examples/default.css" rel="stylesheet" />
     <title>EventHub</title>
     <script>
+        
+
         let map, infoWindow;
         function initMap() {
+             
+
             var map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 43.6631872, lng: -79.3811385 },
+                center: { lat: 43.6631872, lng: -79.3811385 }, //default location
                 zoom: 13
             });
             var input = document.getElementById('searchInput');
@@ -61,6 +65,10 @@
                 marker.setVisible(true);
 
                 var address = '';
+               
+                
+
+
                 if (place.address_components) {
                     address = [
                         (place.address_components[0] && place.address_components[0].short_name || ''),
@@ -72,18 +80,66 @@
                 infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
                 infowindow.open(map, marker);
 
+                
+
                 // Location details
                 for (var i = 0; i < place.address_components.length; i++) {
                     if (place.address_components[i].types[0] == 'postal_code') {
+                   
                         document.getElementById('postal_code').innerHTML = place.address_components[i].long_name;
+
+
+
                     }
                     if (place.address_components[i].types[0] == 'country') {
                         document.getElementById('country').innerHTML = place.address_components[i].long_name;
                     }
                 }
+           
+
+                var outputLat = 43.6532260;
+                var outputLon = -79.3831843;
+
+         
+                outputLat = place.geometry.location.lat();
+                outputLon = place.geometry.location.lng();
+                console.log(outputLat);
                 document.getElementById('location').innerHTML = place.formatted_address;
                 document.getElementById('lat').innerHTML = place.geometry.location.lat();
                 document.getElementById('lon').innerHTML = place.geometry.location.lng();
+
+              
+                //Ticketmaster API
+       
+               $.ajax({
+                      type:"GET",
+                      url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&latlong="+outputLat+","+outputLon,
+                      async:true,
+                      dataType: "json",
+                      success: function(json) {
+                                  console.log(json._embedded.events[0]);
+                       
+                          
+                        document.getElementById('ticketmasterName').innerHTML = json._embedded.events[0].name;
+               
+                         document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
+                          document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
+                           document.getElementById('ticketmasterPriceMin').innerHTML = json._embedded.events[0].priceRanges[0].min;
+                            document.getElementById('ticketmasterPriceMax').innerHTML = json._embedded.events[0].priceRanges[0].max;
+                            document.getElementById('ticketmasterPriceCurrency').innerHTML = json._embedded.events[0].priceRanges[0].currency;
+                          document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;
+                         
+                                  // Parse the response.
+                                  // Do other things.
+                               },
+                      error: function(xhr, status, err) {
+                                  // This time, we do not end up here!
+                               }
+                });
+                
+               
+            
+
             });
 
             var locationButton = document.createElement("button");
@@ -114,6 +170,10 @@
                     handleLocationError(false, infowindow, map.getCenter());
                 }
             });
+
+
+             
+
         }
 
         function handleLocationError(browserHasGeolocation, infowindow, pos) {
@@ -128,33 +188,8 @@
         window.initMap = initMap;
 
 
-        //Ticketmaster API
 
-
-          $.ajax({
-              type:"GET",
-              url:"https://app.ticketmaster.com/discovery/v2/events.json?&apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&city=Toronto",
-              async:true,
-              dataType: "json",
-              success: function(json) {
-                          console.log(json._embedded.events[0]);
-                          console.log(json._embedded.events[0].name);
-                          
-                document.getElementById('ticketmasterName').innerHTML = json._embedded.events[0].name;
-                 document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
-                  document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
-                   document.getElementById('ticketmasterPriceMin').innerHTML = json._embedded.events[0].priceRanges[0].min;
-                    document.getElementById('ticketmasterPriceMax').innerHTML = json._embedded.events[0].priceRanges[0].max;
-                    document.getElementById('ticketmasterPriceCurrency').innerHTML = json._embedded.events[0].priceRanges[0].currency;
-                  document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;
-                         
-                          // Parse the response.
-                          // Do other things.
-                       },
-              error: function(xhr, status, err) {
-                          // This time, we do not end up here!
-                       }
-        });
+       
 
     </script>
 </head>
@@ -214,7 +249,7 @@
         #map {
             display: block;
             position: absolute;
-            height: 60%;
+            height:60%;
            /*width: 100%;*/
             left: 2em;
             right: 2em;
