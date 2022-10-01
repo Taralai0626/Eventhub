@@ -11,10 +11,12 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq_BgjdIrt6XMzDT5J7RPmMovum-hne1E&callback=initMap&libraries=places&v=weekly"
             defer></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq_BgjdIrt6XMzDT5J7RPmMovum-hne1E&libraries=visualization,places" async defer></script>
+    <script type="module" src="./index.js"></script>
+
     <link href="https://maps/documentation/javascript/examples/default.css" rel="stylesheet" />
     <title>EventHub</title>
     <script>
+        let map, infoWindow;
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 43.6631872, lng: -79.3811385 },
@@ -41,7 +43,7 @@
                     return;
                 }
 
-                // If the place has a geometry, then present it on a map.
+                // If the place has a geometry, then present it on a map./
                 if (place.geometry.viewport) {
                     map.fitBounds(place.geometry.viewport);
                 } else {
@@ -84,13 +86,12 @@
                 document.getElementById('lon').innerHTML = place.geometry.location.lng();
             });
 
-            const locationButton = document.createElement("button");
+            var locationButton = document.createElement("button");
 
             locationButton.textContent = "Pan to Current Location";
             locationButton.classList.add("custom-map-control-button");
             map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
             locationButton.addEventListener("click", () => {
-                // Try HTML5 geolocation.
                 if (navigator.geolocation) {
                     navigator.geolocation.getCurrentPosition(
                         (position) => {
@@ -99,21 +100,30 @@
                                 lng: position.coords.longitude,
                             };
 
-                            infoWindow.setPosition(pos);
-                            infoWindow.setContent("Current Location.");
-                            infoWindow.open(map);
+                            infowindow.setPosition(pos);
+                            infowindow.setContent("Location found.");
+                            infowindow.open(map);
                             map.setCenter(pos);
+                            console.log(pos)
                         },
                         () => {
-                            handleLocationError(true, infoWindow, map.getCenter());
+                            handleLocationError(true, infowindow, map.getCenter());
                         }
                     );
                 } else {
-                    // Browser doesn't support Geolocation
-                    handleLocationError(false, infoWindow, map.getCenter());
+                    handleLocationError(false, infowindow, map.getCenter());
                 }
-
             });
+        }
+
+        function handleLocationError(browserHasGeolocation, infowindow, pos) {
+            infowindow.setPosition(pos);
+            infowindow.setContent(
+                browserHasGeolocation
+                    ? "Error: The Geolocation service failed."
+                    : "Error: Your browser doesn't support geolocation."
+            );
+            infowindow.open(map);
         }
         window.initMap = initMap;
     </script>
@@ -139,17 +149,17 @@
         </div>
     </div>
 
-                <!--  <h1>Current Event</h1>
-         <p id="location">location there</p>
-         <h2>input your city and check out the list of suggested things!</h2>
+    <!--  <h1>Current Event</h1>
+     <p id="location">location there</p>
+     <h2>input your city and check out the list of suggested things!</h2>
 
-         <form id="form1" runat="server" name="address" method="GET">
+     <form id="form1" runat="server" name="address" method="GET">
 
-        <label for="address">Search Your City</label>
-        <input id="txt_location" name="address" type="text" runat="server" />
-        <input type="button" value="Search" onclick="getmap()" class="btn btn-secondary btn-lg" />
-        <div id="map_populate" style="width:100%; height:500px; border: 5px solid #5E5454;"></div>
-        </form>-->
+    <label for="address">Search Your City</label>
+    <input id="txt_location" name="address" type="text" runat="server" />
+    <input type="button" value="Search" onclick="getmap()" class="btn btn-secondary btn-lg" />
+    <div id="map_populate" style="width:100%; height:500px; border: 5px solid #5E5454;"></div>
+    </form>-->
 </body>
 </html>
 
@@ -157,8 +167,8 @@
 {
     <style type="text/css">
         #map {
-            display:block;
-            position:absolute;
+            display: block;
+            position: absolute;
             height: 60%;
             width: 80%;
         }
@@ -178,8 +188,26 @@
             width: 16em;
             height: 2em;
         }
-        .container{
-            height:100%;
+
+        .container {
+            height: 100%;
         }
+
+        .custom-map-control-button {
+            background-color: #fff;
+            border: 0;
+            border-radius: 2px;
+            box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+            margin: 10px;
+            padding: 0 0.5em;
+            font: 400 18px Roboto, Arial, sans-serif;
+            overflow: hidden;
+            height: 40px;
+            cursor: pointer;
+        }
+
+            .custom-map-control-button:hover {
+                background: rgb(235, 235, 235);
+            }
     </style>
 }
