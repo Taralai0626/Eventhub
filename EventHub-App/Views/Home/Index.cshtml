@@ -117,10 +117,22 @@
                       async:true,
                       dataType: "json",
                       success: function(json) {
-                                  console.log(json._embedded.events[0]);
+                                  console.log(json);
                        
                           
-                        document.getElementById('ticketmasterName').innerHTML = json._embedded.events[0].name;
+                       /* document.getElementById('ticketmasterName').innerHTML = json._embedded.events[0].name;
+               
+                         document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
+                          document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
+                           document.getElementById('ticketmasterPriceMin').innerHTML = json._embedded.events[0].priceRanges[0].min;
+                            document.getElementById('ticketmasterPriceMax').innerHTML = json._embedded.events[0].priceRanges[0].max;
+                            document.getElementById('ticketmasterPriceCurrency').innerHTML = json._embedded.events[0].priceRanges[0].currency;
+                          document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;
+                          */
+
+
+
+                            document.getElementById('ticketmasterName').innerHTML = json._embedded.events;
                
                          document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
                           document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
@@ -232,13 +244,17 @@
     </form>-->
 
        <!--TicketMaster data-->
-    <div class="ticketmaster">
+
+
+        <div class="ticketmaster">
         <p id="ticketmasterName"></p>
         <p id="ticketmasterDate"></p>
          <p id="ticketmasterTime"></p>
          <p>$<span id="ticketmasterPriceMin"></span> to $<span id="ticketmasterPriceMax"></span> <span id="ticketmasterPriceCurrency"></span></p>
         <a id="ticketmasterURL" href="#" target="_blank">this is a link</a>
     </div>
+    
+    
 
 </body>
 </html>
