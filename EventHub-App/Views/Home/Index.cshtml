@@ -126,6 +126,36 @@
             infowindow.open(map);
         }
         window.initMap = initMap;
+
+
+        //Ticketmaster API
+
+
+          $.ajax({
+              type:"GET",
+              url:"https://app.ticketmaster.com/discovery/v2/events.json?&apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&city=Toronto",
+              async:true,
+              dataType: "json",
+              success: function(json) {
+                          console.log(json._embedded.events[0]);
+                          console.log(json._embedded.events[0].name);
+                          
+                document.getElementById('ticketmasterName').innerHTML = json._embedded.events[0].name;
+                 document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
+                  document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
+                   document.getElementById('ticketmasterPriceMin').innerHTML = json._embedded.events[0].priceRanges[0].min;
+                    document.getElementById('ticketmasterPriceMax').innerHTML = json._embedded.events[0].priceRanges[0].max;
+                    document.getElementById('ticketmasterPriceCurrency').innerHTML = json._embedded.events[0].priceRanges[0].currency;
+                  document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;
+                         
+                          // Parse the response.
+                          // Do other things.
+                       },
+              error: function(xhr, status, err) {
+                          // This time, we do not end up here!
+                       }
+        });
+
     </script>
 </head>
 <body>
@@ -165,6 +195,16 @@
     <input type="button" value="Search" onclick="getmap()" class="btn btn-secondary btn-lg" />
     <div id="map_populate" style="width:100%; height:500px; border: 5px solid #5E5454;"></div>
     </form>-->
+
+       <!--TicketMaster data-->
+    <div class="ticketmaster">
+        <p id="ticketmasterName"></p>
+        <p id="ticketmasterDate"></p>
+         <p id="ticketmasterTime"></p>
+         <p>$<span id="ticketmasterPriceMin"></span> to $<span id="ticketmasterPriceMax"></span> <span id="ticketmasterPriceCurrency"></span></p>
+        <a id="ticketmasterURL" href="#" target="_blank">this is a link</a>
+    </div>
+
 </body>
 </html>
 
@@ -228,8 +268,19 @@
             cursor: pointer;
         }
 
+
         .custom-map-control-button:hover {
             background: rgb(235, 235, 235);
+        }
+
+
+        .custom-map-control-button:hover {
+            background: rgb(235, 235, 235);
+        }
+
+       
+        .ticketmaster{
+            margin-top:500px;
         }
 
     </style>
