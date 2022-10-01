@@ -132,7 +132,7 @@
     <div class="main">
         <div class="container">
             <!-- Search input -->
-            <label for="address">Search Vanue:</label>
+            <label class="address" for="address">Search Vanue:</label>
             <input id="searchInput" class="controls" type="text" placeholder="Enter a location">
 
             <!-- Google map -->
@@ -170,7 +170,7 @@
             display: block;
             position: absolute;
             height: 60%;
-            width: 80%;
+            width: 90%;
         }
 
         #events {
@@ -183,10 +183,17 @@
             padding: 1em;
         }
 
+
+        .address{
+            font-size: 22px;
+            font-weight: bolder;
+        }
+
         #searchInput {
             position: relative !important;
             width: 16em;
             height: 2em;
+            margin-bottom: 2em;
         }
 
         .container {
