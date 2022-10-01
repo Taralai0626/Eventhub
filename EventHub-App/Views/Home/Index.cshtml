@@ -159,16 +159,21 @@
     </script>
 </head>
 <body>
-    <div class="main">
-        <div class="container">
+    <div class="app">
+        <div class="map-wrapper">
             <!-- Search input -->
-            <label class="address" for="address">Search Vanue:</label>
-            <input id="searchInput" class="controls" type="text" placeholder="Enter a location">
-
+            <div class="search-wrapper">
+                <label class="address" for="address">Search Vanue:</label>
+                <input id="searchInput" class="controls" type="text" placeholder="Enter a location">
+            </div>
             <!-- Google map -->
-            <div id="map">map</div>
-
+            <div>
+                <span id="map"></span>
+            </div>
+            
+        </div>
             <!-- Display geolocation data -->
+        <div>
             <ul class="geo-data">
                 <li>Full Address: <span id="location"></span></li>
                 <li>Postal Code: <span id="postal_code"></span></li>
@@ -210,7 +215,9 @@
             display: block;
             position: absolute;
             height: 60%;
-            width: 90%;
+           /*width: 100%;*/
+            left: 2em;
+            right: 2em;
         }
 
         #events {
@@ -224,7 +231,13 @@
         }
 
 
-        .address{
+        /******** SEARCH BAR **********/
+
+        .search-wrapper{
+            text-align:center;
+        }
+
+        .address {
             font-size: 22px;
             font-weight: bolder;
         }
@@ -240,6 +253,8 @@
             height: 100%;
         }
 
+
+        /*********** CURREN LOCATION BUTTON(google inner class) ***********/
         .custom-map-control-button {
             background-color: #fff;
             border: 0;
@@ -253,13 +268,20 @@
             cursor: pointer;
         }
 
-            .custom-map-control-button:hover {
-                background: rgb(235, 235, 235);
-            }
+
+        .custom-map-control-button:hover {
+            background: rgb(235, 235, 235);
+        }
+
+
+        .custom-map-control-button:hover {
+            background: rgb(235, 235, 235);
+        }
 
        
-      .ticketmaster{
-                margin-top:500px;
-            }
+        .ticketmaster{
+            margin-top:500px;
+        }
+
     </style>
 }
