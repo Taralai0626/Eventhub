@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "Title";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -16,10 +16,9 @@
     <link href="https://maps/documentation/javascript/examples/default.css" rel="stylesheet" />
     <title>EventHub</title>
     <script>
+
         let map, infoWindow;
         function initMap() {
-
-
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 43.6631872, lng: -79.3811385 }, //default location
                 zoom: 13
@@ -45,7 +44,8 @@
                     return;
                 }
 
-                // If the place has a geometry, then present it on a map./
+                /*  If the place has a geometry, then present it on a map */
+
                 if (place.geometry.viewport) {
                     map.fitBounds(place.geometry.viewport);
                 } else {
@@ -118,17 +118,6 @@
                     success: function (json) {
                         console.log(json);
 
-
-                        /* document.getElementById('ticketmasterName').innerHTML = json._embedded.events[0].name;
-
-                          document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
-                           document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
-                            document.getElementById('ticketmasterPriceMin').innerHTML = json._embedded.events[0].priceRanges[0].min;
-                             document.getElementById('ticketmasterPriceMax').innerHTML = json._embedded.events[0].priceRanges[0].max;
-                             document.getElementById('ticketmasterPriceCurrency').innerHTML = json._embedded.events[0].priceRanges[0].currency;
-                           document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;
-                           */
-
                         var array1 = json._embedded.events;
 
                         /*array1.forEach(element => console.log(element)
@@ -158,7 +147,7 @@
                         // Do other things.
                     },
                     error: function (xhr, status, err) {
-                        // This time, we do not end up here!
+                        /* This time, we do not end up here!*/
                     }
                 });
 
@@ -204,7 +193,10 @@
             );
             infowindow.open(map);
         }
-        window.initMap = initMap;</script>
+        window.initMap = initMap;
+
+    </script>
+
 </head>
 <body>
     <div class="app">
