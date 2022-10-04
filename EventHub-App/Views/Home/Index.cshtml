@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewBag.Title = "Title";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -16,9 +16,11 @@
     <link href="https://maps/documentation/javascript/examples/default.css" rel="stylesheet" />
     <title>EventHub</title>
     <script>
+        
+
         let map, infoWindow;
         function initMap() {
-
+             
 
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 43.6631872, lng: -79.3811385 }, //default location
@@ -63,6 +65,9 @@
                 marker.setVisible(true);
 
                 var address = '';
+               
+                
+
 
                 if (place.address_components) {
                     address = [
@@ -75,24 +80,27 @@
                 infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
                 infowindow.open(map, marker);
 
+                
 
-
-                // Location details//
+                // Location details
                 for (var i = 0; i < place.address_components.length; i++) {
                     if (place.address_components[i].types[0] == 'postal_code') {
-
+                   
                         document.getElementById('postal_code').innerHTML = place.address_components[i].long_name;
+
+
+
                     }
                     if (place.address_components[i].types[0] == 'country') {
                         document.getElementById('country').innerHTML = place.address_components[i].long_name;
                     }
                 }
-
+           
 
                 var outputLat = 43.6532260;
                 var outputLon = -79.3831843;
 
-
+         
                 outputLat = place.geometry.location.lat();
                 outputLon = place.geometry.location.lng();
                 console.log(outputLat);
@@ -100,34 +108,67 @@
                 document.getElementById('lat').innerHTML = place.geometry.location.lat();
                 document.getElementById('lon').innerHTML = place.geometry.location.lng();
 
+              
+             //Ticketmaster API
+       
+               $.ajax({
+                      type:"GET",
+                      url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&latlong="+outputLat+","+outputLon,
+                      async:true,
+                      dataType: "json",
+                      success: function(json) {
+                                  console.log(json);
+                       
+                          
+                       /* document.getElementById('ticketmasterName').innerHTML = json._embedded.events[0].name;
+               
+                         document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
+                          document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
+                           document.getElementById('ticketmasterPriceMin').innerHTML = json._embedded.events[0].priceRanges[0].min;
+                            document.getElementById('ticketmasterPriceMax').innerHTML = json._embedded.events[0].priceRanges[0].max;
+                            document.getElementById('ticketmasterPriceCurrency').innerHTML = json._embedded.events[0].priceRanges[0].currency;
+                          document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;
+                          */
 
-                //Ticketmaster API
+                         var array1 = json._embedded.events;
 
-                $.ajax({
-                    type: "GET",
-                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&latlong=" + outputLat + "," + outputLon,
-                    async: true,
-                    dataType: "json",
-                    success: function (json) {
-                        console.log(json._embedded.events[0]);
+                         /*array1.forEach(element => console.log(element)                         
+                         );
+                         */
+                        var ticketMasterName = document.getElementById('ticketmasterName');
+                        console.log(ticketMasterName);
+                         array1.forEach((element) => {
+                              console.log( element );
+                             // document.getElementById('ticketmasterName').innerHTML += element.name;
+                              var node = document.createElement("li");
+                                var textnode = document.createTextNode(element.name);
+                                node.appendChild(textnode);
+                               ticketMasterName.appendChild(node);
+                         });
 
-
-                        document.getElementById('ticketmasterName').innerHTML = json._embedded.events[0].name;
-
-                        document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
-                        document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
-                        document.getElementById('ticketmasterPriceMin').innerHTML = json._embedded.events[0].priceRanges[0].min;
-                        document.getElementById('ticketmasterPriceMax').innerHTML = json._embedded.events[0].priceRanges[0].max;
-                        document.getElementById('ticketmasterPriceCurrency').innerHTML = json._embedded.events[0].priceRanges[0].currency;
-                        document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;
-
-                        // Parse the response.
-                        // Do other things.
-                    },
-                    error: function (xhr, status, err) {
-                        // This time, we do not end up here!
-                    }
+                            //document.getElementById('ticketmasterName').innerHTML = json._embedded.events;
+               
+                        /* document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
+                          document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
+                           document.getElementById('ticketmasterPriceMin').innerHTML = json._embedded.events[0].priceRanges[0].min;
+                            document.getElementById('ticketmasterPriceMax').innerHTML = json._embedded.events[0].priceRanges[0].max;
+                            document.getElementById('ticketmasterPriceCurrency').innerHTML = json._embedded.events[0].priceRanges[0].currency;
+                          document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;*/
+                         
+                                  // Parse the response.
+                                  // Do other things.
+                               },
+                      error: function(xhr, status, err) {
+                                  // This time, we do not end up here!
+                               }
                 });
+                
+               
+            
+
+           
+
+            
 
             });
 
@@ -161,7 +202,7 @@
             });
 
 
-
+             
 
         }
 
@@ -175,6 +216,11 @@
             infowindow.open(map);
         }
         window.initMap = initMap;
+
+
+
+       
+
     </script>
 </head>
 <body>
@@ -189,9 +235,9 @@
             <div>
                 <span id="map"></span>
             </div>
-
+            
         </div>
-        <!-- Display geolocation data -->
+            <!-- Display geolocation data -->
         <div>
             <ul class="geo-data">
                 <li>Full Address: <span id="location"></span></li>
@@ -214,14 +260,21 @@
     <input type="button" value="Search" onclick="getmap()" class="btn btn-secondary btn-lg" />
     <div id="map_populate" style="width:100%; height:500px; border: 5px solid #5E5454;"></div>
     </form>-->
-    <!--TicketMaster data-->
-    <div class="ticketmaster">
-        <p id="ticketmasterName"></p>
+
+       <!--TicketMaster data-->
+
+
+        <div class="ticketmaster">
+        <ul id="ticketmasterName"></ul>
         <p id="ticketmasterDate"></p>
-        <p id="ticketmasterTime"></p>
-        <p>$<span id="ticketmasterPriceMin"></span> to $<span id="ticketmasterPriceMax"></span> <span id="ticketmasterPriceCurrency"></span></p>
+         <p id="ticketmasterTime"></p>
+         <p>$<span id="ticketmasterPriceMin"></span> to $<span id="ticketmasterPriceMax"></span> <span id="ticketmasterPriceCurrency"></span></p>
         <a id="ticketmasterURL" href="#" target="_blank">this is a link</a>
     </div>
+
+  
+    
+    
 
 </body>
 </html>
@@ -232,8 +285,8 @@
         #map {
             display: block;
             position: absolute;
-            height: 60%;
-            /*width: 100%;*/
+            height:60%;
+           /*width: 100%;*/
             left: 2em;
             right: 2em;
         }
@@ -251,8 +304,8 @@
 
         /******** SEARCH BAR **********/
 
-        .search-wrapper {
-            text-align: center;
+        .search-wrapper{
+            text-align:center;
         }
 
         .address {
@@ -287,18 +340,19 @@
         }
 
 
-            .custom-map-control-button:hover {
-                background: rgb(235, 235, 235);
-            }
-
-
-            .custom-map-control-button:hover {
-                background: rgb(235, 235, 235);
-            }
-
-
-        .ticketmaster {
-            margin-top: 500px;
+        .custom-map-control-button:hover {
+            background: rgb(235, 235, 235);
         }
+
+
+        .custom-map-control-button:hover {
+            background: rgb(235, 235, 235);
+        }
+
+       
+        .ticketmaster{
+            margin-top:500px;
+        }
+
     </style>
 }
