@@ -135,10 +135,15 @@
                          /*array1.forEach(element => console.log(element)                         
                          );
                          */
-
+                        var ticketMasterName = document.getElementById('ticketmasterName');
+                        console.log(ticketMasterName);
                          array1.forEach((element) => {
                               console.log( element );
-                              document.getElementById('ticketmasterName').innerHTML = element.name;
+                             // document.getElementById('ticketmasterName').innerHTML += element.name;
+                              var node = document.createElement("li");
+                                var textnode = document.createTextNode(element.name);
+                                node.appendChild(textnode);
+                               ticketMasterName.appendChild(node);
                          });
 
                             //document.getElementById('ticketmasterName').innerHTML = json._embedded.events;
@@ -260,12 +265,14 @@
 
 
         <div class="ticketmaster">
-        <p id="ticketmasterName"></p>
+        <ul id="ticketmasterName"></ul>
         <p id="ticketmasterDate"></p>
          <p id="ticketmasterTime"></p>
          <p>$<span id="ticketmasterPriceMin"></span> to $<span id="ticketmasterPriceMax"></span> <span id="ticketmasterPriceCurrency"></span></p>
         <a id="ticketmasterURL" href="#" target="_blank">this is a link</a>
     </div>
+
+  
     
     
 
