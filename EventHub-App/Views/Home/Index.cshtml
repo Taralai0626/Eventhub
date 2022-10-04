@@ -64,6 +64,9 @@
 
                 var address = '';
 
+
+
+
                 if (place.address_components) {
                     address = [
                         (place.address_components[0] && place.address_components[0].short_name || ''),
@@ -77,11 +80,15 @@
 
 
 
-                // Location details//
+                // Location details
+
                 for (var i = 0; i < place.address_components.length; i++) {
                     if (place.address_components[i].types[0] == 'postal_code') {
 
                         document.getElementById('postal_code').innerHTML = place.address_components[i].long_name;
+
+
+
                     }
                     if (place.address_components[i].types[0] == 'country') {
                         document.getElementById('country').innerHTML = place.address_components[i].long_name;
@@ -109,17 +116,43 @@
                     async: true,
                     dataType: "json",
                     success: function (json) {
-                        console.log(json._embedded.events[0]);
+                        console.log(json);
 
 
-                        document.getElementById('ticketmasterName').innerHTML = json._embedded.events[0].name;
+                        /* document.getElementById('ticketmasterName').innerHTML = json._embedded.events[0].name;
 
-                        document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
-                        document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
-                        document.getElementById('ticketmasterPriceMin').innerHTML = json._embedded.events[0].priceRanges[0].min;
-                        document.getElementById('ticketmasterPriceMax').innerHTML = json._embedded.events[0].priceRanges[0].max;
-                        document.getElementById('ticketmasterPriceCurrency').innerHTML = json._embedded.events[0].priceRanges[0].currency;
-                        document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;
+                          document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
+                           document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
+                            document.getElementById('ticketmasterPriceMin').innerHTML = json._embedded.events[0].priceRanges[0].min;
+                             document.getElementById('ticketmasterPriceMax').innerHTML = json._embedded.events[0].priceRanges[0].max;
+                             document.getElementById('ticketmasterPriceCurrency').innerHTML = json._embedded.events[0].priceRanges[0].currency;
+                           document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;
+                           */
+
+                        var array1 = json._embedded.events;
+
+                        /*array1.forEach(element => console.log(element)
+                        );
+                        */
+                        var ticketMasterName = document.getElementById('ticketmasterName');
+                        console.log(ticketMasterName);
+                        array1.forEach((element) => {
+                            console.log(element);
+                            // document.getElementById('ticketmasterName').innerHTML += element.name;
+                            var node = document.createElement("li");
+                            var textnode = document.createTextNode(element.name);
+                            node.appendChild(textnode);
+                            ticketMasterName.appendChild(node);
+                        });
+
+                        //document.getElementById('ticketmasterName').innerHTML = json._embedded.events;
+
+                        /* document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
+                          document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
+                           document.getElementById('ticketmasterPriceMin').innerHTML = json._embedded.events[0].priceRanges[0].min;
+                            document.getElementById('ticketmasterPriceMax').innerHTML = json._embedded.events[0].priceRanges[0].max;
+                            document.getElementById('ticketmasterPriceCurrency').innerHTML = json._embedded.events[0].priceRanges[0].currency;
+                          document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;*/
 
                         // Parse the response.
                         // Do other things.
@@ -160,9 +193,6 @@
                 }
             });
 
-
-
-
         }
 
         function handleLocationError(browserHasGeolocation, infowindow, pos) {
@@ -174,8 +204,7 @@
             );
             infowindow.open(map);
         }
-        window.initMap = initMap;
-    </script>
+        window.initMap = initMap;</script>
 </head>
 <body>
     <div class="app">
@@ -215,13 +244,16 @@
     <div id="map_populate" style="width:100%; height:500px; border: 5px solid #5E5454;"></div>
     </form>-->
     <!--TicketMaster data-->
+
+
     <div class="ticketmaster">
-        <p id="ticketmasterName"></p>
+        <ul id="ticketmasterName"></ul>
         <p id="ticketmasterDate"></p>
         <p id="ticketmasterTime"></p>
         <p>$<span id="ticketmasterPriceMin"></span> to $<span id="ticketmasterPriceMax"></span> <span id="ticketmasterPriceCurrency"></span></p>
         <a id="ticketmasterURL" href="#" target="_blank">this is a link</a>
     </div>
+
 
 </body>
 </html>
@@ -287,14 +319,14 @@
         }
 
 
-            .custom-map-control-button:hover {
-                background: rgb(235, 235, 235);
-            }
+        .custom-map-control-button:hover {
+            background: rgb(235, 235, 235);
+        }
 
 
-            .custom-map-control-button:hover {
-                background: rgb(235, 235, 235);
-            }
+        .custom-map-control-button:hover {
+            background: rgb(235, 235, 235);
+        }
 
 
         .ticketmaster {
