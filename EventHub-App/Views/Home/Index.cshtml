@@ -109,7 +109,7 @@
                 document.getElementById('lon').innerHTML = place.geometry.location.lng();
 
               
-                //Ticketmaster API
+             //Ticketmaster API
        
                $.ajax({
                       type:"GET",
@@ -130,16 +130,25 @@
                           document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;
                           */
 
+                         var array1 = json._embedded.events;
 
+                         /*array1.forEach(element => console.log(element)                         
+                         );
+                         */
 
-                            document.getElementById('ticketmasterName').innerHTML = json._embedded.events;
+                         array1.forEach((element) => {
+                              console.log( element );
+                              document.getElementById('ticketmasterName').innerHTML = element.name;
+                         });
+
+                            //document.getElementById('ticketmasterName').innerHTML = json._embedded.events;
                
-                         document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
+                        /* document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
                           document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
                            document.getElementById('ticketmasterPriceMin').innerHTML = json._embedded.events[0].priceRanges[0].min;
                             document.getElementById('ticketmasterPriceMax').innerHTML = json._embedded.events[0].priceRanges[0].max;
                             document.getElementById('ticketmasterPriceCurrency').innerHTML = json._embedded.events[0].priceRanges[0].currency;
-                          document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;
+                          document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;*/
                          
                                   // Parse the response.
                                   // Do other things.
@@ -150,6 +159,10 @@
                 });
                 
                
+            
+
+           
+
             
 
             });
