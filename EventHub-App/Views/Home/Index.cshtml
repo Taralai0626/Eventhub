@@ -96,8 +96,11 @@
                 }
 
 
-                var outputLat = 43.6532260;
-                var outputLon = -79.3831843;
+                //var outputLat = 43.6532260;
+               // var outputLon = -79.3831843;
+
+               var outputLat;
+               var outputLon;
 
 
                 outputLat = place.geometry.location.lat();
@@ -120,31 +123,37 @@
 
                         var array1 = json._embedded.events;
 
-                        /*array1.forEach(element => console.log(element)
-                        );
-                        */
-                        var ticketMasterName = document.getElementById('ticketmasterName');
-                        console.log(ticketMasterName);
+                        var eventContainer = document.getElementById('eventContainer');
+                        console.log(eventContainer);
+
+                        //make each events as an individual object
                         array1.forEach((element) => {
+
                             console.log(element);
-                            // document.getElementById('ticketmasterName').innerHTML += element.name;
                             var node = document.createElement("li");
-                            var textnode = document.createTextNode(element.name);
-                            node.appendChild(textnode);
-                            ticketMasterName.appendChild(node);
+
+                            var eventName = document.createTextNode(element.name);
+                            var eventDate = document.createTextNode(element.dates.start.localDate);
+                            var eventStartTime = document.createTextNode(element.dates.start.localTime);
+                            var eventPriceMin = document.createTextNode(element.priceRanges[0].min);
+                            var eventPriceMax = document.createTextNode(element.priceRanges[0].max);
+                            var eventPriceCurrency = document.createTextNode(element.priceRanges[0].currency);
+                            var eventUrl = document.createTextNode(element.url);
+
+                            node.appendChild(eventName);
+                            node.appendChild(eventDate);
+                            node.appendChild(eventStartTime);
+                            node.appendChild(eventPriceMin);
+                             node.appendChild(eventPriceMax);
+                              node.appendChild(eventPriceCurrency);
+                               node.appendChild(eventUrl);
+                         
+                           
+
+                            eventContainer.appendChild(node);
                         });
 
-                        //document.getElementById('ticketmasterName').innerHTML = json._embedded.events;
-
-                        /* document.getElementById('ticketmasterDate').innerHTML = json._embedded.events[0].dates.start.localDate;
-                          document.getElementById('ticketmasterTime').innerHTML = json._embedded.events[0].dates.start.localTime;
-                           document.getElementById('ticketmasterPriceMin').innerHTML = json._embedded.events[0].priceRanges[0].min;
-                            document.getElementById('ticketmasterPriceMax').innerHTML = json._embedded.events[0].priceRanges[0].max;
-                            document.getElementById('ticketmasterPriceCurrency').innerHTML = json._embedded.events[0].priceRanges[0].currency;
-                          document.getElementById('ticketmasterURL').href = json._embedded.events[0].url;*/
-
-                        // Parse the response.
-                        // Do other things.
+                  
                     },
                     error: function (xhr, status, err) {
                         /* This time, we do not end up here!*/
@@ -239,11 +248,7 @@
 
 
     <div class="ticketmaster">
-        <ul id="ticketmasterName"></ul>
-        <p id="ticketmasterDate"></p>
-        <p id="ticketmasterTime"></p>
-        <p>$<span id="ticketmasterPriceMin"></span> to $<span id="ticketmasterPriceMax"></span> <span id="ticketmasterPriceCurrency"></span></p>
-        <a id="ticketmasterURL" href="#" target="_blank">this is a link</a>
+        <ul id="eventContainer"></ul>
     </div>
 
 
