@@ -101,7 +101,8 @@
 
                var outputLat;
                var outputLon;
-
+              
+   
 
                 outputLat = place.geometry.location.lat();
                 outputLon = place.geometry.location.lng();
@@ -115,7 +116,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&latlong=" + outputLat + "," + outputLon,
+                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&latlong=" + outputLat + "," + outputLon,
                     async: true,
                     dataType: "json",
                     success: function (json) {
@@ -130,7 +131,19 @@
                         array1.forEach((element) => {
 
                             console.log(element);
+
+                            //get lat and lon for map pins
+                            console.log("each event lat is: " + element._embedded.venues[0].location.latitude+" and lon is: "+element._embedded.venues[0].location.longitude);
+                  
+
                             var node = document.createElement("li");
+                            var eventDateContainer = document.createElement("p");
+                            var eventStartTimeContainer = document.createElement("p");
+                            var eventPriceMinContainer = document.createElement("p");
+                            var eventPriceMaxContainer = document.createElement("p");
+                            var eventPriceCurrencyContainer = document.createElement("p");
+                            var eventUrlContainer = document.createElement("p");
+                            var eventVenueContainer = document.createElement("p");
 
                             var eventName = document.createTextNode(element.name);
                             var eventDate = document.createTextNode(element.dates.start.localDate);
@@ -139,17 +152,33 @@
                             var eventPriceMax = document.createTextNode(element.priceRanges[0].max);
                             var eventPriceCurrency = document.createTextNode(element.priceRanges[0].currency);
                             var eventUrl = document.createTextNode(element.url);
+                            var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
+                            var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
 
+                           //create li
                             node.appendChild(eventName);
-                            node.appendChild(eventDate);
-                            node.appendChild(eventStartTime);
-                            node.appendChild(eventPriceMin);
-                             node.appendChild(eventPriceMax);
-                              node.appendChild(eventPriceCurrency);
-                               node.appendChild(eventUrl);
                          
-                           
+                           //create p
+                            eventDateContainer.appendChild(eventDate);
+                            eventStartTimeContainer.appendChild(eventStartTime);
+                            eventPriceMinContainer.appendChild(eventPriceMin);
+                            eventPriceMaxContainer.appendChild(eventPriceMax);
+                            eventPriceCurrencyContainer.appendChild(eventPriceCurrency);
+                            eventUrlContainer.appendChild(eventUrl);
+                            eventVenueContainer.appendChild(eventVenueAddress);
+                             eventVenueContainer.appendChild(eventVenueName);
 
+                            //insert p to li
+                            node.appendChild(eventDateContainer);
+                            node.appendChild(eventStartTimeContainer);
+                            node.appendChild(eventPriceMinContainer);
+                            node.appendChild(eventPriceMaxContainer);
+                            node.appendChild(eventPriceCurrencyContainer);
+                            node.appendChild(eventUrlContainer);
+                            node.appendChild(eventVenueContainer);
+
+                           
+                            //insert li to ul(eventContainer)
                             eventContainer.appendChild(node);
                         });
 
@@ -248,7 +277,8 @@
 
 
     <div class="ticketmaster">
-        <ul id="eventContainer"></ul>
+        <ul id="eventContainer">
+        </ul>
     </div>
 
 
