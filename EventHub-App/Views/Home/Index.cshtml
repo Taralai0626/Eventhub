@@ -17,8 +17,14 @@
     <title>EventHub</title>
     <script>
 
+        
         let map, infoWindow;
+
         function initMap() {
+               var outputLat = 43.6532260;
+                var outputLon = -79.3831843;
+          
+
             var map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 43.6631872, lng: -79.3811385 }, //default location
                 zoom: 13
@@ -98,34 +104,30 @@
                     }
                 }
 
-
+                  
         
                 //console.log(outputLat);
                 document.getElementById('location').innerHTML = place.formatted_address;
                 document.getElementById('lat').innerHTML = place.geometry.location.lat();
                 document.getElementById('lon').innerHTML = place.geometry.location.lng();
 
-
-
-                 //=====TICKETMASTER API=====
-
-                var outputLat = 43.6532260;
-                var outputLon = -79.3831843;
-
-            
-                //console.log(eventContainer);
-                var eventContainer = document.getElementById('eventContainer');
-                eventContainer.innerHTML = ''; //reset the list
-
+             
+                
                 outputLat = place.geometry.location.lat();
                 outputLon = place.geometry.location.lng();
 
+                    //=====TICKETMASTER API=====
+
+                //console.log(eventContainer);
+                var eventContainer = document.getElementById('eventContainer');
+                
                 $.ajax({
                     type: "GET",
                     url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&latlong=" + outputLat + "," + outputLon,
                    async: true,
                     dataType: "json",
                     success: function (json) {
+                        eventContainer.innerHTML = '';
                         console.log(json);
 
                         var array1 = json._embedded.events;
@@ -196,10 +198,13 @@
                     }
                 });
 
-
-
             
             });
+
+            
+              
+
+
 
  
             var locationButton = document.createElement("button");
