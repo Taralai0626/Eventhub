@@ -48,6 +48,9 @@
 
                 if (place.geometry.viewport) {
                     map.fitBounds(place.geometry.viewport);
+
+                       
+
                 } else {
                     map.setCenter(place.geometry.location);
                     map.setZoom(17);
@@ -96,36 +99,36 @@
                 }
 
 
-                //var outputLat = 43.6532260;
-               // var outputLon = -79.3831843;
-
-               var outputLat;
-               var outputLon;
-              
-   
-
-                outputLat = place.geometry.location.lat();
-                outputLon = place.geometry.location.lng();
-                console.log(outputLat);
+        
+                //console.log(outputLat);
                 document.getElementById('location').innerHTML = place.formatted_address;
                 document.getElementById('lat').innerHTML = place.geometry.location.lat();
                 document.getElementById('lon').innerHTML = place.geometry.location.lng();
 
 
-                //Ticketmaster API
+
+                 //Ticketmaster API
+
+                var outputLat = 43.6532260;
+                var outputLon = -79.3831843;
+
+            
+                //console.log(eventContainer);
+                var eventContainer = document.getElementById('eventContainer');
+                eventContainer.innerHTML = ''; //reset the list
+
+                outputLat = place.geometry.location.lat();
+                outputLon = place.geometry.location.lng();
 
                 $.ajax({
                     type: "GET",
                     url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&latlong=" + outputLat + "," + outputLon,
-                    async: true,
+                   async: true,
                     dataType: "json",
                     success: function (json) {
                         console.log(json);
 
                         var array1 = json._embedded.events;
-
-                        var eventContainer = document.getElementById('eventContainer');
-                        console.log(eventContainer);
 
                         //make each events as an individual object
                         array1.forEach((element) => {
@@ -145,18 +148,19 @@
                             var eventUrlContainer = document.createElement("p");
                             var eventVenueContainer = document.createElement("p");
 
-                            var eventName = document.createTextNode(element.name);
-                            var eventDate = document.createTextNode(element.dates.start.localDate);
-                            var eventStartTime = document.createTextNode(element.dates.start.localTime);
-                            var eventPriceMin = document.createTextNode(element.priceRanges[0].min);
-                            var eventPriceMax = document.createTextNode(element.priceRanges[0].max);
-                            var eventPriceCurrency = document.createTextNode(element.priceRanges[0].currency);
-                            var eventUrl = document.createTextNode(element.url);
-                            var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
-                            var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
+                           var eventName = document.createTextNode(element.name);
+                           var eventDate = document.createTextNode(element.dates.start.localDate);
+                           var eventStartTime = document.createTextNode(element.dates.start.localTime);
+                           var eventPriceMin = document.createTextNode(element.priceRanges[0].min);
+                           var eventPriceMax = document.createTextNode(element.priceRanges[0].max);
+                           var eventPriceCurrency = document.createTextNode(element.priceRanges[0].currency);
+                           var eventUrl = document.createTextNode(element.url);
+                           var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
+                           var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
 
                            //create li
-                            node.appendChild(eventName);
+                               node.appendChild(eventName);
+
                          
                            //create p
                             eventDateContainer.appendChild(eventDate);
@@ -166,7 +170,7 @@
                             eventPriceCurrencyContainer.appendChild(eventPriceCurrency);
                             eventUrlContainer.appendChild(eventUrl);
                             eventVenueContainer.appendChild(eventVenueAddress);
-                             eventVenueContainer.appendChild(eventVenueName);
+                            eventVenueContainer.appendChild(eventVenueName);
 
                             //insert p to li
                             node.appendChild(eventDateContainer);
@@ -179,18 +183,25 @@
 
                            
                             //insert li to ul(eventContainer)
-                            eventContainer.appendChild(node);
+                                eventContainer.appendChild(node);
+              
+                       
+                    
                         });
-
-                  
+                        
+              
                     },
                     error: function (xhr, status, err) {
                         /* This time, we do not end up here!*/
                     }
                 });
 
+
+
+            
             });
 
+ 
             var locationButton = document.createElement("button");
 
             locationButton.textContent = "Pan to Current Location";
@@ -278,6 +289,8 @@
 
     <div class="ticketmaster">
         <ul id="eventContainer">
+            
+        
         </ul>
     </div>
 
