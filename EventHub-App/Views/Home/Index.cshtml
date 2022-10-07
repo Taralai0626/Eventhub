@@ -17,18 +17,75 @@
     <title>EventHub</title>
     <script>
 
-        
+        var objForMap = [];
         let map, infoWindow;
 
         function initMap() {
-               var outputLat = 43.6532260;
-                var outputLon = -79.3831843;
-          
+            var outputLat = 43.6532260;
+            var outputLon = -79.3831843;
 
             var map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 43.6631872, lng: -79.3811385 }, //default location
+                center: { lat: 43.6631872, lng: -79.3811385 }, /*default location*/
                 zoom: 13
             });
+            setMarkers(map); /* to set markers */
+        }
+        
+        /* default markers */
+        var beaches = [
+            ["Bondi Beach", -33.890542, 151.274856, 4],
+            ["Coogee Beach", -33.923036, 151.259052, 5],
+            ["Cronulla Beach", -34.028249, 151.157507, 3],
+            ["Manly Beach", -33.80010128657071, 151.28747820854187, 2],
+            ["Maroubra Beach", -33.950198, 151.259302, 1],
+        ];
+
+        function setMarkers(map) {
+            // Adds markers to the map.
+            // Marker sizes are expressed as a Size of X,Y where the origin of the image
+            // (0,0) is located in the top left of the image.
+            // Origins, anchor positions and coordinates of the marker increase in the X
+            // direction to the right and in the Y direction down.
+            var image = {
+                url: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+                // This marker is 20 pixels wide by 32 pixels high.
+                size: new google.maps.Size(20, 32),
+                // The origin for this image is (0, 0).
+                origin: new google.maps.Point(0, 0),
+                // The anchor for this image is the base of the flagpole at (0, 32).
+                anchor: new google.maps.Point(0, 32),
+            };
+            // Shapes define the clickable region of the icon. The type defines an HTML
+            // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+            // The final coordinate closes the poly by connecting to the first coordinate.
+            var shape = {
+                coords: [1, 1, 1, 20, 18, 20, 18, 1],
+                type: "poly",
+            };
+            for (var i = 0; i < beaches.length; i++) {
+                var beach = beaches[i];
+                new google.maps.Marker({
+                    position: { lat: beach[1], lng: beach[2] },
+                    map: map,
+                    icon: image,
+                    shape: shape,
+                    title: beach[0],
+                    zIndex: beach[3],
+                });
+            }
+
+
+            /* one marker testing (IT'S WORKING) keep it for testing */
+            /*var image =
+                "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+            var beachMarker = new google.maps.Marker({
+                position: { lat: 43.663, lng: -79.381 },
+                    
+                map,
+                icon: image,
+            });*/
+            
+            /* for search bar and auto complete address function */
             var input = document.getElementById('searchInput');
             //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
@@ -51,11 +108,8 @@
                 }
 
                 /*  If the place has a geometry, then present it on a map */
-
                 if (place.geometry.viewport) {
                     map.fitBounds(place.geometry.viewport);
-
-                       
 
                 } else {
                     map.setCenter(place.geometry.location);
@@ -73,9 +127,6 @@
 
                 var address = '';
 
-
-
-
                 if (place.address_components) {
                     address = [
                         (place.address_components[0] && place.address_components[0].short_name || ''),
@@ -89,14 +140,53 @@
 
 
 
-                // Location details
+               /* multiple markers (NOT WORKING) */
+               /* var markers = [];
+                var collisionBehavior = google.maps.CollisionBehavior.REQUIRED;
+                var menuList = document.querySelector(".mdc-list");
+                // Add the behaviors to the select options
 
+                for (var _i = 0, _a = Object.entries(google.maps.CollisionBehavior); _i < _a.length; _i++) {
+                    var _b = _a[_i], key = _b[0], value = _b[1];
+                    var item = document.createElement("LI");
+                    item.classList.add("mdc-list-item");
+                    item.setAttribute("data-value", key);
+                    var itemText = document.createElement("SPAN");
+                    itemText.classList.add("mdc-list-item__text");
+                    itemText.innerText = value;
+                    item.appendChild(itemText);
+                    menuList.appendChild(item);
+                }
+
+                var select = new mdc.select.MDCSelect(document.querySelector(".mdc-select"));
+                select.listen("MDCSelect:change", function () {
+                    collisionBehavior = select.value;
+                    markers.forEach(function (marker) {
+                        marker.set("collisionBehavior", collisionBehavior);
+                    });
+                });
+                select.value = collisionBehavior;
+
+                markers = [
+                    [-122.3402, 47.6093],
+                    [43.6532260, -79.3831843],
+                   
+                ].map(function (_a, i) {
+                    var lng = _a[0], lat = _a[1];
+                    return new google.maps.Marker({
+                        position: new google.maps.LatLng({ lat: lat, lng: lng }),
+                        map: map,
+                        collisionBehavior: collisionBehavior,
+                    });
+                });
+                */
+
+
+                /* Location details */
                 for (var i = 0; i < place.address_components.length; i++) {
                     if (place.address_components[i].types[0] == 'postal_code') {
 
                         document.getElementById('postal_code').innerHTML = place.address_components[i].long_name;
-
-
 
                     }
                     if (place.address_components[i].types[0] == 'country') {
@@ -104,27 +194,24 @@
                     }
                 }
 
-                  
-        
                 //console.log(outputLat);
+
                 document.getElementById('location').innerHTML = place.formatted_address;
                 document.getElementById('lat').innerHTML = place.geometry.location.lat();
                 document.getElementById('lon').innerHTML = place.geometry.location.lng();
 
-             
-                
                 outputLat = place.geometry.location.lat();
                 outputLon = place.geometry.location.lng();
 
-                    //=====TICKETMASTER API=====
+                /*=====TICKETMASTER API===== */
 
-                //console.log(eventContainer);
+                /*console.log(eventContainer); */
                 var eventContainer = document.getElementById('eventContainer');
-                
+
                 $.ajax({
                     type: "GET",
                     url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&latlong=" + outputLat + "," + outputLon,
-                   async: true,
+                    async: true,
                     dataType: "json",
                     success: function (json) {
                         eventContainer.innerHTML = '';
@@ -133,13 +220,17 @@
                         var array1 = json._embedded.events;
 
                         //make each events as an individual object
+
                         array1.forEach((element) => {
 
-                            console.log(element);
+                            //push element.name into array
+                            var individualArray = [element.name, element._embedded.venues[0].location.latitude, element._embedded.venues[0].location.longitude]
+                            objForMap.push(individualArray);
+                            console.log(objForMap);
 
                             //get lat and lon for map pins
                             console.log("each event lat is: " + element._embedded.venues[0].location.latitude+" and lon is: "+element._embedded.venues[0].location.longitude);
-                  
+
 
                             var node = document.createElement("li");
                             var eventDateContainer = document.createElement("p");
@@ -149,22 +240,22 @@
                             var eventPriceCurrencyContainer = document.createElement("p");
                             var eventUrlContainer = document.createElement("p");
                             var eventVenueContainer = document.createElement("p");
+ 
+                            var eventName = document.createTextNode(element.name);
+                            var eventDate = document.createTextNode(element.dates.start.localDate);
+                            var eventStartTime = document.createTextNode(element.dates.start.localTime);
+                            var eventPriceMin = document.createTextNode(element.priceRanges[0].min);
+                            var eventPriceMax = document.createTextNode(element.priceRanges[0].max);
+                            var eventPriceCurrency = document.createTextNode(element.priceRanges[0].currency);
+                            var eventUrl = document.createTextNode(element.url);
+                            var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
+                            var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
 
-                           var eventName = document.createTextNode(element.name);
-                           var eventDate = document.createTextNode(element.dates.start.localDate);
-                           var eventStartTime = document.createTextNode(element.dates.start.localTime);
-                           var eventPriceMin = document.createTextNode(element.priceRanges[0].min);
-                           var eventPriceMax = document.createTextNode(element.priceRanges[0].max);
-                           var eventPriceCurrency = document.createTextNode(element.priceRanges[0].currency);
-                           var eventUrl = document.createTextNode(element.url);
-                           var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
-                           var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
+                           /****** create li  ******/
+                            node.appendChild(eventName);
 
-                           //create li
-                               node.appendChild(eventName);
 
-                         
-                           //create p
+                            /****** create p  ******/
                             eventDateContainer.appendChild(eventDate);
                             eventStartTimeContainer.appendChild(eventStartTime);
                             eventPriceMinContainer.appendChild(eventPriceMin);
@@ -174,7 +265,7 @@
                             eventVenueContainer.appendChild(eventVenueAddress);
                             eventVenueContainer.appendChild(eventVenueName);
 
-                            //insert p to li
+                            /****** insert p to li ******/
                             node.appendChild(eventDateContainer);
                             node.appendChild(eventStartTimeContainer);
                             node.appendChild(eventPriceMinContainer);
@@ -183,30 +274,18 @@
                             node.appendChild(eventUrlContainer);
                             node.appendChild(eventVenueContainer);
 
-                           
-                            //insert li to ul(eventContainer)
+
+                            /****** insert li to ul(eventContainer) ******/
                             eventContainer.appendChild(node);
-              
-                       
-                    
                         });
-                        
-              
                     },
                     error: function (xhr, status, err) {
                         /* This time, we do not end up here!*/
                     }
                 });
-
-            
             });
 
-            
-              
-
-
-
- 
+            /****** to get current location ******/
             var locationButton = document.createElement("button");
 
             locationButton.textContent = "Pan to Current Location";
@@ -377,5 +456,6 @@
         .ticketmaster {
             margin-top: 500px;
         }
+/*something*/
     </style>
 }
