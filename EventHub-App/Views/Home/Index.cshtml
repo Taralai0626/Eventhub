@@ -19,7 +19,7 @@
 
         //var objForMap = [];
         let map, infoWindow;
-        var beaches = [];
+        var eventPin = [];
 
         function initMap() {
             var outputLat = 43.6532260;
@@ -210,11 +210,10 @@
 
                             //push element.name into array
                             var individualArray = [element.name, parseFloat(element._embedded.venues[0].location.latitude), parseFloat(element._embedded.venues[0].location.longitude)];
-                           beaches.push(individualArray);
+                           eventPin.push(individualArray);
                             
 
-                            //var beaches = objForMap;
-
+                     
                             //get lat and lon for map pins
                             console.log("each event lat is: " + element._embedded.venues[0].location.latitude+" and lon is: "+element._embedded.venues[0].location.longitude);
 
@@ -274,15 +273,15 @@
                                 coords: [1, 1, 1, 20, 18, 20, 18, 1],
                                 type: "poly",
                             };
-                            for (var i = 0; i < beaches.length; i++) {
-                                var beach = beaches[i];
+                            for (var i = 0; i < eventPin.length; i++) {
+                                var event = eventPin[i];
                                 new google.maps.Marker({
-                                    position: { lat: beach[1], lng: beach[2] },
+                                    position: { lat: event[1], lng: event[2] },
                                     map: map,
                                     icon: image,
                                     shape: shape,
-                                    title: beach[0],
-                                    zIndex: beach[3],
+                                    title: event[0],
+                                    zIndex: event[3],
                                 });
                             }
                         });
@@ -328,7 +327,7 @@
             });
 
         }
-        console.log(beaches);
+        console.log(eventPin);
 
         function handleLocationError(browserHasGeolocation, infowindow, pos) {
             infowindow.setPosition(pos);
