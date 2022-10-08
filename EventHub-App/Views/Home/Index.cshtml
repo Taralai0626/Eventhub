@@ -264,6 +264,27 @@
 
                             /****** insert li to ul(eventContainer) ******/
                             eventContainer.appendChild(node);
+
+
+
+                             // Shapes define the clickable region of the icon. The type defines an HTML
+                            // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+                            // The final coordinate closes the poly by connecting to the first coordinate.
+                            var shape = {
+                                coords: [1, 1, 1, 20, 18, 20, 18, 1],
+                                type: "poly",
+                            };
+                            for (var i = 0; i < beaches.length; i++) {
+                                var beach = beaches[i];
+                                new google.maps.Marker({
+                                    position: { lat: beach[1], lng: beach[2] },
+                                    map: map,
+                                    icon: image,
+                                    shape: shape,
+                                    title: beach[0],
+                                    zIndex: beach[3],
+                                });
+                            }
                         });
                     },
                     error: function (xhr, status, err) {
@@ -271,24 +292,7 @@
                     }
                 });
 
-                 // Shapes define the clickable region of the icon. The type defines an HTML
-            // <area> element 'poly' which traces out a polygon as a series of X,Y points.
-            // The final coordinate closes the poly by connecting to the first coordinate.
-            var shape = {
-                coords: [1, 1, 1, 20, 18, 20, 18, 1],
-                type: "poly",
-            };
-            for (var i = 0; i < beaches.length; i++) {
-                var beach = beaches[i];
-                new google.maps.Marker({
-                    position: { lat: beach[1], lng: beach[2] },
-                    map: map,
-                    icon: image,
-                    shape: shape,
-                    title: beach[0],
-                    zIndex: beach[3],
-                });
-            }
+                
 
 
             });
