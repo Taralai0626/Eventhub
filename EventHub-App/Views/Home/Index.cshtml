@@ -17,8 +17,9 @@
     <title>EventHub</title>
     <script>
 
-        var objForMap = [];
+        //var objForMap = [];
         let map, infoWindow;
+        var beaches = [];
 
         function initMap() {
             var outputLat = 43.6532260;
@@ -32,13 +33,15 @@
         }
         
         /* default markers */
-        var beaches = [
-            ["Bondi Beach", -33.890542, 151.274856, 4],
-            ["Coogee Beach", -33.923036, 151.259052, 5],
-            ["Cronulla Beach", -34.028249, 151.157507, 3],
-            ["Manly Beach", -33.80010128657071, 151.28747820854187, 2],
-            ["Maroubra Beach", -33.950198, 151.259302, 1],
-        ];
+            /*var beaches = [
+                ["Bondi Beach", -33.890542, 151.274856, 4],
+                ["Coogee Beach", -33.923036, 151.259052, 5],
+                ["Cronulla Beach", -34.028249, 151.157507, 3],
+                ["Manly Beach", -33.80010128657071, 151.28747820854187, 2],
+                ["Maroubra Beach", -33.950198, 151.259302, 1],
+            ];*/
+
+            
 
         function setMarkers(map) {
             // Adds markers to the map.
@@ -224,9 +227,11 @@
                         array1.forEach((element) => {
 
                             //push element.name into array
-                            var individualArray = [element.name, element._embedded.venues[0].location.latitude, element._embedded.venues[0].location.longitude]
-                            objForMap.push(individualArray);
-                            console.log(objForMap);
+                            var individualArray = [element.name, parseFloat(element._embedded.venues[0].location.latitude), parseFloat(element._embedded.venues[0].location.longitude)];
+                           beaches.push(individualArray);
+                            
+
+                            //var beaches = objForMap;
 
                             //get lat and lon for map pins
                             console.log("each event lat is: " + element._embedded.venues[0].location.latitude+" and lon is: "+element._embedded.venues[0].location.longitude);
@@ -316,6 +321,7 @@
             });
 
         }
+        console.log(beaches);
 
         function handleLocationError(browserHasGeolocation, infowindow, pos) {
             infowindow.setPosition(pos);
