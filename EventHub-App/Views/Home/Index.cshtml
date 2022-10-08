@@ -192,10 +192,15 @@
 
                 /*console.log(eventContainer); */
                 var eventContainer = document.getElementById('eventContainer');
+                var date = new Date();
+  let today = date.toISOString().slice(0, 10);
+
+  var followingDay = new Date(date.getTime() + 86400000); //add one day
+  let tomrrow = followingDay.toISOString().slice(0, 10); 
 
                 $.ajax({
                     type: "GET",
-                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&latlong=" + outputLat + "," + outputLon,
+                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today + "T00:00:00," + tomrrow + "T00:00:00",
                     async: true,
                     dataType: "json",
                     success: function (json) {
@@ -371,7 +376,7 @@
 
     <!--TicketMaster data-->
     <div class="ticketmaster">
-        <h2>This week event:</h2>
+        <h2>Today event:</h2>
         <ul id="eventContainer">
             
         
