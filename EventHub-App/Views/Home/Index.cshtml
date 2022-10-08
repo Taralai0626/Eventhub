@@ -17,8 +17,9 @@
     <title>EventHub</title>
     <script>
 
-        var objForMap = [];
+        //var objForMap = [];
         let map, infoWindow;
+        var eventPin = [];
 
         function initMap() {
             var outputLat = 43.6532260;
@@ -32,13 +33,15 @@
         }
         
         /* default markers */
-        var beaches = [
-            ["Bondi Beach", -33.890542, 151.274856, 4],
-            ["Coogee Beach", -33.923036, 151.259052, 5],
-            ["Cronulla Beach", -34.028249, 151.157507, 3],
-            ["Manly Beach", -33.80010128657071, 151.28747820854187, 2],
-            ["Maroubra Beach", -33.950198, 151.259302, 1],
-        ];
+            /*var beaches = [
+                ["Bondi Beach", -33.890542, 151.274856, 4],
+                ["Coogee Beach", -33.923036, 151.259052, 5],
+                ["Cronulla Beach", -34.028249, 151.157507, 3],
+                ["Manly Beach", -33.80010128657071, 151.28747820854187, 2],
+                ["Maroubra Beach", -33.950198, 151.259302, 1],
+            ];*/
+
+            
 
         function setMarkers(map) {
             // Adds markers to the map.
@@ -55,25 +58,7 @@
                 // The anchor for this image is the base of the flagpole at (0, 32).
                 anchor: new google.maps.Point(0, 32),
             };
-            // Shapes define the clickable region of the icon. The type defines an HTML
-            // <area> element 'poly' which traces out a polygon as a series of X,Y points.
-            // The final coordinate closes the poly by connecting to the first coordinate.
-            var shape = {
-                coords: [1, 1, 1, 20, 18, 20, 18, 1],
-                type: "poly",
-            };
-            for (var i = 0; i < beaches.length; i++) {
-                var beach = beaches[i];
-                new google.maps.Marker({
-                    position: { lat: beach[1], lng: beach[2] },
-                    map: map,
-                    icon: image,
-                    shape: shape,
-                    title: beach[0],
-                    zIndex: beach[3],
-                });
-            }
-
+           
 
             /* one marker testing (IT'S WORKING) keep it for testing */
             /*var image =
@@ -224,10 +209,11 @@
                         array1.forEach((element) => {
 
                             //push element.name into array
-                            var individualArray = [element.name, element._embedded.venues[0].location.latitude, element._embedded.venues[0].location.longitude]
-                            objForMap.push(individualArray);
-                            console.log(objForMap);
+                            var individualArray = [element.name, parseFloat(element._embedded.venues[0].location.latitude), parseFloat(element._embedded.venues[0].location.longitude)];
+                           eventPin.push(individualArray);
+                            
 
+                     
                             //get lat and lon for map pins
                             console.log("each event lat is: " + element._embedded.venues[0].location.latitude+" and lon is: "+element._embedded.venues[0].location.longitude);
 
@@ -277,12 +263,37 @@
 
                             /****** insert li to ul(eventContainer) ******/
                             eventContainer.appendChild(node);
+
+
+
+                             // Shapes define the clickable region of the icon. The type defines an HTML
+                            // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+                            // The final coordinate closes the poly by connecting to the first coordinate.
+                            var shape = {
+                                coords: [1, 1, 1, 20, 18, 20, 18, 1],
+                                type: "poly",
+                            };
+                            for (var i = 0; i < eventPin.length; i++) {
+                                var event = eventPin[i];
+                                new google.maps.Marker({
+                                    position: { lat: event[1], lng: event[2] },
+                                    map: map,
+                                    icon: image,
+                                    shape: shape,
+                                    title: event[0],
+                                    zIndex: event[3],
+                                });
+                            }
                         });
                     },
                     error: function (xhr, status, err) {
                         /* This time, we do not end up here!*/
                     }
                 });
+
+                
+
+
             });
 
             /****** to get current location ******/
@@ -316,6 +327,7 @@
             });
 
         }
+        console.log(eventPin);
 
         function handleLocationError(browserHasGeolocation, infowindow, pos) {
             infowindow.setPosition(pos);
@@ -357,21 +369,9 @@
         </div>
     </div>
 
-    <!--  <h1>Current Event</h1>
-     <p id="location">location there</p>
-     <h2>input your city and check out the list of suggested things!</h2>
-
-     <form id="form1" runat="server" name="address" method="GET">
-
-    <label for="address">Search Your City</label>
-    <input id="txt_location" name="address" type="text" runat="server" />
-    <input type="button" value="Search" onclick="getmap()" class="btn btn-secondary btn-lg" />
-    <div id="map_populate" style="width:100%; height:500px; border: 5px solid #5E5454;"></div>
-    </form>-->
     <!--TicketMaster data-->
-
-
     <div class="ticketmaster">
+        <h2>This week event:</h2>
         <ul id="eventContainer">
             
         
