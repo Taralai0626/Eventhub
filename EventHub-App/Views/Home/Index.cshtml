@@ -159,11 +159,12 @@
     </script>
 </head>
 <body>
+
     <div class="app">
         <div class="map-wrapper">
             <!-- Search input -->
             <div class="search-wrapper">
-                <label class="address" for="address">Search Venue:</label>
+                <label class="address" for="address">Search City:</label>
                 <input id="searchInput" class="controls" type="text" placeholder="Enter a location">
             </div>
             <!-- Google map -->
@@ -173,32 +174,12 @@
             
         </div>
             <!-- Display geolocation data -->
-        <div>
-            <ul class="geo-data">
-                <li>Full Address: <span id="location"></span></li>
-                <li>Postal Code: <span id="postal_code"></span></li>
-                <li>Country: <span id="country"></span></li>
-                <li>Latitude: <span id="lat"></span></li>
-                <li>Longitude: <span id="lon"></span></li>
-            </ul>
-        </div>
+   
     </div>
-
-    <!--  <h1>Current Event</h1>
-     <p id="location">location there</p>
-     <h2>input your city and check out the list of suggested things!</h2>
-
-     <form id="form1" runat="server" name="address" method="GET">
-
-    <label for="address">Search Your City</label>
-    <input id="txt_location" name="address" type="text" runat="server" />
-    <input type="button" value="Search" onclick="getmap()" class="btn btn-secondary btn-lg" />
-    <div id="map_populate" style="width:100%; height:500px; border: 5px solid #5E5454;"></div>
-    </form>-->
 
        <!--TicketMaster data-->
     <div class="ticketmaster">
-        <h2>Today event:</h2>
+        <h2>Today's' event:</h2>
         <ul id="eventContainer">
             
         
@@ -211,12 +192,16 @@
 @section Styles
 {
     <style type="text/css">
+        body {
+                border-style: none none none solid;
+        }
+
         #map {
             display: block;
             position: absolute;
-            height: 60%;
+            height: 40%;
            /*width: 100%;*/
-            left: 2em;
+            left: 15em;
             right: 2em;
         }
 
@@ -224,11 +209,6 @@
             display: none;
         }
         /* * Optional: Makes the sample page fill the window */
-        html, body {
-            height: 100%;
-            margin: 1em;
-            padding: 1em;
-        }
 
 
         /******** SEARCH BAR **********/
@@ -267,7 +247,6 @@
             height: 40px;
             cursor: pointer;
         }
-
 
         .custom-map-control-button:hover {
             background: rgb(235, 235, 235);
