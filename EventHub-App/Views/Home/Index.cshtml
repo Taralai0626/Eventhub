@@ -364,26 +364,37 @@
 
 </head>
 <body>
-
     <div class="app">
         <div class="map-wrapper">
             <!-- Search input -->
             <div class="search-wrapper">
-                <label class="address" for="address">Search City:</label>
+                <label class="address" for="address">Search Vanue:</label>
                 <input id="searchInput" class="controls" type="text" placeholder="Enter a location">
             </div>
             <!-- Google map -->
             <div>
                 <span id="map"></span>
             </div>
+
+        </div>
+        <!-- Display geolocation data -->
+        <div>
+            <ul class="geo-data">
+                <li>Full Address: <span id="location"></span></li>
+                <li>Postal Code: <span id="postal_code"></span></li>
+                <li>Country: <span id="country"></span></li>
+                <li>Latitude: <span id="lat"></span></li>
+                <li>Longitude: <span id="lon"></span></li>
+            </ul>
         </div>
     </div>
 
     <!--TicketMaster data-->
     <div class="ticketmaster">
-        <h2>Today's' event:</h2>
+        <h2>Today events:</h2>
         <ul id="eventContainer">
-    </div>     
+        </ul>
+    </div>
 
     <div>
         <h2>This month events:</h2>
@@ -398,17 +409,12 @@
 @section Styles
 {
     <style type="text/css">
-        body {
-                border-style: none none none solid;
-        }
-
         #map {
             display: block;
             position: absolute;
-
-            height: 40%;
-           /*width: 100%;*/
-            left: 15em;
+            height: 60%;
+            /*width: 100%;*/
+            left: 2em;
             right: 2em;
         }
 
@@ -416,6 +422,11 @@
             display: none;
         }
         /* * Optional: Makes the sample page fill the window */
+        html, body {
+            height: 100%;
+            margin: 1em;
+            padding: 1em;
+        }
 
 
         /******** SEARCH BAR **********/
