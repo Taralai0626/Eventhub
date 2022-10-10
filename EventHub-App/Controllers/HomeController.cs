@@ -1,4 +1,5 @@
 ﻿using EventHub_App.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -53,9 +54,10 @@ namespace EventHub_App.Controllers
 
        }*/
 
-
+        [Authorize]
         public IActionResult Privacy()
         {
+
             return View();
         }
 
