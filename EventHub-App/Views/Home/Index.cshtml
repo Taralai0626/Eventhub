@@ -15,7 +15,9 @@
 
     <link href="https://maps/documentation/javascript/examples/default.css" rel="stylesheet" />
     <title>EventHub</title>
+
     <script>
+
 
         //var objForMap = [];
 
@@ -269,13 +271,13 @@
                             /****** insert li to ul(eventContainer) ******/
                             eventContainer.appendChild(node);
 
-              
-                          
+
+
                             // Shapes define the clickable region of the icon. The type defines an HTML
                             // <area> element 'poly' which traces out a polygon as a series of X,Y points.
                             // The final coordinate closes the poly by connecting to the first coordinate.
 
-                           
+
                             var shape = {
                                 coords: [1, 1, 1, 20, 18, 20, 18, 1],
                                 type: "poly",
@@ -286,7 +288,7 @@
                             //    content: contentString,
                             //});
 
-                            
+
                             var marker = new google.maps.Marker({
                                 position: { lat: event[1], lng: event[2] },
                                 map: map,
@@ -412,9 +414,9 @@
         #map {
             display: block;
             position: absolute;
-            height: 60%;
+            height: 40%;
             /*width: 100%;*/
-            left: 2em;
+            left: 15em;
             right: 2em;
         }
 
@@ -477,7 +479,9 @@
         .ticketmaster {
             margin-top: 500px;
         }
-
+        .geo-data{
+            display:none;
+        }
 
     </style>
 }
