@@ -18,6 +18,8 @@
     <script>
 
         //var objForMap = [];
+
+
         let map, infoWindow;
         var eventPin = [];
 
@@ -31,17 +33,17 @@
             });
             setMarkers(map); /* to set markers */
         }
-        
-        /* default markers */
-            /*var beaches = [
-                ["Bondi Beach", -33.890542, 151.274856, 4],
-                ["Coogee Beach", -33.923036, 151.259052, 5],
-                ["Cronulla Beach", -34.028249, 151.157507, 3],
-                ["Manly Beach", -33.80010128657071, 151.28747820854187, 2],
-                ["Maroubra Beach", -33.950198, 151.259302, 1],
-            ];*/
 
-            
+        /* default markers */
+        /*var beaches = [
+            ["Bondi Beach", -33.890542, 151.274856, 4],
+            ["Coogee Beach", -33.923036, 151.259052, 5],
+            ["Cronulla Beach", -34.028249, 151.157507, 3],
+            ["Manly Beach", -33.80010128657071, 151.28747820854187, 2],
+            ["Maroubra Beach", -33.950198, 151.259302, 1],
+        ];*/
+
+
 
         function setMarkers(map) {
             // Adds markers to the map.
@@ -58,18 +60,18 @@
                 // The anchor for this image is the base of the flagpole at (0, 32).
                 anchor: new google.maps.Point(0, 32),
             };
-           
+
 
             /* one marker testing (IT'S WORKING) keep it for testing */
             /*var image =
                 "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
             var beachMarker = new google.maps.Marker({
                 position: { lat: 43.663, lng: -79.381 },
-                    
+
                 map,
                 icon: image,
             });*/
-            
+
             /* for search bar and auto complete address function */
             var input = document.getElementById('searchInput');
             //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
@@ -125,46 +127,46 @@
 
 
 
-               /* multiple markers (NOT WORKING) */
-               /* var markers = [];
-                var collisionBehavior = google.maps.CollisionBehavior.REQUIRED;
-                var menuList = document.querySelector(".mdc-list");
-                // Add the behaviors to the select options
+                /* multiple markers (NOT WORKING) */
+                /* var markers = [];
+                 var collisionBehavior = google.maps.CollisionBehavior.REQUIRED;
+                 var menuList = document.querySelector(".mdc-list");
+                 // Add the behaviors to the select options
 
-                for (var _i = 0, _a = Object.entries(google.maps.CollisionBehavior); _i < _a.length; _i++) {
-                    var _b = _a[_i], key = _b[0], value = _b[1];
-                    var item = document.createElement("LI");
-                    item.classList.add("mdc-list-item");
-                    item.setAttribute("data-value", key);
-                    var itemText = document.createElement("SPAN");
-                    itemText.classList.add("mdc-list-item__text");
-                    itemText.innerText = value;
-                    item.appendChild(itemText);
-                    menuList.appendChild(item);
-                }
+                 for (var _i = 0, _a = Object.entries(google.maps.CollisionBehavior); _i < _a.length; _i++) {
+                     var _b = _a[_i], key = _b[0], value = _b[1];
+                     var item = document.createElement("LI");
+                     item.classList.add("mdc-list-item");
+                     item.setAttribute("data-value", key);
+                     var itemText = document.createElement("SPAN");
+                     itemText.classList.add("mdc-list-item__text");
+                     itemText.innerText = value;
+                     item.appendChild(itemText);
+                     menuList.appendChild(item);
+                 }
 
-                var select = new mdc.select.MDCSelect(document.querySelector(".mdc-select"));
-                select.listen("MDCSelect:change", function () {
-                    collisionBehavior = select.value;
-                    markers.forEach(function (marker) {
-                        marker.set("collisionBehavior", collisionBehavior);
-                    });
-                });
-                select.value = collisionBehavior;
+                 var select = new mdc.select.MDCSelect(document.querySelector(".mdc-select"));
+                 select.listen("MDCSelect:change", function () {
+                     collisionBehavior = select.value;
+                     markers.forEach(function (marker) {
+                         marker.set("collisionBehavior", collisionBehavior);
+                     });
+                 });
+                 select.value = collisionBehavior;
 
-                markers = [
-                    [-122.3402, 47.6093],
-                    [43.6532260, -79.3831843],
-                   
-                ].map(function (_a, i) {
-                    var lng = _a[0], lat = _a[1];
-                    return new google.maps.Marker({
-                        position: new google.maps.LatLng({ lat: lat, lng: lng }),
-                        map: map,
-                        collisionBehavior: collisionBehavior,
-                    });
-                });
-                */
+                 markers = [
+                     [-122.3402, 47.6093],
+                     [43.6532260, -79.3831843],
+
+                 ].map(function (_a, i) {
+                     var lng = _a[0], lat = _a[1];
+                     return new google.maps.Marker({
+                         position: new google.maps.LatLng({ lat: lat, lng: lng }),
+                         map: map,
+                         collisionBehavior: collisionBehavior,
+                     });
+                 });
+                 */
 
 
                 /* Location details */
@@ -196,7 +198,7 @@
                 let today = date.toISOString().slice(0, 10);
 
                 var followingDay = new Date(date.getTime() + 86400000); //add one day
-                let tomrrow = followingDay.toISOString().slice(0, 10); 
+                let tomrrow = followingDay.toISOString().slice(0, 10);
 
                 $.ajax({
                     type: "GET",
@@ -215,12 +217,11 @@
 
                             //push element.name into array
                             var individualArray = [element.name, parseFloat(element._embedded.venues[0].location.latitude), parseFloat(element._embedded.venues[0].location.longitude)];
-                           eventPin.push(individualArray);
-                            
+                            eventPin.push(individualArray);
 
-                     
+
                             //get lat and lon for map pins
-                            console.log("each event lat is: " + element._embedded.venues[0].location.latitude+" and lon is: "+element._embedded.venues[0].location.longitude);
+                            console.log("each event lat is: " + element._embedded.venues[0].location.latitude + " and lon is: " + element._embedded.venues[0].location.longitude);
 
 
                             var node = document.createElement("li");
@@ -231,7 +232,7 @@
                             var eventPriceCurrencyContainer = document.createElement("p");
                             var eventUrlContainer = document.createElement("p");
                             var eventVenueContainer = document.createElement("p");
- 
+
                             var eventName = document.createTextNode(element.name);
                             var eventDate = document.createTextNode(element.dates.start.localDate);
                             var eventStartTime = document.createTextNode(element.dates.start.localTime);
@@ -242,9 +243,8 @@
                             var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
                             var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
 
-                           /****** create li  ******/
+                            /****** create li  ******/
                             node.appendChild(eventName);
-
 
                             /****** create p  ******/
                             eventDateContainer.appendChild(eventDate);
@@ -268,63 +268,43 @@
 
                             /****** insert li to ul(eventContainer) ******/
                             eventContainer.appendChild(node);
-                            
-                            /****** google info window deafault content ******/
-                            var contentString = '<div id="content">' +
-                                '<div id="siteNotice">' +
-                                "</div>" +
-                                '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
-                                '<div id="bodyContent">' +
-                                "<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large " +
-                                "sandstone rock formation in the southern part of the " +
-                                "Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) " +
-                                "south west of the nearest large town, Alice Springs; 450&#160;km " +
-                                "(280&#160;mi) by road. Kata Tjuta and Uluru are the two major " +
-                                "features of the Uluru - Kata Tjuta National Park. Uluru is " +
-                                "sacred to the Pitjantjatjara and Yankunytjatjara, the " +
-                                "Aboriginal people of the area. It has many springs, waterholes, " +
-                                "rock caves and ancient paintings. Uluru is listed as a World " +
-                                "Heritage Site.</p>" +
-                                '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
-                                "https://en.wikipedia.org/w/index.php?title=Uluru</a> " +
-                                "(last visited June 22, 2009).</p>" +
-                                "</div>" +
-                                "</div>";
-                            var infowindow = new google.maps.InfoWindow({
-                                content: contentString,
-                            });
 
-                             // Shapes define the clickable region of the icon. The type defines an HTML
+              
+                          
+                            // Shapes define the clickable region of the icon. The type defines an HTML
                             // <area> element 'poly' which traces out a polygon as a series of X,Y points.
                             // The final coordinate closes the poly by connecting to the first coordinate.
+
+                           
                             var shape = {
                                 coords: [1, 1, 1, 20, 18, 20, 18, 1],
                                 type: "poly",
                             };
 
-
-
                             var event = individualArray;
+                            //var infowindow = new google.maps.InfoWindow({
+                            //    content: contentString,
+                            //});
 
-                                var marker = new google.maps.Marker({
-                                    position: { lat: event[1], lng: event[2] },
-                                    map: map,
-                                    icon: image,
-                                    shape: shape,
-                                    //title: event[0],
-                                    //zIndex: event[3],
-                                });
-                                /****** Marker listener to open info window ******/
-                                marker.addListener("click", function () {
-                                    infowindow.open({
-                                        anchor: marker,
-                                        map: map,
-                                        shouldFocus: false,
-                                    });
-                                });
                             
-
-
+                            var marker = new google.maps.Marker({
+                                position: { lat: event[1], lng: event[2] },
+                                map: map,
+                                icon: image,
+                                shape: shape,
+                                //title: event[0],
+                                //zIndex: event[3],
+                            });
+                            /****** Marker listener to open info window ******/
+                            marker.addListener("click", function () {
+                                infowindow.close();
+                                infowindow.setContent(node.innerHTML);
+                                infowindow.open({
+                                    anchor: marker,
+                                    map: map,
+                                    shouldFocus: false,
+                                });
+                            });
 
                         });
                     },
@@ -333,8 +313,6 @@
                     }
                 });
 
-
-               
             });
 
             /****** to get current location ******/
@@ -380,6 +358,7 @@
             infowindow.open(map);
         }
         window.initMap = initMap;
+
 
     </script>
 
@@ -487,20 +466,18 @@
             cursor: pointer;
         }
 
-
         .custom-map-control-button:hover {
             background: rgb(235, 235, 235);
         }
 
-
         .custom-map-control-button:hover {
             background: rgb(235, 235, 235);
         }
-
 
         .ticketmaster {
             margin-top: 500px;
         }
-/*something*/
+
+
     </style>
 }
