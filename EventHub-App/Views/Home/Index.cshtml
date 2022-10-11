@@ -99,7 +99,8 @@
 
                 /*  If the place has a geometry, then present it on a map */
                 if (place.geometry.viewport) {
-                    map.fitBounds(place.geometry.viewport);
+                    map.fitBounds(place.geometry.viewport)
+                    map.setZoom(12);
 
                 } else {
                     map.setCenter(place.geometry.location);
@@ -236,7 +237,7 @@
                             var eventPriceCurrencyContainer = document.createElement("p");
                             var eventUrlContainer = document.createElement("p");
                             var eventVenueContainer = document.createElement("p");
- 
+
                             var eventName = document.createTextNode(element.name);
                             var eventDate = document.createTextNode(element.dates.start.localDate);
                             var eventStartTime = document.createTextNode(element.dates.start.localTime);
@@ -246,9 +247,12 @@
                             var eventUrl = document.createTextNode(element.url);
                             var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
                             var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
-
+                            var eventImage = document.createTextNode(element.images[0].url);
+                            console.log("image" + eventImage )
+                           
                           
                             // append element into container
+
                             eventNameContainer.appendChild(eventName)
                             eventDateContainer.appendChild(eventDate);
                             eventStartTimeContainer.appendChild(eventStartTime);
@@ -284,12 +288,17 @@
                             eventContainer.appendChild(node);
 
 
-
-
-
-
-
-
+                            
+                            /******  Get the obeject to string for infowindow ******/
+                            const getEventName = JSON.stringify(element.name).replace(/"/g, '');
+                            const getEventVanue = JSON.stringify(element._embedded.venues[0].name).replace(/"/g, '');
+                            const geteventDate = JSON.stringify(element.dates.start.localDate).replace(/"/g, '');
+                            const getEventTime = JSON.stringify(element.dates.start.localTime).replace(/"/g, '');
+                            const getEventAddress = JSON.stringify(element._embedded.venues[0].address.line1).replace(/"/g, '');
+                            const getEventImage = JSON.stringify(element.images[0].url).replace(/"/g, '');
+                           
+                                
+                            var contentString = '<img src="' + getEventImage + '" width="100%"/>' + '<br>' + getEventName + '<br>' + getEventVanue + '<br>' + getEventAddress + '<br>' + geteventDate + ' ' + getEventTime 
 
 
                             // Shapes define the clickable region of the icon. The type defines an HTML
@@ -305,6 +314,7 @@
                             var event = individualArray;
                             //var infowindow = new google.maps.InfoWindow({
                             //    content: contentString,
+                            //    maxWidth: 200,
                             //});
 
 
@@ -319,11 +329,13 @@
                             /****** Marker listener to open info window ******/
                             marker.addListener("click", function () {
                                 infowindow.close();
-                                infowindow.setContent(node.innerHTML);
+                                //infowindow.setOptions({ maxWidth: 400 });
+                                infowindow.setContent(contentString);
+
                                 infowindow.open({
                                     anchor: marker,
                                     map: map,
-                                    shouldFocus: false,
+                                    shouldFocus: false, 
                                 });
                             });
 
@@ -490,14 +502,14 @@
     <!--TicketMaster data-->
     <div class="ticketmaster">
         <h2>Today events:</h2>
-        <ul id="eventContainer">
-        </ul>
+        <ol id="eventContainer">
+        </ol>
     </div>
 
     <div>
         <h2>This week events:</h2>
-        <ul id="eventContainer2">
-        </ul>
+        <ol id="eventContainer2">
+        </ol>
     </div>
 
 
@@ -577,6 +589,11 @@
         }
         .geo-data{
             display:none;
+        }
+
+        /*inforwindow overide width*/
+        .gm-style-iw-d{
+            max-width: 200px;
         }
 
     </style>
