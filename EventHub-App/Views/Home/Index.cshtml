@@ -215,6 +215,7 @@
 
                         var array1 = json._embedded.events;
 
+
                         //make each events as an individual object
 
                         array1.forEach((element) => {
@@ -317,8 +318,9 @@
                             //    maxWidth: 200,
                             //});
 
+                           
 
-                            var marker = new google.maps.Marker({
+                            var eventMarker = new google.maps.Marker({
                                 position: { lat: event[1], lng: event[2] },
                                 map: map,
                                 icon: image,
@@ -327,13 +329,11 @@
                                 //zIndex: event[3],
                             });
                             /****** Marker listener to open info window ******/
-                            marker.addListener("click", function () {
+                            eventMarker.addListener("click", function () {
                                 infowindow.close();
-                                //infowindow.setOptions({ maxWidth: 400 });
                                 infowindow.setContent(contentString);
-
                                 infowindow.open({
-                                    anchor: marker,
+                                    anchor: eventMarker,
                                     map: map,
                                     shouldFocus: false, 
                                 });
@@ -425,8 +425,15 @@
 
             });
 
+      
+           
             /****** to get current location ******/
             var locationButton = document.createElement("button");
+            var currentMarker = new google.maps.Marker({
+                map: map,
+                shouldFocus: true
+                //anchorPoint: new google.maps.Point(0, 71)
+            });
 
             locationButton.textContent = "Pan to Current Location";
             locationButton.classList.add("custom-map-control-button");
@@ -439,10 +446,11 @@
                                 lat: position.coords.latitude,
                                 lng: position.coords.longitude,
                             };
-
+                            currentMarker.setPosition(pos);
+                            currentMarker.setVisible(true);
                             infowindow.setPosition(pos);
                             infowindow.setContent("Location found.");
-                            infowindow.open(map);
+                            infowindow.open(map, currentMarker);
                             map.setCenter(pos);
                             console.log(pos)
                         },
@@ -454,7 +462,6 @@
                     handleLocationError(false, infowindow, map.getCenter());
                 }
             });
-
         }
         console.log(eventPin);
 
@@ -522,7 +529,7 @@
         #map {
             display: block;
             position: absolute;
-            height: 40%;
+            height: 60%;
             /*width: 100%;*/
             left: 15em;
             right: 2em;
