@@ -53,13 +53,14 @@
             // (0,0) is located in the top left of the image.
             // Origins, anchor positions and coordinates of the marker increase in the X
             // direction to the right and in the Y direction down.
+
             var image = {
                 url: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-                // This marker is 20 pixels wide by 32 pixels high.
+                /* This marker is 20 pixels wide by 32 pixels high.*/
                 size: new google.maps.Size(20, 32),
-                // The origin for this image is (0, 0).
+                /* The origin for this image is (0, 0). */
                 origin: new google.maps.Point(0, 0),
-                // The anchor for this image is the base of the flagpole at (0, 32).
+                /* The anchor for this image is the base of the flagpole at (0, 32). */
                 anchor: new google.maps.Point(0, 32),
             };
 
@@ -325,6 +326,83 @@
                                     shouldFocus: false,
                                 });
                             });
+
+                        });
+                    },
+                    error: function (xhr, status, err) {
+                        /* This time, we do not end up here!*/
+                    }
+                });
+                /*=====TICKETMASTER API (This week event)===== */
+
+                /*console.log(eventContainer2); */
+                var eventContainer2 = document.getElementById('eventContainer2');
+                var date2 = new Date();
+                let today2 = date2.toISOString().slice(0, 10);
+                var addOneWeek = new Date(date2.getTime() + 604800000); //add 30 days
+                let eventInAWeek = addOneWeek.toISOString().slice(0, 10);
+
+
+                $.ajax({
+                    type: "GET",
+                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today2 + "T00:00:00," + eventInAWeek + "T00:00:00",
+                    async: true,
+                    dataType: "json",
+                    success: function (json) {
+                        eventContainer2.innerHTML = '';
+
+
+                        var array1 = json._embedded.events;
+
+                        //make each events as an individual object
+
+                        array1.forEach((element) => {
+
+                            var node2 = document.createElement("li");
+                            var eventDateContainer2 = document.createElement("p");
+                            var eventStartTimeContainer2 = document.createElement("p");
+                            var eventPriceMinContainer2 = document.createElement("p");
+                            var eventPriceMaxContainer2 = document.createElement("p");
+                            var eventPriceCurrencyContainer2 = document.createElement("p");
+                            var eventUrlContainer2 = document.createElement("p");
+                            var eventVenueContainer2 = document.createElement("p");
+
+                            var eventName2 = document.createTextNode(element.name);
+                            var eventDate2 = document.createTextNode(element.dates.start.localDate);
+                            var eventStartTime2 = document.createTextNode(element.dates.start.localTime);
+                            var eventPriceMin2 = document.createTextNode(element.priceRanges[0].min);
+                            var eventPriceMax2 = document.createTextNode(element.priceRanges[0].max);
+                            var eventPriceCurrency2 = document.createTextNode(element.priceRanges[0].currency);
+                            var eventUrl2 = document.createTextNode(element.url);
+                            var eventVenueAddress2 = document.createTextNode(element._embedded.venues[0].address.line1);
+                            var eventVenueName2 = document.createTextNode(element._embedded.venues[0].name);
+
+                            /****** create li  ******/
+                            node2.appendChild(eventName2);
+
+
+                            /****** create p  ******/
+                            eventDateContainer2.appendChild(eventDate2);
+                            eventStartTimeContainer2.appendChild(eventStartTime2);
+                            eventPriceMinContainer2.appendChild(eventPriceMin2);
+                            eventPriceMaxContainer2.appendChild(eventPriceMax2);
+                            eventPriceCurrencyContainer2.appendChild(eventPriceCurrency2);
+                            eventUrlContainer2.appendChild(eventUrl2);
+                            eventVenueContainer2.appendChild(eventVenueAddress2);
+                            eventVenueContainer2.appendChild(eventVenueName2);
+
+                            /****** insert p to li ******/
+                            node2.appendChild(eventDateContainer2);
+                            node2.appendChild(eventStartTimeContainer2);
+                            node2.appendChild(eventPriceMinContainer2);
+                            node2.appendChild(eventPriceMaxContainer2);
+                            node2.appendChild(eventPriceCurrencyContainer2);
+                            node2.appendChild(eventUrlContainer2);
+                            node2.appendChild(eventVenueContainer2);
+
+
+                            /****** insert li to ul(eventContainer) ******/
+                            eventContainer2.appendChild(node2);
 
                         });
                     },
