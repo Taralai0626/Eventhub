@@ -225,8 +225,9 @@
                             //get lat and lon for map pins
                             console.log("each event lat is: " + element._embedded.venues[0].location.latitude + " and lon is: " + element._embedded.venues[0].location.longitude);
 
-
+         //create element
                             var node = document.createElement("li");
+                            var eventNameContainer = document.createElement("h3");
                             var eventDateContainer = document.createElement("p");
                             var eventStartTimeContainer = document.createElement("p");
                             var eventPriceMinContainer = document.createElement("p");
@@ -234,7 +235,7 @@
                             var eventPriceCurrencyContainer = document.createElement("p");
                             var eventUrlContainer = document.createElement("p");
                             var eventVenueContainer = document.createElement("p");
-
+ 
                             var eventName = document.createTextNode(element.name);
                             var eventDate = document.createTextNode(element.dates.start.localDate);
                             var eventStartTime = document.createTextNode(element.dates.start.localTime);
@@ -245,10 +246,9 @@
                             var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
                             var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
 
-                            /****** create li  ******/
-                            node.appendChild(eventName);
-
-                            /****** create p  ******/
+                          
+                            // append element into container
+                            eventNameContainer.appendChild(eventName)
                             eventDateContainer.appendChild(eventDate);
                             eventStartTimeContainer.appendChild(eventStartTime);
                             eventPriceMinContainer.appendChild(eventPriceMin);
@@ -258,7 +258,17 @@
                             eventVenueContainer.appendChild(eventVenueAddress);
                             eventVenueContainer.appendChild(eventVenueName);
 
-                            /****** insert p to li ******/
+                            /* create buttons */
+                            var btn = document.createElement("button");
+                            btn.innerHTML = "Click me";
+                            btn.onclick = function () {
+
+                                alert("Name: " +eventNameContainer.innerHTML+"Date: "+ eventDateContainer.innerHTML+ "Time: " +eventStartTimeContainer.innerHTML);
+
+                                };
+
+                            //append element into node(li)
+                            node.appendChild(eventNameContainer);
                             node.appendChild(eventDateContainer);
                             node.appendChild(eventStartTimeContainer);
                             node.appendChild(eventPriceMinContainer);
@@ -266,10 +276,18 @@
                             node.appendChild(eventPriceCurrencyContainer);
                             node.appendChild(eventUrlContainer);
                             node.appendChild(eventVenueContainer);
+                            node.appendChild(btn);
 
 
                             /****** insert li to ul(eventContainer) ******/
                             eventContainer.appendChild(node);
+
+
+
+
+
+
+
 
 
 
