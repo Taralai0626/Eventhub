@@ -55,7 +55,7 @@ namespace EventHub_App.Controllers
        }*/
 
         [Authorize]
-        public IActionResult Privacy()
+        public IActionResult Favourite()
         {
 
             return View();
