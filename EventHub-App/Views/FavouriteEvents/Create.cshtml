@@ -12,6 +12,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz_qxllhGeL9ZGB7kNBoXaOj0IVYNB1Sw&callback=initMap&libraries=places&v=weekly"
             defer></script>
+            <script src="https://kit.fontawesome.com/e67acba296.js" crossorigin="anonymous"></script>
     <script type="module" src="./index.js"></script>
 
     <link href="https://maps/documentation/javascript/examples/default.css" rel="stylesheet" />
@@ -219,9 +220,10 @@
 
                             /* create buttons */
                             var btn = document.createElement("button");
-                            btn.innerHTML = "Click me";
+                            btn.innerHTML = '<i class="fa-regular fa-heart fa-xl" style="color:red;"></i>';
+                            btn.classList.add("addBtn");
                             btn.onclick = function () {
-                               
+                               btn.innerHTML = '<i class="fa-solid fa-heart fa-xl" style="color:red;"></i>';
                                 //alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
 
                                 document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
@@ -368,9 +370,11 @@
                             eventVenueContainer2.appendChild(eventVenueName2);
 
                             //button
-                            var btn2 = document.createElement("button");
-                            btn2.innerHTML = "Click me";
-                            btn2.onclick = function () {
+                                var btn = document.createElement("button");
+                            btn.innerHTML = '<i class="fa-regular fa-heart fa-xl" style="color:red;"></i>';
+                            btn.classList.add("addBtn");
+                            btn.onclick = function () {
+                               btn.innerHTML = '<i class="fa-solid fa-heart fa-xl" style="color:red;"></i>';
                                
                                 //alert("Name: " + eventNameContainer2.innerHTML + "Date: " + eventDateContainer2.innerHTML + "Time: " + eventStartTimeContainer2.innerHTML);
 
@@ -486,10 +490,11 @@
                         eventVenueContainer.appendChild(eventVenueName);
 
                         /* create buttons */
-                        var btn = document.createElement("button");
-
-                        btn.innerHTML = "Click me";
-                        btn.onclick = function () {
+                            var btn = document.createElement("button");
+                            btn.innerHTML = '<i class="fa-regular fa-heart fa-xl" style="color:red;"></i>';
+                            btn.classList.add("addBtn");
+                            btn.onclick = function () {
+                               btn.innerHTML = '<i class="fa-solid fa-heart fa-xl" style="color:red;"></i>';
                              
                            // alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
                   
@@ -626,21 +631,22 @@
 
                    
                               /* create buttons */
-                        var btn = document.createElement("button");
-
-                        btn.innerHTML = "Click me";
-                        btn.onclick = function () {
+                            var btn = document.createElement("button");
+                            btn.innerHTML = '<i class="fa-regular fa-heart fa-xl" style="color:red;"></i>';
+                            btn.classList.add("addBtn");
+                            btn.onclick = function () {
+                               btn.innerHTML = '<i class="fa-solid fa-heart fa-xl" style="color:red;"></i>';
                              
                             //alert("Name: " + eventNameContainer2.innerHTML + "Date: " + eventDateContainer2.innerHTML + "Time: " + eventStartTimeContainer2.innerHTML);
 
-                                document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
-                                document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
-                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
-                                document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer.innerHTML;
-                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
-                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
-                                document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
-                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
+                                document.getElementById("FavouriteEventName").value = eventNameContainer2.innerHTML;
+                                document.getElementById("FavouriteEventDate").value = eventDateContainer2.innerHTML;
+                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer2.innerHTML;
+                                document.getElementById("FavouriteEventUrl").value = eventUrlContainer2.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer2.innerHTML;
                                 var auto_refresh = setInterval(function() { submitform(); }, 2000);
                         };
 
@@ -783,10 +789,11 @@
                                         eventVenueContainer.appendChild(eventVenueName);
 
                                         /* create buttons */
-                                        var btn = document.createElement("button");
-                                        btn.innerHTML = "Click me";
-                                        btn.onclick = function () {
-
+                                           var btn = document.createElement("button");
+                            btn.innerHTML = '<i class="fa-regular fa-heart fa-xl" style="color:red;"></i>';
+                            btn.classList.add("addBtn");
+                            btn.onclick = function () {
+                               btn.innerHTML = '<i class="fa-solid fa-heart fa-xl" style="color:red;"></i>';
                                               document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
                                 document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
                                 document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
@@ -1109,6 +1116,11 @@
             font-size: 16px
         }
 
+        .addBtn{
+            background-color:transparent;
+            border:none;
+
+        }
 
     </style>
 }
