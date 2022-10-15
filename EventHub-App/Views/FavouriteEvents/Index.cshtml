@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EventHub_App.Models.FavouriteEvent>
+@model IEnumerable<EventHub_App.Models.FavouriteEvent>
 
 @{
     ViewData["Title"] = "Index";
@@ -18,6 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.FavouriteEventDate)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.FavouriteEventTime)
             </th>
@@ -36,6 +37,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.FavouriteEventVenue)
             </th>
+
             <th></th>
         </tr>
     </thead>
@@ -67,6 +69,7 @@
                 @Html.DisplayFor(modelItem => item.FavouriteEventVenue)
             </td>
             <td>
+
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.id">Delete</a>

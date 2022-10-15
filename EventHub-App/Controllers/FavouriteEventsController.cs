@@ -54,6 +54,7 @@ namespace EventHub_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create([Bind("id,FavouriteEventName,FavouriteEventDate,FavouriteEventTime,FavouriteEventPriceMin,FavouriteEventPriceMax,FavouriteEventPriceCurrency,FavouriteEventUrl,FavouriteEventVenue")] FavouriteEvent favouriteEvent)
         {
             if (ModelState.IsValid)
