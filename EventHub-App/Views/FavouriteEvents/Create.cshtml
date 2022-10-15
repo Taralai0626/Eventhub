@@ -225,9 +225,20 @@
                                
                                 //alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
               
-                                document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
+                                 document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
                                 document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
+                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
+
+                                 document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer.innerHTML;
+                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
+                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
+
+                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
+                          
+
                                 var auto_refresh = setInterval(function() { submitform(); }, 1000);
+
                             
                             };
 
@@ -369,8 +380,19 @@
                                 //alert("Name: " + eventNameContainer2.innerHTML + "Date: " + eventDateContainer2.innerHTML + "Time: " + eventStartTimeContainer2.innerHTML);
                             
                                      document.getElementById("FavouriteEventName").value = eventNameContainer2.innerHTML;
-                                      document.getElementById("FavouriteEventDate").value = eventDateContainer2.innerHTML;
-                                      var auto_refresh = setInterval(function() { submitform(); }, 1000);
+                                document.getElementById("FavouriteEventDate").value = eventDateContainer2.innerHTML;
+                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer2.innerHTML;
+
+                                 document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer2.innerHTML;
+
+                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer2.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer2.innerHTML;
+                          
+
+                                var auto_refresh = setInterval(function() { submitform(); }, 1000);
+
                             };
 
                             /****** insert p to li ******/
@@ -480,9 +502,20 @@
                              
                            // alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
                         
-                              document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
-                               document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
-                               var auto_refresh = setInterval(function() { submitform(); }, 1000);
+                               document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
+                                document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
+                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
+
+                                 document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer.innerHTML;
+                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
+                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
+
+                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
+                          
+
+                                var auto_refresh = setInterval(function() { submitform(); }, 1000);
+
                         };
 
                         //append element into node(li)
@@ -612,9 +645,20 @@
                         btn.onclick = function () {
                              
                             //alert("Name: " + eventNameContainer2.innerHTML + "Date: " + eventDateContainer2.innerHTML + "Time: " + eventStartTimeContainer2.innerHTML);
-                           document.getElementById("FavouriteEventName").value = eventNameContainer2.innerHTML;
-                            document.getElementById("FavouriteEventDate").value = eventDateContainer2.innerHTML;
-                            var auto_refresh = setInterval(function() { submitform(); }, 1000);
+                            document.getElementById("FavouriteEventName").value = eventNameContainer2.innerHTML;
+                                document.getElementById("FavouriteEventDate").value = eventDateContainer2.innerHTML;
+                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer2.innerHTML;
+
+                                 document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer2.innerHTML;
+
+                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer2.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer2.innerHTML;
+                          
+
+                                var auto_refresh = setInterval(function() { submitform(); }, 1000);
+
                         };
 
 
@@ -652,43 +696,54 @@
             });
 
 
-            /****** to get current location ******/
-            var locationButton = document.createElement("button");
-            var currentMarker = new google.maps.Marker({
-                map: map,
-                shouldFocus: true
-                //anchorPoint: new google.maps.Point(0, 71)
-            });
+        <form id="myForm"  name="myForm" asp-action="Create" >
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FavouriteEventName"   class="control-label"></label>
+                    <input asp-for="FavouriteEventName" class="form-control" id="FavouriteEventName" value=""/>
+                    <span asp-validation-for="FavouriteEventName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FavouriteEventDate" class="control-label"></label>
+                    <input asp-for="FavouriteEventDate" id="FavouriteEventDate" class="form-control" />
+                    <span asp-validation-for="FavouriteEventDate" class="text-danger"></span>
+                </div>
+                 <div class="form-group">
+                    <label asp-for="FavouriteEventTime" class="control-label"></label>
+                    <input asp-for="FavouriteEventTime" id="FavouriteEventTime" class="form-control" />
+                    <span asp-validation-for="FavouriteEventTime" class="text-danger"></span>
+                </div>
+                 <div class="form-group">
+                    <label asp-for="FavouriteEventPriceMin" class="control-label"></label>
+                    <input asp-for="FavouriteEventPriceMin" id="FavouriteEventPriceMin" class="form-control" />
+                    <span asp-validation-for="FavouriteEventPriceMin" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FavouriteEventPriceMax" class="control-label"></label>
+                    <input asp-for="FavouriteEventPriceMax" id="FavouriteEventPriceMax" class="form-control" />
+                    <span asp-validation-for="FavouriteEventPriceMax" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FavouriteEventPriceCurrency" class="control-label"></label>
+                    <input asp-for="FavouriteEventPriceCurrency" id="FavouriteEventPriceCurrency" class="form-control" />
+                    <span asp-validation-for="FavouriteEventPriceCurrency" class="text-danger"></span>
+                </div>
+                 <div class="form-group">
+                    <label asp-for="FavouriteEventUrl" class="control-label"></label>
+                    <input asp-for="FavouriteEventUrl" id="FavouriteEventUrl" class="form-control" />
+                    <span asp-validation-for="FavouriteEventUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FavouriteEventVenue" class="control-label"></label>
+                    <input asp-for="FavouriteEventVenue" id="FavouriteEventVenue" class="form-control" />
+                    <span asp-validation-for="FavouriteEventVenue" class="text-danger"></span>
+                </div>
+                
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
 
-            locationButton.textContent = "Pan to Current Location";
-            locationButton.classList.add("custom-map-control-button");
-            map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-            locationButton.addEventListener("click", () => {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(
-                        (position) => {
-                            const pos = {
-                                lat: position.coords.latitude,
-                                lng: position.coords.longitude,
-                            };
-                            currentMarker.setPosition(pos);
-                            currentMarker.setVisible(true);
-                            infowindow.setPosition(pos);
-                            infowindow.setContent("Location found.");
-                            infowindow.open(map, currentMarker);
-                            map.setCenter(pos);
-                            console.log(pos)
-                        },
-                        () => {
-                            handleLocationError(true, infowindow, map.getCenter());
-                        }
-                    );
-                } else {
-                    handleLocationError(false, infowindow, map.getCenter());
-                }
-            });
-        }
-        console.log(eventPin);
 
         function handleLocationError(browserHasGeolocation, infowindow, pos) {
             infowindow.setPosition(pos);
@@ -756,10 +811,42 @@
                     <input asp-for="FavouriteEventDate" id="FavouriteEventDate" class="form-control" />
                     <span asp-validation-for="FavouriteEventDate" class="text-danger"></span>
                 </div>
+                 <div class="form-group">
+                    <label asp-for="FavouriteEventTime" class="control-label"></label>
+                    <input asp-for="FavouriteEventTime" id="FavouriteEventTime" class="form-control" />
+                    <span asp-validation-for="FavouriteEventTime" class="text-danger"></span>
+                </div>
+                 <div class="form-group">
+                    <label asp-for="FavouriteEventPriceMin" class="control-label"></label>
+                    <input asp-for="FavouriteEventPriceMin" id="FavouriteEventPriceMin" class="form-control" />
+                    <span asp-validation-for="FavouriteEventPriceMin" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FavouriteEventPriceMax" class="control-label"></label>
+                    <input asp-for="FavouriteEventPriceMax" id="FavouriteEventPriceMax" class="form-control" />
+                    <span asp-validation-for="FavouriteEventPriceMax" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FavouriteEventPriceCurrency" class="control-label"></label>
+                    <input asp-for="FavouriteEventPriceCurrency" id="FavouriteEventPriceCurrency" class="form-control" />
+                    <span asp-validation-for="FavouriteEventPriceCurrency" class="text-danger"></span>
+                </div>
+                 <div class="form-group">
+                    <label asp-for="FavouriteEventUrl" class="control-label"></label>
+                    <input asp-for="FavouriteEventUrl" id="FavouriteEventUrl" class="form-control" />
+                    <span asp-validation-for="FavouriteEventUrl" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FavouriteEventVenue" class="control-label"></label>
+                    <input asp-for="FavouriteEventVenue" id="FavouriteEventVenue" class="form-control" />
+                    <span asp-validation-for="FavouriteEventVenue" class="text-danger"></span>
+                </div>
+                
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
             </form>
+
         </div>
 </div>
 
