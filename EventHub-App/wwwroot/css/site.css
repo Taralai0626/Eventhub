@@ -16,18 +16,3 @@ html {
 body {
     margin-bottom: 60px;
 }
-
-#sideNav {
-    float: left;
-}
-
-#sideNav .navbar-nav .nav-item .nav-link {
-        font-weight: 800;
-        letter-spacing: 0.05rem;
-        text-transform: uppercase;
-        text-align: center;
-    }
-
-    #sideNav .navbar-toggler:focus {
-        outline-color: #d48a6e;
-    }

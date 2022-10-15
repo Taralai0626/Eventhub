@@ -14,6 +14,9 @@
     <script type="module" src="./index.js"></script>
 
     <link href="https://maps/documentation/javascript/examples/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EventHub_App.styles.css" asp-append-version="true" />
     <title>EventHub</title>
 
     <script>//var objForMap = [];
@@ -684,10 +687,27 @@
     <div class="app">
         <div class="map-wrapper">
             <!-- Search input -->
+            <div class="container shadow min-vh-100 py-4 search-wrapper">
+                <div class="row">
+                    <div class="col-md-5 mx-auto">
+                        <div class="input-group search-wrapper">
+                            <input class="form-control border-end-0 border rounded-pill controls" type="text" value="search" id="searchInput" placeholder="Enter a location">
+                            <span class="input-group-append">
+                                <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+            <!-- old search bar
             <div class="search-wrapper">
                 <label class="address" for="address">Search Vanue:</label>
                 <input id="searchInput" class="controls" type="text" placeholder="Enter a location">
-            </div>
+            </div>-->
+
             <!-- Google map -->
             <div>
                 <span id="map"></span>

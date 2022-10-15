@@ -5,27 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - eventHub</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EventHub_App.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/dfd2096e8b.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
-        <nav class="navbar" id="sideNav">
+        <nav class="navbar" >
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="FavouriteEvents" asp-action="Create">EventHub_App</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+               
               
                     <ul class="nav navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="FavouriteEvents" asp-action="Create">Home</a>
+                            
+                            <a class="nav-link text-dark" asp-area="" asp-controller="FavouriteEvents" asp-action="Create"><i class="fa-solid fa-house"></i>Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="FavouriteEvents" asp-action="Index">Favourites</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="FavouriteEvents" asp-action="Index"> <i class="fa-solid fa-heart"></i>Favourites</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
