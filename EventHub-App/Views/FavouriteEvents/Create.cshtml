@@ -1,7 +1,12 @@
+﻿
+
+
+@model EventHub_App.Models.FavouriteEvent
+
 @{
-    ViewBag.Title = "Title";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Create";
 }
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,8 +26,14 @@
 
         let map, infoWindow;
         var eventPin = [];
+      
+                            
+      
 
         function initMap() {
+       
+
+
             var outputLat = 43.6532260;
             var outputLon = -79.3831843;
 
@@ -214,9 +225,23 @@
                             var btn = document.createElement("button");
                             btn.innerHTML = "Click me";
                             btn.onclick = function () {
+                               
+                                //alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
+              
+                                document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
+                                document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
+                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
 
-                                alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
+                                 document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer.innerHTML;
+                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
+                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
 
+                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
+                          
+
+                                var auto_refresh = setInterval(function() { submitform(); }, 1000);
+                            
                             };
 
                             //append element into node(li)
@@ -353,9 +378,21 @@
                             var btn2 = document.createElement("button");
                             btn2.innerHTML = "Click me";
                             btn2.onclick = function () {
+                               
+                                //alert("Name: " + eventNameContainer2.innerHTML + "Date: " + eventDateContainer2.innerHTML + "Time: " + eventStartTimeContainer2.innerHTML);
+                            
+                                    document.getElementById("FavouriteEventName").value = eventNameContainer2.innerHTML;
+                                document.getElementById("FavouriteEventDate").value = eventDateContainer2.innerHTML;
+                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer2.innerHTML;
 
-                                alert("Name: " + eventNameContainer2.innerHTML + "Date: " + eventDateContainer2.innerHTML + "Time: " + eventStartTimeContainer2.innerHTML);
+                                 document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer2.innerHTML;
 
+                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer2.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer2.innerHTML;
+                          
+                                      var auto_refresh = setInterval(function() { submitform(); }, 1000);
                             };
 
                             /****** insert p to li ******/
@@ -459,11 +496,25 @@
 
                         /* create buttons */
                         var btn = document.createElement("button");
+
                         btn.innerHTML = "Click me";
                         btn.onclick = function () {
+                             
+                           // alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
+                        
+                              document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
+                                document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
+                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
 
-                            alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
+                                 document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer.innerHTML;
+                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
+                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
 
+                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
+                           
+
+                               var auto_refresh = setInterval(function() { submitform(); }, 1000);
                         };
 
                         //append element into node(li)
@@ -566,7 +617,7 @@
                     array1.forEach((element) => {
 
                         var node2 = document.createElement("li");
-                         var eventNameContainer2 = document.createElement("h3");
+                        var eventNameContainer2 = document.createElement("h3");
                         var eventDateContainer2 = document.createElement("p");
                         var eventStartTimeContainer2 = document.createElement("p");
                         var eventPriceMinContainer2 = document.createElement("p");
@@ -585,7 +636,28 @@
                         var eventVenueAddress2 = document.createTextNode(element._embedded.venues[0].address.line1);
                         var eventVenueName2 = document.createTextNode(element._embedded.venues[0].name);
 
-                    
+                   
+                              /* create buttons */
+                        var btn = document.createElement("button");
+
+                        btn.innerHTML = "Click me";
+                        btn.onclick = function () {
+                             
+                            //alert("Name: " + eventNameContainer2.innerHTML + "Date: " + eventDateContainer2.innerHTML + "Time: " + eventStartTimeContainer2.innerHTML);
+                             document.getElementById("FavouriteEventName").value = eventNameContainer2.innerHTML;
+                                document.getElementById("FavouriteEventDate").value = eventDateContainer2.innerHTML;
+                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer2.innerHTML;
+
+                                 document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer2.innerHTML;
+
+                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer2.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer2.innerHTML;
+                          
+                            var auto_refresh = setInterval(function() { submitform(); }, 1000);
+                        };
+
 
                         ///****** create p  ******/
                         eventNameContainer2.appendChild(eventName2);
@@ -607,15 +679,9 @@
                         node2.appendChild(eventPriceCurrencyContainer2);
                         node2.appendChild(eventUrlContainer2);
                         node2.appendChild(eventVenueContainer2);
+                        node2.appendChild(btn);
 
-                        /* create buttons */
-                        var btn2 = document.createElement("button");
-                        btn2.innerHTML = "Click me";
-                        btn2.onclick = function () {
 
-                            alert("Name: " + eventNameContainer2.innerHTML + "Date: " + eventDateContainer2.innerHTML + "Time: " + eventStartTimeContainer2.innerHTML);
-
-                        };
                         /****** insert li to ul(eventContainer) ******/
                         eventContainer2.appendChild(node2);
 
@@ -676,7 +742,13 @@
         }
         window.initMap = initMap;
 
+       
 
+        function submitform()
+        {
+    
+          document.getElementById("myForm").submit();
+        }
     </script>
 
 </head>
@@ -706,6 +778,67 @@
         </div>
     </div>
 
+    <div class="adding">
+    <h1>Create</h1>
+
+    <h4>FavouriteEvent</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+           <form asp-action="Create" name="myForm" id="myForm">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FavouriteEventName" class="control-label"></label>
+                <input asp-for="FavouriteEventName" class="form-control" />
+                <span asp-validation-for="FavouriteEventName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FavouriteEventDate" class="control-label"></label>
+                <input asp-for="FavouriteEventDate" class="form-control" />
+                <span asp-validation-for="FavouriteEventDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FavouriteEventTime" class="control-label"></label>
+                <input asp-for="FavouriteEventTime" class="form-control" />
+                <span asp-validation-for="FavouriteEventTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FavouriteEventPriceMin" class="control-label"></label>
+                <input asp-for="FavouriteEventPriceMin" class="form-control" />
+                <span asp-validation-for="FavouriteEventPriceMin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FavouriteEventPriceMax" class="control-label"></label>
+                <input asp-for="FavouriteEventPriceMax" class="form-control" />
+                <span asp-validation-for="FavouriteEventPriceMax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FavouriteEventPriceCurrency" class="control-label"></label>
+                <input asp-for="FavouriteEventPriceCurrency" class="form-control" />
+                <span asp-validation-for="FavouriteEventPriceCurrency" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FavouriteEventUrl" class="control-label"></label>
+                <input asp-for="FavouriteEventUrl" class="form-control" />
+                <span asp-validation-for="FavouriteEventUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FavouriteEventVenue" class="control-label"></label>
+                <input asp-for="FavouriteEventVenue" class="form-control" />
+                <span asp-validation-for="FavouriteEventVenue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+
+        </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+</div>
     <!--TicketMaster data-->
     <div class="ticketmaster">
         <h2>Today events:</h2>
@@ -726,6 +859,9 @@
 @section Styles
 {
     <style type="text/css">
+        .adding{
+            margin-top: 600px;
+        }
         #map {
             display: block;
             position: absolute;
@@ -809,3 +945,13 @@
 
     </style>
 }
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
