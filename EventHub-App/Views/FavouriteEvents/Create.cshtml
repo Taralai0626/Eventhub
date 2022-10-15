@@ -225,7 +225,7 @@
                                
                                 //alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
               
-                                 document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
+                                   document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
                                 document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
                                 document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
 
@@ -238,6 +238,7 @@
                           
 
                                 var auto_refresh = setInterval(function() { submitform(); }, 1000);
+
 
                             
                             };
@@ -379,7 +380,7 @@
                                
                                 //alert("Name: " + eventNameContainer2.innerHTML + "Date: " + eventDateContainer2.innerHTML + "Time: " + eventStartTimeContainer2.innerHTML);
                             
-                                     document.getElementById("FavouriteEventName").value = eventNameContainer2.innerHTML;
+                                      document.getElementById("FavouriteEventName").value = eventNameContainer2.innerHTML;
                                 document.getElementById("FavouriteEventDate").value = eventDateContainer2.innerHTML;
                                 document.getElementById("FavouriteEventTime").value = eventStartTimeContainer2.innerHTML;
 
@@ -392,6 +393,7 @@
                           
 
                                 var auto_refresh = setInterval(function() { submitform(); }, 1000);
+
 
                             };
 
@@ -502,7 +504,7 @@
                              
                            // alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
                         
-                               document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
+                                document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
                                 document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
                                 document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
 
@@ -515,6 +517,7 @@
                           
 
                                 var auto_refresh = setInterval(function() { submitform(); }, 1000);
+
 
                         };
 
@@ -645,7 +648,7 @@
                         btn.onclick = function () {
                              
                             //alert("Name: " + eventNameContainer2.innerHTML + "Date: " + eventDateContainer2.innerHTML + "Time: " + eventStartTimeContainer2.innerHTML);
-                            document.getElementById("FavouriteEventName").value = eventNameContainer2.innerHTML;
+                              document.getElementById("FavouriteEventName").value = eventNameContainer2.innerHTML;
                                 document.getElementById("FavouriteEventDate").value = eventDateContainer2.innerHTML;
                                 document.getElementById("FavouriteEventTime").value = eventStartTimeContainer2.innerHTML;
 
@@ -658,6 +661,7 @@
                           
 
                                 var auto_refresh = setInterval(function() { submitform(); }, 1000);
+
 
                         };
 
@@ -695,54 +699,217 @@
                 }
             });
 
+ /****** to get current location ******/
+            var locationButton = document.createElement("button");
+            var currentMarker = new google.maps.Marker({
+                map: map,
+                shouldFocus: true
+                //anchorPoint: new google.maps.Point(0, 71)
+            });
 
-        <form id="myForm"  name="myForm" asp-action="Create" >
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="FavouriteEventName"   class="control-label"></label>
-                    <input asp-for="FavouriteEventName" class="form-control" id="FavouriteEventName" value=""/>
-                    <span asp-validation-for="FavouriteEventName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="FavouriteEventDate" class="control-label"></label>
-                    <input asp-for="FavouriteEventDate" id="FavouriteEventDate" class="form-control" />
-                    <span asp-validation-for="FavouriteEventDate" class="text-danger"></span>
-                </div>
-                 <div class="form-group">
-                    <label asp-for="FavouriteEventTime" class="control-label"></label>
-                    <input asp-for="FavouriteEventTime" id="FavouriteEventTime" class="form-control" />
-                    <span asp-validation-for="FavouriteEventTime" class="text-danger"></span>
-                </div>
-                 <div class="form-group">
-                    <label asp-for="FavouriteEventPriceMin" class="control-label"></label>
-                    <input asp-for="FavouriteEventPriceMin" id="FavouriteEventPriceMin" class="form-control" />
-                    <span asp-validation-for="FavouriteEventPriceMin" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="FavouriteEventPriceMax" class="control-label"></label>
-                    <input asp-for="FavouriteEventPriceMax" id="FavouriteEventPriceMax" class="form-control" />
-                    <span asp-validation-for="FavouriteEventPriceMax" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="FavouriteEventPriceCurrency" class="control-label"></label>
-                    <input asp-for="FavouriteEventPriceCurrency" id="FavouriteEventPriceCurrency" class="form-control" />
-                    <span asp-validation-for="FavouriteEventPriceCurrency" class="text-danger"></span>
-                </div>
-                 <div class="form-group">
-                    <label asp-for="FavouriteEventUrl" class="control-label"></label>
-                    <input asp-for="FavouriteEventUrl" id="FavouriteEventUrl" class="form-control" />
-                    <span asp-validation-for="FavouriteEventUrl" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="FavouriteEventVenue" class="control-label"></label>
-                    <input asp-for="FavouriteEventVenue" id="FavouriteEventVenue" class="form-control" />
-                    <span asp-validation-for="FavouriteEventVenue" class="text-danger"></span>
-                </div>
-                
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
-                </div>
-            </form>
+            locationButton.textContent = "Pan to Current Location";
+            locationButton.classList.add("custom-map-control-button");
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+            locationButton.addEventListener("click", () => {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            const pos = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude,
+                            };
+                            currentMarker.setPosition(pos);
+                            currentMarker.setVisible(true);
+                            infowindow.setPosition(pos);
+                            infowindow.setContent("Location found.");
+                            infowindow.open(map, currentMarker);
+                            map.setCenter(pos);
+                            console.log(pos)
+                            console.log(pos.lat)
+                            console.log(pos.lng)
+
+                            /*=====TICKETMASTER API (Tody event)===== */
+
+                            /*console.log(eventContainer); */
+
+                            var eventContainer = document.getElementById('eventContainer');
+                            var date = new Date();
+                            let today = date.toISOString().slice(0, 10);
+
+                            var followingDay = new Date(date.getTime() + 86400000); //add one day
+
+                            let tomrrow = followingDay.toISOString().slice(0, 10);
+
+                            $.ajax({
+                                type: "GET",
+                                url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&radius=30&unit=km&latlong=" + pos.lat + "," + pos.lng + "&localStartEndDateTime=" + today + "T00:00:00," + tomrrow + "T00:00:00",
+                                async: true,
+                                dataType: "json",
+                                success: function (json) {
+                                    eventContainer.innerHTML = '';
+                                    console.log(json);
+
+                                    var array1 = json._embedded.events;
+
+
+                                    //make each events as an individual object
+
+                                    array1.forEach((element) => {
+
+                                        //push element.name into array
+                                        var individualArray = [element.name, parseFloat(element._embedded.venues[0].location.latitude), parseFloat(element._embedded.venues[0].location.longitude)];
+                                        eventPin.push(individualArray);
+
+
+                                        //get lat and lon for map pins
+                                        console.log("each event lat is: " + element._embedded.venues[0].location.latitude + " and lon is: " + element._embedded.venues[0].location.longitude);
+
+                                        //create element
+                                        var node = document.createElement("li");
+                                        var eventNameContainer = document.createElement("h3");
+                                        var eventDateContainer = document.createElement("p");
+                                        var eventStartTimeContainer = document.createElement("p");
+                                        var eventPriceMinContainer = document.createElement("p");
+                                        var eventPriceMaxContainer = document.createElement("p");
+                                        var eventPriceCurrencyContainer = document.createElement("p");
+                                        var eventUrlContainer = document.createElement("p");
+                                        var eventVenueContainer = document.createElement("p");
+
+                                        var eventName = document.createTextNode(element.name);
+                                        var eventDate = document.createTextNode(element.dates.start.localDate);
+                                        var eventStartTime = document.createTextNode(element.dates.start.localTime);
+                                        var eventPriceMin = document.createTextNode(element.priceRanges[0].min);
+                                        var eventPriceMax = document.createTextNode(element.priceRanges[0].max);
+                                        var eventPriceCurrency = document.createTextNode(element.priceRanges[0].currency);
+                                        var eventUrl = document.createTextNode(element.url);
+                                        var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
+                                        var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
+                                        var eventImage = document.createTextNode(element.images[0].url);
+                                        console.log("image" + eventImage)
+
+
+                                        // append element into container
+
+                                        eventNameContainer.appendChild(eventName)
+                                        eventDateContainer.appendChild(eventDate);
+                                        eventStartTimeContainer.appendChild(eventStartTime);
+                                        eventPriceMinContainer.appendChild(eventPriceMin);
+                                        eventPriceMaxContainer.appendChild(eventPriceMax);
+                                        eventPriceCurrencyContainer.appendChild(eventPriceCurrency);
+                                        eventUrlContainer.appendChild(eventUrl);
+                                        eventVenueContainer.appendChild(eventVenueAddress);
+                                        eventVenueContainer.appendChild(eventVenueName);
+
+                                        /* create buttons */
+                                        var btn = document.createElement("button");
+                                        btn.innerHTML = "Click me";
+                                        btn.onclick = function () {
+
+                                              document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
+                                document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
+                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
+
+                                 document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer.innerHTML;
+                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
+                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
+
+                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
+                          
+
+                                var auto_refresh = setInterval(function() { submitform(); }, 1000);
+
+                                        };
+
+                                        //append element into node(li)
+                                        node.appendChild(eventNameContainer);
+                                        node.appendChild(eventDateContainer);
+                                        node.appendChild(eventStartTimeContainer);
+                                        node.appendChild(eventPriceMinContainer);
+                                        node.appendChild(eventPriceMaxContainer);
+                                        node.appendChild(eventPriceCurrencyContainer);
+                                        node.appendChild(eventUrlContainer);
+                                        node.appendChild(eventVenueContainer);
+                                        node.appendChild(btn);
+
+
+                                        /****** insert li to ul(eventContainer) ******/
+                                        eventContainer.appendChild(node);
+
+
+
+                                        /******  Get the obeject to string for infowindow ******/
+                                        const getEventName = JSON.stringify(element.name).replace(/"/g, '');
+                                        const getEventVanue = JSON.stringify(element._embedded.venues[0].name).replace(/"/g, '');
+                                        const geteventDate = JSON.stringify(element.dates.start.localDate).replace(/"/g, '');
+                                        const getEventTime = JSON.stringify(element.dates.start.localTime).replace(/"/g, '');
+                                        const getEventAddress = JSON.stringify(element._embedded.venues[0].address.line1).replace(/"/g, '');
+                                        const getEventImage = JSON.stringify(element.images[0].url).replace(/"/g, '');
+
+
+                                        var contentString = '<img src="' + getEventImage + '" width="100%"/>' + '<br><strong>' + getEventName + '</strong><br>' + getEventVanue + '<br>' + getEventAddress + '<br>' + geteventDate + ' ' + getEventTime
+
+                                        // Shapes define the clickable region of the icon. The type defines an HTML
+                                        // <area> element 'poly' which traces out a polygon as a series of X,Y points.
+                                        // The final coordinate closes the poly by connecting to the first coordinate.
+
+
+                                        var shape = {
+                                            coords: [1, 1, 1, 20, 18, 20, 18, 1],
+                                            type: "poly",
+                                        };
+
+                                        var event = individualArray;
+                                        //var infowindow = new google.maps.InfoWindow({
+                                        //    content: contentString,
+                                        //    maxWidth: 200,
+                                        //});
+
+
+
+                                        var eventMarker = new google.maps.Marker({
+                                            position: { lat: event[1], lng: event[2] },
+                                            map: map,
+                                            icon: image,
+                                            shape: shape,
+                                            //title: event[0],
+                                            //zIndex: event[3],
+                                        });
+                                        /****** Marker listener to open info window ******/
+                                        eventMarker.addListener("click", function () {
+                                            infowindow.close();
+                                            infowindow.setContent(contentString);
+                                            infowindow.open({
+                                                anchor: eventMarker,
+                                                map: map,
+                                                shouldFocus: false,
+                                            });
+                                        });
+
+                                    });
+                                },
+                                error: function (xhr, status, err) {
+                                    /* This time, we do not end up here!*/
+                                }
+                            });
+
+                        },
+                         
+                        () => {
+                            handleLocationError(true, infowindow, map.getCenter());
+                        }
+                    );
+                } else {
+                    handleLocationError(false, infowindow, map.getCenter());
+                }
+            });
+            //console.log("pos" + pos)
+            //console.log("lat" + pos.lat)
+            //console.log("lng" + pos.lng)
+           
+        }
+        //console.log(eventPin);
+
 
 
         function handleLocationError(browserHasGeolocation, infowindow, pos) {
