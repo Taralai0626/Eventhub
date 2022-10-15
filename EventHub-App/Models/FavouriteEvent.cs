@@ -1,4 +1,4 @@
-﻿namespace EventHub_App.Models
+namespace EventHub_App.Models
 {
     public class FavouriteEvent
     {
@@ -11,16 +11,15 @@
 
         public string FavouriteEventTime { get; set; }
 
-        public int FavouriteEventPriceMin { get; set; }
-        public int FavouriteEventPriceMax { get; set; }
+        public string FavouriteEventPriceMin { get; set; }
+        
+        public string FavouriteEventPriceMax { get; set; }
+
         public string FavouriteEventPriceCurrency { get; set; }
+        
         public string FavouriteEventUrl { get; set; }
 
-
         public string FavouriteEventVenue { get; set; }
-
-
-
 
         public FavouriteEvent()
         {

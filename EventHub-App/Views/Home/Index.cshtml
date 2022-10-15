@@ -566,6 +566,7 @@
                     array1.forEach((element) => {
 
                         var node2 = document.createElement("li");
+                         var eventNameContainer2 = document.createElement("h3");
                         var eventDateContainer2 = document.createElement("p");
                         var eventStartTimeContainer2 = document.createElement("p");
                         var eventPriceMinContainer2 = document.createElement("p");
@@ -584,11 +585,10 @@
                         var eventVenueAddress2 = document.createTextNode(element._embedded.venues[0].address.line1);
                         var eventVenueName2 = document.createTextNode(element._embedded.venues[0].name);
 
-                        /****** create li  ******/
-                        node2.appendChild(eventName2);
-
+                    
 
                         ///****** create p  ******/
+                        eventNameContainer2.appendChild(eventName2);
                         eventDateContainer2.appendChild(eventDate2);
                         eventStartTimeContainer2.appendChild(eventStartTime2);
                         eventPriceMinContainer2.appendChild(eventPriceMin2);
@@ -599,6 +599,7 @@
                         eventVenueContainer2.appendChild(eventVenueName2);
 
                         /****** insert p to li ******/
+                        node2.appendChild(eventNameContainer2);
                         node2.appendChild(eventDateContainer2);
                         node2.appendChild(eventStartTimeContainer2);
                         node2.appendChild(eventPriceMinContainer2);
@@ -607,7 +608,14 @@
                         node2.appendChild(eventUrlContainer2);
                         node2.appendChild(eventVenueContainer2);
 
+                        /* create buttons */
+                        var btn2 = document.createElement("button");
+                        btn2.innerHTML = "Click me";
+                        btn2.onclick = function () {
 
+                            alert("Name: " + eventNameContainer2.innerHTML + "Date: " + eventDateContainer2.innerHTML + "Time: " + eventStartTimeContainer2.innerHTML);
+
+                        };
                         /****** insert li to ul(eventContainer) ******/
                         eventContainer2.appendChild(node2);
 

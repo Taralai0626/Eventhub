@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EventHub_App.Models.FavouriteEvent>
+@model IEnumerable<EventHub_App.Models.FavouriteEvent>
 
 @{
     ViewData["Title"] = "Index";
@@ -18,6 +18,26 @@
             <th>
                 @Html.DisplayNameFor(model => model.FavouriteEventDate)
             </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.FavouriteEventTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FavouriteEventPriceMin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FavouriteEventPriceMax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FavouriteEventPriceCurrency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FavouriteEventUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FavouriteEventVenue)
+            </th>
+
             <th></th>
         </tr>
     </thead>
@@ -31,6 +51,25 @@
                 @Html.DisplayFor(modelItem => item.FavouriteEventDate)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.FavouriteEventTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FavouriteEventPriceMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FavouriteEventPriceMax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FavouriteEventPriceCurrency)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FavouriteEventUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FavouriteEventVenue)
+            </td>
+            <td>
+
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
