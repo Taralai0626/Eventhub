@@ -232,7 +232,7 @@
                                 document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
                                 document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
-                                var auto_refresh = setInterval(function() { submitform(); }, 1000);
+                                var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
                             
                             };
@@ -382,7 +382,7 @@
                                 document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
                                 document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
-                                var auto_refresh = setInterval(function() { submitform(); }, 1000);
+                                var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
                             };
 
@@ -501,7 +501,7 @@
                                 document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
                                 document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
-                                var auto_refresh = setInterval(function() { submitform(); }, 1000);
+                                var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
                         };
 
@@ -641,7 +641,7 @@
                                 document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
                                 document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
-                                var auto_refresh = setInterval(function() { submitform(); }, 1000);
+                                var auto_refresh = setInterval(function() { submitform(); }, 2000);
                         };
 
 
@@ -799,7 +799,7 @@
                                 document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
                           
 
-                                var auto_refresh = setInterval(function() { submitform(); }, 1000);
+                                var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
                                         };
 
@@ -904,7 +904,18 @@
 
         function submitform()
         {
-          document.getElementById("myForm").submit();
+           document.getElementById("myForm").submit();
+            document.getElementById("FavouriteEventName").value = "";
+                                document.getElementById("FavouriteEventDate").value = "";
+                                document.getElementById("FavouriteEventTime").value = "";
+
+                                 document.getElementById("FavouriteEventPriceMin").value = "";
+                                document.getElementById("FavouriteEventPriceMax").value = "";
+                                document.getElementById("FavouriteEventPriceCurrency").value = "";
+
+                                 document.getElementById("FavouriteEventUrl").value = "";
+                                document.getElementById("FavouriteEventVenue").value = "";
+
         }
     </script>
 
@@ -1106,3 +1117,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
