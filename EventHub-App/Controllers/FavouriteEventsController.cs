@@ -55,7 +55,6 @@ namespace EventHub_App.Controllers
         // POST: FavouriteEvents/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        private readonly UserManager<ApplicationUser> _userManager;
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -64,8 +63,6 @@ namespace EventHub_App.Controllers
         {
             if (ModelState.IsValid)
             {
-               string userId = _userManager.GetUserId(this.User);
-                favouriteEvent.UserId = userId;
                 _context.Add(favouriteEvent);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
