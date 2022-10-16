@@ -205,6 +205,7 @@
                             var eventImage = document.createTextNode(element.images[0].url);
                             console.log("image" + eventImage)
 
+                          
 
                             // append element into container
 
@@ -476,7 +477,8 @@
                         var eventImage = document.createTextNode(element.images[0].url);
                         console.log("image" + eventImage)
 
-
+                          //add CSS to element
+                            node.classList.add("listingLi");
                         // append element into container
 
                         eventNameContainer.appendChild(eventName)
@@ -1016,14 +1018,14 @@
     <!--TicketMaster data-->
     <div class="ticketmaster">
         <h2>Today events:</h2>
-        <ol id="eventContainer">
-        </ol>
+        <ul id="eventContainer">
+        </ul>
     </div>
 
     <div>
         <h2>This week events:</h2>
-        <ol id="eventContainer2">
-        </ol>
+        <ul id="eventContainer2">
+        </ul>
     </div>
 
 
@@ -1035,6 +1037,7 @@
     <style type="text/css">
         .adding{
             margin-top: 600px;
+            display:none;
         }
         #map {
             display: block;
@@ -1120,6 +1123,20 @@
             background-color:transparent;
             border:none;
 
+        }
+
+        #eventContainer, #eventContainer2{
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+        }
+
+        .listingLi{
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0px 5px 10px grey;
+            margin: 5px 0;
+            padding:  10px 20px;
         }
 
     </style>
