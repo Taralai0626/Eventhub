@@ -931,12 +931,16 @@
     <div class="app">
         <div class="map-wrapper">
             <!-- Search input -->
-            <div class="search-wrapper">
-                <label class="address" for="address">Search Vanue:</label>
-                <input id="searchInput" class="controls" type="text" placeholder="Enter a location">
-            </div>
+                <div class="row">
+                    <div class="col-md-7 mx-auto">
+                        <div class="input-group search-wrapper">
+                            <input class="form-control border-end-0 border rounded-pill controls" type="text" id="searchInput" placeholder="Enter a location">  
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </div>
+                </div>
             <!-- Google map -->
-            <div>
+            <div id="mapdiv">
                 <span id="map"></span>
             </div>
 
@@ -1033,27 +1037,30 @@
 @section Styles
 {
     <style type="text/css">
+
         .adding{
             margin-top: 600px;
         }
+
         #map {
             display: block;
             position: absolute;
             height: 60%;
-            /*width: 100%;*/
-            left: 15em;
-            right: 2em;
+            width: 75%;
+       
+            float: left;
+        }
+        
+        #mapdiv {
+            margin: auto;
+            width: 50%;
         }
 
         #events {
             display: none;
         }
         /* * Optional: Makes the sample page fill the window */
-        html, body {
-            height: 100%;
-            margin: 1em;
-            padding: 1em;
-        }
+  
 
 
         /******** SEARCH BAR **********/
@@ -1069,15 +1076,14 @@
 
         #searchInput {
             position: relative !important;
-            width: 16em;
+            width: 75%;
             height: 2em;
-            margin-bottom: 2em;
         }
 
-        .container {
+       <!-- .container {
             height: 100%;
         }
-
+        -->
 
         /*********** CURREN LOCATION BUTTON(google inner class) ***********/
         .custom-map-control-button {
