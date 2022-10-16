@@ -492,6 +492,7 @@
                          eventDateContainer.classList.add("listingDate");
                           eventStartTimeContainer.classList.add("listingTime");
                          eventVenueAddressContainer.classList.add("listingVenueAddress");
+                          eventVenueNameContainer.classList.add("listingVenueName");
 
                         // append element into container
 
@@ -652,6 +653,7 @@
                          eventDateContainer2.classList.add("listingDate");
                           eventStartTimeContainer2.classList.add("listingTime");
                          eventVenueAddressContainer2.classList.add("listingVenueAddress");
+                          eventVenueNameContainer2.classList.add("listingVenueName");
 
                      
                    
@@ -1194,9 +1196,13 @@
             content: '🕖';
         }
 
-         /*each event listing's venue*/
+         /*each event listing's venue address*/
         .listingVenueAddress::before{
             content: '📍';
+        }
+         /*each event listing's venue name*/
+        .listingVenueName::before{
+            content: '🏟️';
         }
 
     </style>
