@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EventHub_App.Data;
 using EventHub_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EventHub_App.Controllers
 {
@@ -20,6 +21,7 @@ namespace EventHub_App.Controllers
         }
 
         // GET: FavouriteEvents
+        [Authorize]
         public async Task<IActionResult> Index()
         {
               return View(await _context.FavouriteEvent.ToListAsync());
@@ -54,6 +56,7 @@ namespace EventHub_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
 
         public async Task<IActionResult> Create([Bind("id,FavouriteEventName,FavouriteEventDate,FavouriteEventTime,FavouriteEventPriceMin,FavouriteEventPriceMax,FavouriteEventPriceCurrency,FavouriteEventUrl,FavouriteEventVenue")] FavouriteEvent favouriteEvent)
         {
@@ -67,6 +70,7 @@ namespace EventHub_App.Controllers
         }
 
         // GET: FavouriteEvents/Edit/5
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.FavouriteEvent == null)
