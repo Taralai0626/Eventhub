@@ -21,6 +21,8 @@ namespace EventHub_App.Models
 
         public string FavouriteEventVenue { get; set; }
 
+        public string UserId { get; set; }
+
         public FavouriteEvent()
         {
 
