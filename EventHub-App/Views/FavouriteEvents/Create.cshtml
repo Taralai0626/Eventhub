@@ -1,4 +1,4 @@
-@model EventHub_App.Models.FavouriteEvent
+﻿@model EventHub_App.Models.FavouriteEvent
 
 @{
     ViewData["Title"] = "Create";
@@ -147,7 +147,7 @@
                 outputLat = place.geometry.location.lat();
                 outputLon = place.geometry.location.lng();
 
-                /*=====TICKETMASTER API (Tody event)===== */
+                /*=====TICKETMASTER API (new Tody event)===== */
 
                 /*console.log(eventContainer); */
                 var eventContainer = document.getElementById('eventContainer');
@@ -205,6 +205,8 @@
                             var eventImage = document.createTextNode(element.images[0].url);
                             console.log("image" + eventImage)
 
+                           //add CSS to element
+                             node.classList.add("listingLi");
                           
 
                             // append element into container
@@ -357,7 +359,9 @@
                             var eventVenueName2 = document.createTextNode(element._embedded.venues[0].name);
 
 
-
+                             //add CSS to element
+                             node2.classList.add("listingLi");
+                             eventDateContainer2.classList.add("listingDate");
 
                             /****** create p  ******/
                             eventNameContainer2.appendChild(eventName2);
@@ -379,14 +383,14 @@
                                
                                 //alert("Name: " + eventNameContainer2.innerHTML + "Date: " + eventDateContainer2.innerHTML + "Time: " + eventStartTimeContainer2.innerHTML);
 
-                                document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
-                                document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
-                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
-                                document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer.innerHTML;
-                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
-                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
-                                document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
-                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
+                                document.getElementById("FavouriteEventName").value = eventNameContainer2.innerHTML;
+                                document.getElementById("FavouriteEventDate").value = eventDateContainer2.innerHTML;
+                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer2.innerHTML;
+                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer2.innerHTML;
+                                document.getElementById("FavouriteEventUrl").value = eventUrlContainer2.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer2.innerHTML;
                                 var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
                             };
@@ -416,7 +420,7 @@
             });
 
 
-            /*=====TICKETMASTER API (Tody event)===== */
+            /*=====TICKETMASTER API (DEFAULT Tody event)===== */
 
             /*console.log(eventContainer); */
             var eventContainer = document.getElementById('eventContainer');
@@ -477,8 +481,11 @@
                         var eventImage = document.createTextNode(element.images[0].url);
                         console.log("image" + eventImage)
 
-                          //add CSS to element
-                            node.classList.add("listingLi");
+                         //add CSS to element
+                         node.classList.add("listingLi");
+                         eventDateContainer.classList.add("listingDate");
+                         eventStartTimeContainer.classList.add("listingTime");
+
                         // append element into container
 
                         eventNameContainer.appendChild(eventName)
@@ -585,7 +592,7 @@
                 }
             });
 
-            /****** defaul for weekly event in Toronto ******/
+               /*=====TICKETMASTER API (default this week)===== */
             var eventContainer2 = document.getElementById('eventContainer2');
             var date2 = new Date();
             let today2 = date2.toISOString().slice(0, 10);
@@ -631,6 +638,9 @@
                         var eventVenueAddress2 = document.createTextNode(element._embedded.venues[0].address.line1);
                         var eventVenueName2 = document.createTextNode(element._embedded.venues[0].name);
 
+                         //add CSS to element
+                         node2.classList.add("listingLi");
+                         eventDateContainer2.classList.add("listingDate");
                    
                               /* create buttons */
                             var btn = document.createElement("button");
@@ -679,6 +689,7 @@
                         /****** insert li to ul(eventContainer) ******/
                         eventContainer2.appendChild(node2);
 
+                        console.log("testing for bug"+eventContainer2);
                     });
                 },
                 error: function (xhr, status, err) {
@@ -718,7 +729,7 @@
                             console.log(pos.lat)
                             console.log(pos.lng)
 
-                            /*=====TICKETMASTER API (Tody event)===== */
+                            /*=====TICKETMASTER API (Default Tody event)===== */
 
                             /*console.log(eventContainer); */
 
@@ -754,79 +765,84 @@
                                         //get lat and lon for map pins
                                         console.log("each event lat is: " + element._embedded.venues[0].location.latitude + " and lon is: " + element._embedded.venues[0].location.longitude);
 
-                                        //create element
-                                        var node = document.createElement("li");
-                                        var eventNameContainer = document.createElement("h3");
-                                        var eventDateContainer = document.createElement("p");
-                                        var eventStartTimeContainer = document.createElement("p");
-                                        var eventPriceMinContainer = document.createElement("p");
-                                        var eventPriceMaxContainer = document.createElement("p");
-                                        var eventPriceCurrencyContainer = document.createElement("p");
-                                        var eventUrlContainer = document.createElement("p");
-                                        var eventVenueContainer = document.createElement("p");
+                                      //create element
+                        var node = document.createElement("li");
+                        var eventNameContainer = document.createElement("h3");
+                        var eventDateContainer = document.createElement("p");
+                        var eventStartTimeContainer = document.createElement("p");
+                        var eventPriceMinContainer = document.createElement("p");
+                        var eventPriceMaxContainer = document.createElement("p");
+                        var eventPriceCurrencyContainer = document.createElement("p");
+                        var eventUrlContainer = document.createElement("p");
+                        var eventVenueContainer = document.createElement("p");
 
-                                        var eventName = document.createTextNode(element.name);
-                                        var eventDate = document.createTextNode(element.dates.start.localDate);
-                                        var eventStartTime = document.createTextNode(element.dates.start.localTime);
-                                        var eventPriceMin = document.createTextNode(element.priceRanges[0].min);
-                                        var eventPriceMax = document.createTextNode(element.priceRanges[0].max);
-                                        var eventPriceCurrency = document.createTextNode(element.priceRanges[0].currency);
-                                        var eventUrl = document.createTextNode(element.url);
-                                        var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
-                                        var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
-                                        var eventImage = document.createTextNode(element.images[0].url);
-                                        console.log("image" + eventImage)
+                        var eventName = document.createTextNode(element.name);
+                        var eventDate = document.createTextNode(element.dates.start.localDate);
+                        var eventStartTime = document.createTextNode(element.dates.start.localTime);
+                        var eventPriceMin = document.createTextNode(element.priceRanges[0].min);
+                        var eventPriceMax = document.createTextNode(element.priceRanges[0].max);
+                        var eventPriceCurrency = document.createTextNode(element.priceRanges[0].currency);
+                        var eventUrl = document.createTextNode(element.url);
+                        var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
+                        var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
+                        var eventImage = document.createTextNode(element.images[0].url);
+                        console.log("image" + eventImage)
 
+                         //add CSS to element
+                         node.classList.add("listingLi");
+                         eventDateContainer.classList.add("listingDate");
+                      
 
-                                        // append element into container
+                        // append element into container
 
-                                        eventNameContainer.appendChild(eventName)
-                                        eventDateContainer.appendChild(eventDate);
-                                        eventStartTimeContainer.appendChild(eventStartTime);
-                                        eventPriceMinContainer.appendChild(eventPriceMin);
-                                        eventPriceMaxContainer.appendChild(eventPriceMax);
-                                        eventPriceCurrencyContainer.appendChild(eventPriceCurrency);
-                                        eventUrlContainer.appendChild(eventUrl);
-                                        eventVenueContainer.appendChild(eventVenueAddress);
-                                        eventVenueContainer.appendChild(eventVenueName);
+                        eventNameContainer.appendChild(eventName)
+                        eventDateContainer.appendChild(eventDate);
+                        eventStartTimeContainer.appendChild(eventStartTime);
+                        eventPriceMinContainer.appendChild(eventPriceMin);
+                        eventPriceMaxContainer.appendChild(eventPriceMax);
+                        eventPriceCurrencyContainer.appendChild(eventPriceCurrency);
+                        eventUrlContainer.appendChild(eventUrl);
+                        eventVenueContainer.appendChild(eventVenueAddress);
+                        eventVenueContainer.appendChild(eventVenueName);
 
-                                        /* create buttons */
-                                           var btn = document.createElement("button");
+                        /* create buttons */
+                            var btn = document.createElement("button");
                             btn.innerHTML = '<i class="fa-regular fa-heart fa-xl" style="color:red;"></i>';
                             btn.classList.add("addBtn");
                             btn.onclick = function () {
                                btn.innerHTML = '<i class="fa-solid fa-heart fa-xl" style="color:red;"></i>';
-                                              document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
+                             
+                           // alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
+                  
+                                document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
                                 document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
                                 document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
-
-                                 document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer.innerHTML;
+                                document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer.innerHTML;
                                 document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
                                 document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
-
-                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
+                                document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
                                 document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
-                          
-
                                 var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
-                                        };
+                        };
 
-                                        //append element into node(li)
-                                        node.appendChild(eventNameContainer);
-                                        node.appendChild(eventDateContainer);
-                                        node.appendChild(eventStartTimeContainer);
-                                        node.appendChild(eventPriceMinContainer);
-                                        node.appendChild(eventPriceMaxContainer);
-                                        node.appendChild(eventPriceCurrencyContainer);
-                                        node.appendChild(eventUrlContainer);
-                                        node.appendChild(eventVenueContainer);
-                                        node.appendChild(btn);
+                        //append element into node(li)
+                        node.appendChild(eventNameContainer);
+                        node.appendChild(eventDateContainer);
+                        node.appendChild(eventStartTimeContainer);
+                        node.appendChild(eventPriceMinContainer);
+                        node.appendChild(eventPriceMaxContainer);
+                        node.appendChild(eventPriceCurrencyContainer);
+                        node.appendChild(eventUrlContainer);
+                        node.appendChild(eventVenueContainer);
+                        node.appendChild(btn);
 
 
-                                        /****** insert li to ul(eventContainer) ******/
-                                        eventContainer.appendChild(node);
-
+                        /****** insert li to ul(eventContainer) ******/
+                        eventContainer.appendChild(node);
+                       
+                        
+                         
 
 
                                         /******  Get the obeject to string for infowindow ******/
@@ -1119,9 +1135,13 @@
             font-size: 16px
         }
 
+        /*Heart buttons*/
         .addBtn{
             background-color:transparent;
             border:none;
+            position: absolute;
+            top:10px;
+            right:10px;
 
         }
 
@@ -1131,13 +1151,38 @@
               padding: 0;
         }
 
+        /*each event listing container*/
         .listingLi{
             background-color: white;
             border-radius: 20px;
             box-shadow: 0px 5px 10px grey;
-            margin: 5px 0;
+            margin: 20px 0;
             padding:  10px 20px;
+            position: relative; 
         }
+
+        /*each event listing's date*/
+        .listingDate{
+            display:inline-block;
+            color:blue;
+        }
+
+        .listingDate::before{
+           content: '📅';
+        }
+
+        /*each event listing's time*/
+        .listingTime{
+             display:inline-block;
+             color:red;
+             margin-left: 30px;
+        }
+
+        .listingTime::before{
+            content: '🕖';
+        }
+
+    
 
     </style>
 }
