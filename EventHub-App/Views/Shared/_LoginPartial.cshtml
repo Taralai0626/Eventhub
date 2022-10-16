@@ -2,6 +2,7 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 <script src="https://kit.fontawesome.com/dfd2096e8b.js" crossorigin="anonymous"></script>
+
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
@@ -16,9 +17,8 @@
 }
 else
 {
-    <li class="nav-item">
-            
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"><i class="fa-solid fa-user"></i>Login</a>
+    <li class="nav-item">  
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"><i class="fa-solid fa-user"></i>Login</a>
     </li>
 }
 </ul>
