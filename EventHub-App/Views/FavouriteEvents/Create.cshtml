@@ -205,8 +205,11 @@
                             var eventImage = document.createTextNode(element.images[0].url);
                             console.log("image" + eventImage)
 
-                           //add CSS to element
-                             node.classList.add("listingLi");
+                          //add CSS to element
+                           node.classList.add("listingLi");
+                         eventDateContainer.classList.add("listingDate");
+                          eventStartTimeContainer.classList.add("listingTime");
+                         eventVenueContainer.classList.add("listingVenue");
                           
 
                             // append element into container
@@ -360,8 +363,10 @@
 
 
                              //add CSS to element
-                             node2.classList.add("listingLi");
-                             eventDateContainer2.classList.add("listingDate");
+                          node2.classList.add("listingLi");
+                         eventDateContainer2.classList.add("listingDate");
+                          eventStartTimeContainer2.classList.add("listingTime");
+                         eventVenueContainer2.classList.add("listingVenue");
 
                             /****** create p  ******/
                             eventNameContainer2.appendChild(eventName2);
@@ -467,7 +472,8 @@
                         var eventPriceMaxContainer = document.createElement("p");
                         var eventPriceCurrencyContainer = document.createElement("p");
                         var eventUrlContainer = document.createElement("p");
-                        var eventVenueContainer = document.createElement("p");
+                        var eventVenueAddressContainer = document.createElement("p");
+                        var eventVenueNameContainer = document.createElement("p");
 
                         var eventName = document.createTextNode(element.name);
                         var eventDate = document.createTextNode(element.dates.start.localDate);
@@ -481,10 +487,11 @@
                         var eventImage = document.createTextNode(element.images[0].url);
                         console.log("image" + eventImage)
 
-                         //add CSS to element
+                        //add CSS to element
                          node.classList.add("listingLi");
                          eventDateContainer.classList.add("listingDate");
-                         eventStartTimeContainer.classList.add("listingTime");
+                          eventStartTimeContainer.classList.add("listingTime");
+                         eventVenueAddressContainer.classList.add("listingVenueAddress");
 
                         // append element into container
 
@@ -495,8 +502,8 @@
                         eventPriceMaxContainer.appendChild(eventPriceMax);
                         eventPriceCurrencyContainer.appendChild(eventPriceCurrency);
                         eventUrlContainer.appendChild(eventUrl);
-                        eventVenueContainer.appendChild(eventVenueAddress);
-                        eventVenueContainer.appendChild(eventVenueName);
+                        eventVenueAddressContainer.appendChild(eventVenueAddress);
+                        eventVenueNameContainer.appendChild(eventVenueName);
 
                         /* create buttons */
                             var btn = document.createElement("button");
@@ -514,7 +521,7 @@
                                 document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
                                 document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
-                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueAddressContainer.innerHTML + eventVenueNameContainer.innerHTML;
                                 var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
                         };
@@ -527,7 +534,8 @@
                         node.appendChild(eventPriceMaxContainer);
                         node.appendChild(eventPriceCurrencyContainer);
                         node.appendChild(eventUrlContainer);
-                        node.appendChild(eventVenueContainer);
+                        node.appendChild(eventVenueAddressContainer);
+                         node.appendChild(eventVenueNameContainer);
                         node.appendChild(btn);
 
 
@@ -626,7 +634,8 @@
                         var eventPriceMaxContainer2 = document.createElement("p");
                         var eventPriceCurrencyContainer2 = document.createElement("p");
                         var eventUrlContainer2 = document.createElement("p");
-                        var eventVenueContainer2 = document.createElement("p");
+                       var eventVenueAddressContainer2 = document.createElement("p");
+                        var eventVenueNameContainer2 = document.createElement("p");
 
                         var eventName2 = document.createTextNode(element.name);
                         var eventDate2 = document.createTextNode(element.dates.start.localDate);
@@ -638,9 +647,13 @@
                         var eventVenueAddress2 = document.createTextNode(element._embedded.venues[0].address.line1);
                         var eventVenueName2 = document.createTextNode(element._embedded.venues[0].name);
 
-                         //add CSS to element
-                         node2.classList.add("listingLi");
+                        //add CSS to element
+                          node2.classList.add("listingLi");
                          eventDateContainer2.classList.add("listingDate");
+                          eventStartTimeContainer2.classList.add("listingTime");
+                         eventVenueAddressContainer2.classList.add("listingVenueAddress");
+
+                     
                    
                               /* create buttons */
                             var btn = document.createElement("button");
@@ -658,21 +671,21 @@
                                 document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer2.innerHTML;
                                 document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer2.innerHTML;
                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer2.innerHTML;
-                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer2.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueAddressContainer2.innerHTML + eventVenueNameContainer2.innerHTML;
                                 var auto_refresh = setInterval(function() { submitform(); }, 2000);
                         };
 
 
                         ///****** create p  ******/
-                        eventNameContainer2.appendChild(eventName2);
+                              eventNameContainer2.appendChild(eventName2)
                         eventDateContainer2.appendChild(eventDate2);
                         eventStartTimeContainer2.appendChild(eventStartTime2);
                         eventPriceMinContainer2.appendChild(eventPriceMin2);
                         eventPriceMaxContainer2.appendChild(eventPriceMax2);
                         eventPriceCurrencyContainer2.appendChild(eventPriceCurrency2);
                         eventUrlContainer2.appendChild(eventUrl2);
-                        eventVenueContainer2.appendChild(eventVenueAddress2);
-                        eventVenueContainer2.appendChild(eventVenueName2);
+                        eventVenueAddressContainer2.appendChild(eventVenueAddress2);
+                        eventVenueNameContainer2.appendChild(eventVenueName2);
 
                         /****** insert p to li ******/
                         node2.appendChild(eventNameContainer2);
@@ -682,7 +695,8 @@
                         node2.appendChild(eventPriceMaxContainer2);
                         node2.appendChild(eventPriceCurrencyContainer2);
                         node2.appendChild(eventUrlContainer2);
-                        node2.appendChild(eventVenueContainer2);
+                        node2.appendChild(eventVenueAddressContainer2);
+                        node2.appendChild(eventVenueNameContainer2);
                         node2.appendChild(btn);
 
 
@@ -788,9 +802,7 @@
                         var eventImage = document.createTextNode(element.images[0].url);
                         console.log("image" + eventImage)
 
-                         //add CSS to element
-                         node.classList.add("listingLi");
-                         eventDateContainer.classList.add("listingDate");
+               
                       
 
                         // append element into container
@@ -1182,7 +1194,10 @@
             content: '🕖';
         }
 
-    
+         /*each event listing's venue*/
+        .listingVenueAddress::before{
+            content: '📍';
+        }
 
     </style>
 }
