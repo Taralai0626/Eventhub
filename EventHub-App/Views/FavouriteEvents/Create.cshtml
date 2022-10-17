@@ -177,7 +177,7 @@
 
                         var array1 = json._embedded.events;
 
- //make each events as an individual object
+                    //make each events as an individual object
 
                     array1.forEach((element) => {
 
@@ -343,7 +343,8 @@
                 });
                 /*=====TICKETMASTER API (This week event)===== */
 
-                var eventContainer3 = document.getElementById('eventContainer3');
+                //var eventContainer3 = document.getElementById('eventContainer3');
+
                 var date3 = new Date();
                 let today3 = date3.toISOString().slice(0, 10);
                 console.log("today3" + today3)
@@ -357,7 +358,7 @@
                 $.ajax({
                     type: 'GET',
                     dataType: "json",
-                    url: "https://api.predicthq.com/v1/events/?within=2mi%40" + outputLat + "," + outputLon + "&active.gte=" + today3 + "&active.lte=" + tomrrow3 + "&category=expos,concerts&sort=rank",
+                    url: "https://api.predicthq.com/v1/events/?within=1mi%40" + outputLat + "," + outputLon + "&active.gte=" + today3 + "&active.lte=" + tomrrow3 + "&category=performing-arts,concerts,festivals&sort=rank",
                     headers: {
                         'Authorization': 'Bearer SD70g3g43BUE_I7x0_m4jFOhY4jZEHBm-LBcIDGl'
                     },
