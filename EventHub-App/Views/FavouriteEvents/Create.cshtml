@@ -56,6 +56,11 @@
                  url: "https://localhost:7219/images/event1.png"
             };
 
+            var image3 = {
+                url: "https://localhost:7219/images/pin4.png"
+            };
+
+
             console.log(image2)
 
             //var image = {
@@ -112,8 +117,8 @@
                     map.setZoom(17);
                 }
                 marker.setIcon(({
-                    url: place.icon,
-                    size: new google.maps.Size(71, 71),
+                    url:"https://localhost:7219/images/pin7.png",
+                    size: new google.maps.Size(90, 90),
                     origin: new google.maps.Point(0, 0),
                     anchor: new google.maps.Point(17, 34),
                     scaledSize: new google.maps.Size(35, 35)
@@ -298,7 +303,7 @@
                         const getEventImage = JSON.stringify(element.images[0].url).replace(/"/g, '');
 
 
-                        var contentString = '<img src="' + getEventImage + '" width="100%"/>' + '<br><strong>' + getEventName + '</strong><br>' + getEventVanue + '<br>' + getEventAddress + '<br>' + geteventDate + ' ' + getEventTime 
+                        var contentString = '<img src="' + getEventImage + '" width="230" height="130"/>' + '<br><strong>' + getEventName + '</strong><br>' + getEventVanue + '<br>' + getEventAddress + '<br>' + geteventDate + ' ' + getEventTime 
 
                         // Shapes define the clickable region of the icon. The type defines an HTML
                         // <area> element 'poly' which traces out a polygon as a series of X,Y points.
@@ -311,11 +316,6 @@
                             };
 
                             var event = individualArray;
-                            //var infowindow = new google.maps.InfoWindow({
-                            //    content: contentString,
-                            //    maxWidth: 200,
-                            //});
-
 
 
                             var eventMarker = new google.maps.Marker({
@@ -349,18 +349,13 @@
 
                 var date3 = new Date();
                 let today3 = date3.toISOString().slice(0, 10);
-                console.log("today3" + today3)
-
-
                 var followingDay3 = new Date(date3.getTime() + 86400000); //add one day
-
                 let tomrrow3 = followingDay3.toISOString().slice(0, 10);
-                console.log("tomrrow3" + tomrrow3)
 
                 $.ajax({
                     type: 'GET',
                     dataType: "json",
-                    url: "https://api.predicthq.com/v1/events/?within=1mi%40" + outputLat + "," + outputLon + "&active.gte=" + today3 + "&active.lte=" + tomrrow3 + "&category=performing-arts,concerts,festivals&sort=rank",
+                    url: "https://api.predicthq.com/v1/events/?within=3mi%40" + outputLat + "," + outputLon + "&active.gte=" + today3 + "&active.lte=" + tomrrow3 + "&category=performing-arts,concerts,festivals&sort=rank",
                     headers: {
                         'Authorization': 'Bearer SD70g3g43BUE_I7x0_m4jFOhY4jZEHBm-LBcIDGl'
                     },
@@ -368,9 +363,6 @@
                         console.log('data: ', data);
 
                         //eventContainer3.innerHTML = '';
-
-                        //console.log(json);
-
                         var array2 = data.results;
 
                         console.log('array: ', array2);
@@ -391,94 +383,16 @@
                             eventPin.push(individualArray2);
                             console.log(individualArray2)
 
-
-                            //get lat and lon for map pins
-                            //console.log("each event lat is: " + element._embedded.venues[0].location.latitude + " and lon is: " + element._embedded.venues[0].location.longitude);
-
-                            //create element
-                            // var node = document.createElement("li");
-                            // var eventNameContainer3 = document.createElement("h3");
-                            //var eventDateContainer3 = document.createElement("p");
-                            //var eventStartTimeContainer3 = document.createElement("p");
-                            //var eventPriceMinContainer3 = document.createElement("p");
-                            //var eventPriceMaxContainer3 = document.createElement("p");
-                            //var eventPriceCurrencyContainer3 = document.createElement("p");
-                            //var eventUrlContainer3 = document.createElement("p");
-                            //var eventVenueContainer3 = document.createElement("p");
-
                             var eventName3 = element.title.toString();
-                            //var eventDate3 = document.createTextNode(element.dates.start.localDate);
-                            //var eventStartTime3 = document.createTextNode(element.dates.start.localTime);
-                            //var eventPriceMin3 = document.createTextNode(element.priceRanges[0].min);
-                            //var eventPriceMax3 = document.createTextNode(element.priceRanges[0].max);
-                            //var eventPriceCurrency3 = document.createTextNode(element.priceRanges[0].currency);
-                            //var eventUrl3 = document.createTextNode(element.url);
-                            //var eventVenueAddress3 = document.createTextNode(element._embedded.venues[0].address.line1);
+                            var category3 = element.category.toString();
+                            var address3 = element.entities[0].formatted_address.toString();
                             var eventVenueName3 = element.entities[0].name.toString();
-                            //var eventImage3 = document.createTextNode(element.images[0].url);
-                            console.log("image" + eventName3)
 
-                            //document.getElementById('eventContainer3').innerHTML = eventName3
-
-                            // append element into container
-
-                            //eventNameContainer3.appendChild(eventName3)
-                            //eventDateContainer3.appendChild(eventDate);
-                            //eventStartTimeContainer3.appendChild(eventStartTime);
-                            //eventPriceMinContainer3.appendChild(eventPriceMin);
-                            //eventPriceMaxContainer3.appendChild(eventPriceMax);
-                            //eventPriceCurrencyContainer3.appendChild(eventPriceCurrency);
-                            //eventUrlContainer3.appendChild(eventUrl);
-                            //eventVenueContainer3.appendChild(eventVenueAddress);
-                            //eventVenueContainer3.appendChild(eventVenueName3);
-                            console.log("name" + eventName3)
-                            console.log("vanue" + eventVenueName3)
-
-
-                            /* create buttons */
-                            //var btn3 = document.createElement("button");
-                            //btn3.innerHTML = "Click me";
-                            //btn3.onclick = function () {
-
-                            //    alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
-
-                            //};
-
-                            //append element into node(li)
-
-                            //node3.appendChild(eventNameContainer3);
-                            //node3.appendChild(eventDateContainer);
-                            //node3.appendChild(eventStartTimeContainer);
-                            //node3.appendChild(eventPriceMinContainer);
-                            //node3.appendChild(eventPriceMaxContainer);
-                            //node3.appendChild(eventPriceCurrencyContainer);
-                            //node3.appendChild(eventUrlContainer);
-                            //node3.appendChild(eventVenueContainer3);
-                            // node3.appendChild(btn);
-
-
-                            /****** insert li to ul(eventContainer) ******/
-                            //eventContainer3.appendChild(node3);
-
-
-
-                            /******  Get the obeject to string for infowindow ******/
-                            //const getEventName3 = JSON.stringify(element.name).replace(/"/g, '');
-                            //const getEventVanue3 = JSON.stringify(element._embedded.entities[0].name)).replace(/"/g, '');
-                            //const geteventDate = JSON.stringify(element.dates.start.localDate).replace(/"/g, '');
-                            //const getEventTime = JSON.stringify(element.dates.start.localTime).replace(/"/g, '');
-                            //const getEventAddress = JSON.stringify(element._embedded.venues[0].address.line1).replace(/"/g, '');
-
-                            //const getEventImage3 = JSON.stringify(element.images[0].url).replace(/"/g, '');
-
-
-                            var contentString3 = eventName3 + eventVenueName3/*'<img src="' + getEventImage3 + '" width="100%"/>' + '<br><strong>' + */
-                            //+ '</strong><br>' + getEventVanue + '<br>' + getEventAddress + '<br>' + geteventDate + ' ' + getEventTime
+                            var contentString3 = "<div class='content3wrap'><img src='https://localhost:7219/images/event3.jpg' width='230' height='130'/>" + "<p><strong>Event Name: </strong>" + eventName3 + "</p><p><strong>Venue Name: </strong>" + eventVenueName3 + "</p><p><strong>Event Type: </strong>" + category3 + "</p><p><strong>Address: </strong>" + address3 + "</p></div>"
 
                             // Shapes define the clickable region of the icon. The type defines an HTML
                             // <area> element 'poly' which traces out a polygon as a series of X,Y points.
                             // The final coordinate closes the poly by connecting to the first coordinate.
-
 
                             var shape2 = {
                                 coords: [1, 1, 1, 20, 30, 20, 18, 1],
@@ -490,8 +404,6 @@
                             //    content: contentString,
                             //    maxWidth: 200,
                             //});
-                            console.log("event2" + event2)
-
 
                             var eventMarker2 = new google.maps.Marker({
                                 position: { lat: event2[1], lng: event2[2] },
@@ -502,10 +414,9 @@
                                 //zIndex: event[3],
 
                             });
-                            //console.log("position" + position)
                             /****** Marker listener to open info window ******/
                             eventMarker2.addListener("click", function () {
-                                //infowindow.close();
+                                infowindow.close();
                                 infowindow.setContent(contentString3);
                                 infowindow.open({
                                     anchor: eventMarker2,
@@ -516,10 +427,7 @@
                         });
                     },
                     error: function (xhr, status, err) {
-                        //        /* This time, we do not end up here!*/
-
                     }
-
                 });
 
 
@@ -819,13 +727,7 @@
                         };
 
                         var event = individualArray;
-                        //var infowindow = new google.maps.InfoWindow({
-                        //    content: contentString,
-                        //    maxWidth: 200,
-                        //});
-
-
-
+  
                         var eventMarker = new google.maps.Marker({
                             position: { lat: event[1], lng: event[2] },
                             map: map,
@@ -852,6 +754,72 @@
                 }
             });
 
+             /*=====the other event API (DEFAULT Tody event)===== */
+
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                url: "https://api.predicthq.com/v1/events/?within=3mi%40" + outputLat + "," + outputLon + "&active.gte=" + today + "&active.lte=" + tomrrow + "&category=performing-arts,concerts,festivals&sort=rank",
+                headers: {
+                    'Authorization': 'Bearer SD70g3g43BUE_I7x0_m4jFOhY4jZEHBm-LBcIDGl'
+                },
+                success: function (data, status, xhr) {
+                    console.log('data: ', data);
+
+                    //eventContainer3.innerHTML = '';
+                    var array2 = data.results;
+
+                    console.log('array: ', array2);
+
+                    //make each events as an individual object
+
+                    array2.forEach((element) => {
+                        //push element.name into array
+
+                        var individualArray2 = [element.title, parseFloat(element.location[1]), parseFloat(element.location[0])];
+                        eventPin.push(individualArray2);
+                        console.log(individualArray2)
+
+                        var eventName3 = element.title.toString();
+                        var category3 = element.category.toString();
+                        var address3 = element.entities[0].formatted_address.toString();
+                        var eventVenueName3 = element.entities[0].name.toString();
+
+                        var contentString3 = "<div class='content3wrap'><img src='https://localhost:7219/images/event3.jpg' width='230' height='130'/>" + "<p><strong>Event Name: </strong>" + eventName3 + "</p><p><strong>Venue Name: </strong>" + eventVenueName3 + "</p><p><strong>Event Type: </strong>" + category3 + "</p><p><strong>Address: </strong>" + address3 + "</p></div>"
+
+                        var shape2 = {
+                            coords: [1, 1, 1, 20, 30, 20, 18, 1],
+                            type: "poly",
+                        };
+
+                        var event2 = individualArray2;
+ 
+                        var eventMarker2 = new google.maps.Marker({
+                            position: { lat: event2[1], lng: event2[2] },
+                            map: map,
+                            icon: image2,
+                            shape: shape2,
+                            //title: event[0],
+                            //zIndex: event[3],
+
+                        });
+                        /****** Marker listener to open info window ******/
+                        eventMarker2.addListener("click", function () {
+                            infowindow.close();
+                            infowindow.setContent(contentString3);
+                            infowindow.open({
+                                anchor: eventMarker2,
+                                map: map,
+                                shouldFocus: false,
+                            });
+                        });
+                    });
+                },
+                error: function (xhr, status, err) {
+                }
+            });
+
+
                /*=====TICKETMASTER API (default this week)===== */
             var eventContainer2 = document.getElementById('eventContainer2');
             var date2 = new Date();
@@ -859,9 +827,6 @@
             var addOneWeek = new Date(date2.getTime() + 604800000); //add 30 days
 
             let eventInAWeek = addOneWeek.toISOString().slice(0, 10);
-
-            var outputLat = 43.6532260;
-            var outputLon = -79.3831843;
 
             $.ajax({
                 type: "GET",
@@ -992,10 +957,11 @@
 
 
             /****** to get current location ******/
-
+           
             var locationButton = document.createElement("button");
             var currentMarker = new google.maps.Marker({
                 map: map,
+                icon: image3,
                 shouldFocus: true
                 //anchorPoint: new google.maps.Point(0, 71)
             });
@@ -1021,7 +987,7 @@
                             console.log(pos.lat)
                             console.log(pos.lng)
 
-                            /*=====TICKETMASTER API (Default Tody event)===== */
+                            /*=====TICKETMASTER API (Current location Tody event)===== */
 
                             /*console.log(eventContainer); */
 
@@ -1162,7 +1128,7 @@
                                         const getEventImage = JSON.stringify(element.images[0].url).replace(/"/g, '');
 
 
-                                        var contentString = '<img src="' + getEventImage + '" width="100%"/>' + '<br><strong>' + getEventName + '</strong><br>' + getEventVanue + '<br>' + getEventAddress + '<br>' + geteventDate + ' ' + getEventTime
+                                        var contentString = '<img src="' + getEventImage + '" width="230" height="130"/>' + '<br><strong>' + getEventName + '</strong><br>' + getEventVanue + '<br>' + getEventAddress + '<br>' + geteventDate + ' ' + getEventTime
 
                                         // Shapes define the clickable region of the icon. The type defines an HTML
                                         // <area> element 'poly' which traces out a polygon as a series of X,Y points.
@@ -1208,6 +1174,75 @@
                                 }
                             });
 
+                            /*=====the other event API (DEFAULT Tody event)===== */
+                            var date3 = new Date();
+                            let today3 = date3.toISOString().slice(0, 10);
+                            var followingDay3 = new Date(date3.getTime() + 86400000); //add one day
+                            let tomrrow3 = followingDay3.toISOString().slice(0, 10);
+
+                            $.ajax({
+                                type: 'GET',
+                                dataType: "json",
+                                url: "https://api.predicthq.com/v1/events/?within=3mi%40" + pos.lat + "," + pos.lng + "&active.gte=" + today3 + "&active.lte=" + tomrrow3 + "&category=performing-arts,concerts,festivals&sort=rank",
+                                headers: {
+                                    'Authorization': 'Bearer SD70g3g43BUE_I7x0_m4jFOhY4jZEHBm-LBcIDGl'
+                                },
+                                success: function (data, status, xhr) {
+                                    console.log('data: ', data);
+
+                                    //eventContainer3.innerHTML = '';
+                                    var array2 = data.results;
+
+                                    console.log('array: ', array2);
+
+                                    //make each events as an individual object
+
+                                    array2.forEach((element) => {
+                                        //push element.name into array
+
+                                        var individualArray2 = [element.title, parseFloat(element.location[1]), parseFloat(element.location[0])];
+                                        eventPin.push(individualArray2);
+                                        console.log(individualArray2)
+
+                                        var eventName3 = element.title.toString();
+                                        var category3 = element.category.toString();
+                                        var address3 = element.entities[0].formatted_address.toString();
+                                        var eventVenueName3 = element.entities[0].name.toString();
+
+                                        var contentString3 = "<div class='content3wrap'><img src='https://localhost:7219/images/event3.jpg' width='230' height='130'/>" + "<p><strong>Event Name: </strong>" + eventName3 + "</p><p><strong>Venue Name: </strong>" + eventVenueName3 + "</p><p><strong>Event Type: </strong>" + category3 + "</p><p><strong>Address: </strong>" + address3 + "</p></div>"
+
+                                        var shape2 = {
+                                            coords: [1, 1, 1, 20, 30, 20, 18, 1],
+                                            type: "poly",
+                                        };
+
+                                        var event2 = individualArray2;
+ 
+                                        var eventMarker2 = new google.maps.Marker({
+                                            position: { lat: event2[1], lng: event2[2] },
+                                            map: map,
+                                            icon: image2,
+                                            shape: shape2,
+                                            //title: event[0],
+                                            //zIndex: event[3],
+
+                                        });
+                                        /****** Marker listener to open info window ******/
+                                        eventMarker2.addListener("click", function () {
+                                            infowindow.close();
+                                            infowindow.setContent(contentString3);
+                                            infowindow.open({
+                                                anchor: eventMarker2,
+                                                map: map,
+                                                shouldFocus: false,
+                                            });
+                                        });
+                                    });
+                                },
+                                error: function (xhr, status, err) {
+                                }
+                            });
+
                         },
                          
                         () => {
@@ -1237,17 +1272,15 @@
 
         function submitform()
         {
-           document.getElementById("myForm").submit();
+            document.getElementById("myForm").submit();
             document.getElementById("FavouriteEventName").value = "";
-                                document.getElementById("FavouriteEventDate").value = "";
-                                document.getElementById("FavouriteEventTime").value = "";
-
-                                 document.getElementById("FavouriteEventPriceMin").value = "";
-                                document.getElementById("FavouriteEventPriceMax").value = "";
-                                document.getElementById("FavouriteEventPriceCurrency").value = "";
-
-                                 document.getElementById("FavouriteEventUrl").value = "";
-                                document.getElementById("FavouriteEventVenue").value = "";
+            document.getElementById("FavouriteEventDate").value = "";
+            document.getElementById("FavouriteEventTime").value = "";
+            document.getElementById("FavouriteEventPriceMin").value = "";
+            document.getElementById("FavouriteEventPriceMax").value = "";
+            document.getElementById("FavouriteEventPriceCurrency").value = "";
+            document.getElementById("FavouriteEventUrl").value = "";
+            document.getElementById("FavouriteEventVenue").value = "";
 
         }
     </script>
@@ -1463,10 +1496,14 @@
         /*inforwindow overide width*/
         .gm-style-iw-d {
             max-width: 250px;
-            max-height: 500px;
-            font-size: 16px
+            max-height: 600px;
+            font-size: 12px
         }
 
+        .content3wrap p{
+            font-size: 12px;
+            margin-bottom: 0;
+        }
         /*Heart buttons*/
         .addBtn{
             background-color:transparent;
@@ -1505,7 +1542,6 @@
              width: 100%;
             padding:  10px 20px;
             position: relative; 
-        
             margin:  20px auto;
         }
 
