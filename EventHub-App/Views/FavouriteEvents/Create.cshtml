@@ -14,7 +14,9 @@
             defer></script>
             <script src="https://kit.fontawesome.com/e67acba296.js" crossorigin="anonymous"></script>
     <script type="module" src="./index.js"></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://maps/documentation/javascript/examples/default.css" rel="stylesheet" />
     <title>EventHub</title>
 
@@ -1255,19 +1257,38 @@
         <div class="map-wrapper">
             <!-- Search input -->
             <div class="row mb-4 position-relative">
-                    <div class="col-md-7 mx-auto w-100">
-                        <div class="input-group search-wrapper">
-                            <input class="form-control border-end-0 border rounded-pill controls" type="text" id="searchInput" placeholder="Enter a location">
-                        <i class="fa fa-search search-icon position-absolute float-end"></i>
-                        </div>
+                <div class="col-12 mx-auto mb-4 w-100">
+                    <div class="input-group search-wrapper">
+                        <input class="form-control border-end-0 border rounded-pill controls" type="text" id="searchInput" placeholder="Enter a location">
+                    <i class="fa fa-search search-icon position-absolute float-end"></i>
                     </div>
                 </div>
-            <!-- Google map -->
-            <div id="mapdiv w-100">
-                <span id="map"></span>
+                <!-- Google map -->
+                <div id="mapdiv" >
+                    <span id="map"  class="position-absolute" ></span>
+                </div>
+    
+            </div>
+            <div class="position-relative">
+                 <!--TicketMaster API-->
+                <div id="ticketMasterContainer" class="w-100">
+                    <div>
+                        <h2 class="eventTitle">Today events:</h2>
+                        <ul id="eventContainer">
+                        </ul>
+                    </div>
+                    <div>
+                        <h2  class="eventTitle">This week events:</h2>
+                        <ul id="eventContainer2">
+                        </ul>
+                    </div>
+                </div>
             </div>
 
         </div>
+
+       
+
         <!-- Display geolocation data -->
         <div>
             <ul class="geo-data">
@@ -1334,24 +1355,18 @@
             </div>
         </form>
         </div>
+
+
+        </div>
+
+   
+
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-</div>
-    <!--TicketMaster data-->
-    <div class="ticketmaster container-fluid">
-        <h2>Today events:</h2>
-        <ul id="eventContainer">
-        </ul>
-    </div>
 
-    <div>
-        <h2>This week events:</h2>
-        <ul id="eventContainer2">
-        </ul>
-    </div>
+
+
+
 
 
 </body>
@@ -1360,17 +1375,21 @@
 @section Styles
 {
     <style type="text/css">
+        body{
+            font-family: 'Nunito', sans-serif;
+        }
 
         .adding{
             margin-top: 600px;
             display:none;
         }
 
+
         #map {
             display: block;
-            position: absolute;
-            height: 70%;
-            width: 89%;
+            height: 420px;
+            width: 98%;
+          
         }
  
 
@@ -1403,6 +1422,7 @@
             position: relative !important;
             width: 75%;
             height: 2em;
+            background-color:#E8ECEF;
         }
 
        <!-- .container {
@@ -1432,9 +1452,7 @@
             background: rgb(235, 235, 235);
         }
 
-        .ticketmaster {
-            margin-top: 500px;
-        }
+      
 
         .geo-data {
             display: none;
@@ -1463,14 +1481,30 @@
               padding: 0;
         }
 
+        #ticketMasterContainer{
+            position:absolute;
+            top: 450px;
+        }
+
+        #ticketMasterContainer h3{
+            font-size: 1.2em;
+            color:#455a64;
+        }
+
+        #ticketMasterContainer h2{
+            font-family: 'Francois One', sans-serif;
+        }
+
         /*each event listing container*/
         .listingLi{
             background-color: white;
             border-radius: 20px;
             box-shadow: 0px 5px 10px grey;
-            margin: 20px 0;
+             width: 100%;
             padding:  10px 20px;
             position: relative; 
+        
+            margin:  20px auto;
         }
 
         /*each event listing's date*/
