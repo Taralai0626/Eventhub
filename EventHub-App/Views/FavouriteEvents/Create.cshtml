@@ -14,7 +14,9 @@
             defer></script>
             <script src="https://kit.fontawesome.com/e67acba296.js" crossorigin="anonymous"></script>
     <script type="module" src="./index.js"></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://maps/documentation/javascript/examples/default.css" rel="stylesheet" />
     <title>EventHub</title>
 
@@ -1042,92 +1044,113 @@
 
                                     var array1 = json._embedded.events;
 
-
                                     //make each events as an individual object
 
-                                    array1.forEach((element) => {
+                    array1.forEach((element) => {
 
-                                        //push element.name into array
-                                        var individualArray = [element.name, parseFloat(element._embedded.venues[0].location.latitude), parseFloat(element._embedded.venues[0].location.longitude)];
-                                        eventPin.push(individualArray);
+                        //push element.name into array
+                        var individualArray = [element.name, parseFloat(element._embedded.venues[0].location.latitude), parseFloat(element._embedded.venues[0].location.longitude)];
+                        eventPin.push(individualArray);
 
 
-                                        //get lat and lon for map pins
-                                        console.log("each event lat is: " + element._embedded.venues[0].location.latitude + " and lon is: " + element._embedded.venues[0].location.longitude);
+                        //get lat and lon for map pins
+                        console.log("each event lat is: " + element._embedded.venues[0].location.latitude + " and lon is: " + element._embedded.venues[0].location.longitude);
 
-                                      //create element
-                                        var node = document.createElement("li");
-                                        var eventNameContainer = document.createElement("h3");
-                                        var eventDateContainer = document.createElement("p");
-                                        var eventStartTimeContainer = document.createElement("p");
-                                        var eventPriceMinContainer = document.createElement("p");
-                                        var eventPriceMaxContainer = document.createElement("p");
-                                        var eventPriceCurrencyContainer = document.createElement("p");
-                                        var eventUrlContainer = document.createElement("p");
-                                        var eventVenueContainer = document.createElement("p");
+                        //create element
+                        var node = document.createElement("li");
+                        var eventNameContainer = document.createElement("h3");
+                        var eventDateContainer = document.createElement("p");
+                        var eventStartTimeContainer = document.createElement("p");
 
-                                        var eventName = document.createTextNode(element.name);
-                                        var eventDate = document.createTextNode(element.dates.start.localDate);
-                                        var eventStartTime = document.createTextNode(element.dates.start.localTime);
-                                        var eventPriceMin = document.createTextNode(element.priceRanges[0].min);
-                                        var eventPriceMax = document.createTextNode(element.priceRanges[0].max);
-                                        var eventPriceCurrency = document.createTextNode(element.priceRanges[0].currency);
-                                        var eventUrl = document.createTextNode(element.url);
-                                        var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
-                                        var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
-                                        var eventImage = document.createTextNode(element.images[0].url);
-                                        console.log("image" + eventImage)
+                        var priceContainer = document.createElement("p");
+                        var eventPriceMinContainer = document.createElement("span");
+                        var eventPriceMaxContainer = document.createElement("span");
+                        var eventPriceCurrencyContainer = document.createElement("span");
 
-               
-                      
 
-                                        // append element into container
+                        var eventUrlContainer = document.createElement("p");
+                        var eventVenueAddressContainer = document.createElement("p");
+                        var eventVenueNameContainer = document.createElement("p");
 
-                                        eventNameContainer.appendChild(eventName)
-                                        eventDateContainer.appendChild(eventDate);
-                                        eventStartTimeContainer.appendChild(eventStartTime);
-                                        eventPriceMinContainer.appendChild(eventPriceMin);
-                                        eventPriceMaxContainer.appendChild(eventPriceMax);
-                                        eventPriceCurrencyContainer.appendChild(eventPriceCurrency);
-                                        eventUrlContainer.appendChild(eventUrl);
-                                        eventVenueContainer.appendChild(eventVenueAddress);
-                                        eventVenueContainer.appendChild(eventVenueName);
+                        var eventName = document.createTextNode(element.name);
+                        var eventDate = document.createTextNode(element.dates.start.localDate);
+                        var eventStartTime = document.createTextNode(element.dates.start.localTime);
+                        var eventPriceMin = document.createTextNode(element.priceRanges[0].min);
+                        var eventPriceMax = document.createTextNode(element.priceRanges[0].max);
+                        var eventPriceCurrency = document.createTextNode(element.priceRanges[0].currency);
+                        var eventUrl = document.createTextNode(element.url);
+                        var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
+                        var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
+                        var eventImage = document.createTextNode(element.images[0].url);
+                        console.log("image" + eventImage)
 
-                                        /* create buttons */
-                                            var btn = document.createElement("button");
-                                            btn.innerHTML = '<i class="fa-regular fa-heart fa-xl" style="color:red;"></i>';
-                                            btn.classList.add("addBtn");
-                                            btn.onclick = function () {
-                                                btn.innerHTML = '<i class="fa-solid fa-heart fa-xl" style="color:red;"></i>';
+                        //add CSS to element
+                        node.classList.add("listingLi");
+                        eventDateContainer.classList.add("listingDate");
+                        eventStartTimeContainer.classList.add("listingTime");
+                        eventVenueAddressContainer.classList.add("listingVenueAddress");
+                        eventVenueNameContainer.classList.add("listingVenueName");
+
+                        priceContainer.classList.add("listingPriceContainer");
+                        eventPriceMaxContainer.classList.add("listingPriceMax");
+                        eventPriceCurrencyContainer.classList.add("listingPriceCurrency");
+
+                         
+                        // append element into container
+
+                        eventNameContainer.appendChild(eventName)
+                        eventDateContainer.appendChild(eventDate);
+                        eventStartTimeContainer.appendChild(eventStartTime);
+
+                        eventPriceMinContainer.appendChild(eventPriceMin);
+                        eventPriceMaxContainer.appendChild(eventPriceMax);
+                        eventPriceCurrencyContainer.appendChild(eventPriceCurrency);
+
+                        priceContainer.appendChild(eventPriceMinContainer);
+                        priceContainer.appendChild(eventPriceMaxContainer);
+                        priceContainer.appendChild(eventPriceCurrencyContainer);
+
+                        eventUrlContainer.appendChild(eventUrl);
+                        eventVenueAddressContainer.appendChild(eventVenueAddress);
+                        eventVenueNameContainer.appendChild(eventVenueName);
+
+                        /* create buttons */
+                        var btn = document.createElement("button");
+                        btn.innerHTML = '<i class="fa-regular fa-heart fa-xl" style="color:red;"></i>';
+                        btn.classList.add("addBtn");
+                        btn.onclick = function () {
+                            btn.innerHTML = '<i class="fa-solid fa-heart fa-xl" style="color:red;"></i>';
                              
-                                            // alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
+                        // alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
                   
-                                                document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
-                                                document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
-                                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
-                                                document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer.innerHTML;
-                                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
-                                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
-                                                document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
-                                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
-                                                var auto_refresh = setInterval(function() { submitform(); }, 2000);
+                        document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
+                        document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
+                        document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
+                        document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer.innerHTML;
+                        document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
+                        document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
+                        document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
+                        document.getElementById("FavouriteEventVenue").value = priceContainer.innerHTML;
+                        var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
-                                        };
+                        };
 
-                                        //append element into node(li)
-                                        node.appendChild(eventNameContainer);
-                                        node.appendChild(eventDateContainer);
-                                        node.appendChild(eventStartTimeContainer);
-                                        node.appendChild(eventPriceMinContainer);
-                                        node.appendChild(eventPriceMaxContainer);
-                                        node.appendChild(eventPriceCurrencyContainer);
-                                        node.appendChild(eventUrlContainer);
-                                        node.appendChild(eventVenueContainer);
-                                        node.appendChild(btn);
+                        //append element into node(li)
+                        node.appendChild(eventNameContainer);
+                        node.appendChild(eventDateContainer);
+                        node.appendChild(eventStartTimeContainer);
+                       
+                  
+                        node.appendChild(priceContainer);
+                        node.appendChild(eventVenueAddressContainer);
+                        node.appendChild(eventVenueNameContainer);
+                        
+                        node.appendChild(eventUrlContainer);
+                        node.appendChild(btn);
 
 
-                                        /****** insert li to ul(eventContainer) ******/
-                                        eventContainer.appendChild(node);
+                        /****** insert li to ul(eventContainer) ******/
+                        eventContainer.appendChild(node);
                        
 
                                         /******  Get the obeject to string for infowindow ******/
@@ -1235,19 +1258,38 @@
         <div class="map-wrapper">
             <!-- Search input -->
             <div class="row mb-4 position-relative">
-                    <div class="col-md-7 mx-auto w-100">
-                        <div class="input-group search-wrapper">
-                            <input class="form-control border-end-0 border rounded-pill controls" type="text" id="searchInput" placeholder="Enter a location">
-                        <i class="fa fa-search search-icon position-absolute float-end"></i>
-                        </div>
+                <div class="col-12 mx-auto mb-4 w-100">
+                    <div class="input-group search-wrapper">
+                        <input class="form-control border-end-0 border rounded-pill controls" type="text" id="searchInput" placeholder="Enter a location">
+                    <i class="fa fa-search search-icon position-absolute float-end"></i>
                     </div>
                 </div>
-            <!-- Google map -->
-            <div id="mapdiv w-100">
-                <span id="map"></span>
+                <!-- Google map -->
+                <div id="mapdiv" >
+                    <span id="map"  class="position-absolute" ></span>
+                </div>
+    
+            </div>
+            <div class="position-relative">
+                 <!--TicketMaster API-->
+                <div id="ticketMasterContainer" class="w-100">
+                    <div>
+                        <h2 class="eventTitle">Today events:</h2>
+                        <ul id="eventContainer">
+                        </ul>
+                    </div>
+                    <div>
+                        <h2  class="eventTitle">This week events:</h2>
+                        <ul id="eventContainer2">
+                        </ul>
+                    </div>
+                </div>
             </div>
 
         </div>
+
+       
+
         <!-- Display geolocation data -->
         <div>
             <ul class="geo-data">
@@ -1314,24 +1356,18 @@
             </div>
         </form>
         </div>
+
+
+        </div>
+
+   
+
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-</div>
-    <!--TicketMaster data-->
-    <div class="ticketmaster container-fluid">
-        <h2>Today events:</h2>
-        <ul id="eventContainer">
-        </ul>
-    </div>
 
-    <div>
-        <h2>This week events:</h2>
-        <ul id="eventContainer2">
-        </ul>
-    </div>
+
+
+
 
 
 </body>
@@ -1340,17 +1376,21 @@
 @section Styles
 {
     <style type="text/css">
+        body{
+            font-family: 'Nunito', sans-serif;
+        }
 
         .adding{
             margin-top: 600px;
             display:none;
         }
 
+
         #map {
             display: block;
-            position: absolute;
-            height: 70%;
-            width: 89%;
+            height: 420px;
+            width: 98%;
+          
         }
  
 
@@ -1383,6 +1423,7 @@
             position: relative !important;
             width: 75%;
             height: 2em;
+            background-color:#E8ECEF;
         }
 
        <!-- .container {
@@ -1412,9 +1453,7 @@
             background: rgb(235, 235, 235);
         }
 
-        .ticketmaster {
-            margin-top: 500px;
-        }
+      
 
         .geo-data {
             display: none;
@@ -1443,14 +1482,30 @@
               padding: 0;
         }
 
+        #ticketMasterContainer{
+            position:absolute;
+            top: 450px;
+        }
+
+        #ticketMasterContainer h3{
+            font-size: 1.2em;
+            color:#455a64;
+        }
+
+        #ticketMasterContainer h2{
+            font-family: 'Francois One', sans-serif;
+        }
+
         /*each event listing container*/
         .listingLi{
             background-color: white;
             border-radius: 20px;
             box-shadow: 0px 5px 10px grey;
-            margin: 20px 0;
+             width: 100%;
             padding:  10px 20px;
             position: relative; 
+        
+            margin:  20px auto;
         }
 
         /*each event listing's date*/
