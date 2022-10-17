@@ -1041,92 +1041,113 @@
 
                                     var array1 = json._embedded.events;
 
-
                                     //make each events as an individual object
 
-                                    array1.forEach((element) => {
+                    array1.forEach((element) => {
 
-                                        //push element.name into array
-                                        var individualArray = [element.name, parseFloat(element._embedded.venues[0].location.latitude), parseFloat(element._embedded.venues[0].location.longitude)];
-                                        eventPin.push(individualArray);
+                        //push element.name into array
+                        var individualArray = [element.name, parseFloat(element._embedded.venues[0].location.latitude), parseFloat(element._embedded.venues[0].location.longitude)];
+                        eventPin.push(individualArray);
 
 
-                                        //get lat and lon for map pins
-                                        console.log("each event lat is: " + element._embedded.venues[0].location.latitude + " and lon is: " + element._embedded.venues[0].location.longitude);
+                        //get lat and lon for map pins
+                        console.log("each event lat is: " + element._embedded.venues[0].location.latitude + " and lon is: " + element._embedded.venues[0].location.longitude);
 
-                                      //create element
-                                        var node = document.createElement("li");
-                                        var eventNameContainer = document.createElement("h3");
-                                        var eventDateContainer = document.createElement("p");
-                                        var eventStartTimeContainer = document.createElement("p");
-                                        var eventPriceMinContainer = document.createElement("p");
-                                        var eventPriceMaxContainer = document.createElement("p");
-                                        var eventPriceCurrencyContainer = document.createElement("p");
-                                        var eventUrlContainer = document.createElement("p");
-                                        var eventVenueContainer = document.createElement("p");
+                        //create element
+                        var node = document.createElement("li");
+                        var eventNameContainer = document.createElement("h3");
+                        var eventDateContainer = document.createElement("p");
+                        var eventStartTimeContainer = document.createElement("p");
 
-                                        var eventName = document.createTextNode(element.name);
-                                        var eventDate = document.createTextNode(element.dates.start.localDate);
-                                        var eventStartTime = document.createTextNode(element.dates.start.localTime);
-                                        var eventPriceMin = document.createTextNode(element.priceRanges[0].min);
-                                        var eventPriceMax = document.createTextNode(element.priceRanges[0].max);
-                                        var eventPriceCurrency = document.createTextNode(element.priceRanges[0].currency);
-                                        var eventUrl = document.createTextNode(element.url);
-                                        var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
-                                        var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
-                                        var eventImage = document.createTextNode(element.images[0].url);
-                                        console.log("image" + eventImage)
+                        var priceContainer = document.createElement("p");
+                        var eventPriceMinContainer = document.createElement("span");
+                        var eventPriceMaxContainer = document.createElement("span");
+                        var eventPriceCurrencyContainer = document.createElement("span");
 
-               
-                      
 
-                                        // append element into container
+                        var eventUrlContainer = document.createElement("p");
+                        var eventVenueAddressContainer = document.createElement("p");
+                        var eventVenueNameContainer = document.createElement("p");
 
-                                        eventNameContainer.appendChild(eventName)
-                                        eventDateContainer.appendChild(eventDate);
-                                        eventStartTimeContainer.appendChild(eventStartTime);
-                                        eventPriceMinContainer.appendChild(eventPriceMin);
-                                        eventPriceMaxContainer.appendChild(eventPriceMax);
-                                        eventPriceCurrencyContainer.appendChild(eventPriceCurrency);
-                                        eventUrlContainer.appendChild(eventUrl);
-                                        eventVenueContainer.appendChild(eventVenueAddress);
-                                        eventVenueContainer.appendChild(eventVenueName);
+                        var eventName = document.createTextNode(element.name);
+                        var eventDate = document.createTextNode(element.dates.start.localDate);
+                        var eventStartTime = document.createTextNode(element.dates.start.localTime);
+                        var eventPriceMin = document.createTextNode(element.priceRanges[0].min);
+                        var eventPriceMax = document.createTextNode(element.priceRanges[0].max);
+                        var eventPriceCurrency = document.createTextNode(element.priceRanges[0].currency);
+                        var eventUrl = document.createTextNode(element.url);
+                        var eventVenueAddress = document.createTextNode(element._embedded.venues[0].address.line1);
+                        var eventVenueName = document.createTextNode(element._embedded.venues[0].name);
+                        var eventImage = document.createTextNode(element.images[0].url);
+                        console.log("image" + eventImage)
 
-                                        /* create buttons */
-                                            var btn = document.createElement("button");
-                                            btn.innerHTML = '<i class="fa-regular fa-heart fa-xl" style="color:red;"></i>';
-                                            btn.classList.add("addBtn");
-                                            btn.onclick = function () {
-                                                btn.innerHTML = '<i class="fa-solid fa-heart fa-xl" style="color:red;"></i>';
+                        //add CSS to element
+                        node.classList.add("listingLi");
+                        eventDateContainer.classList.add("listingDate");
+                        eventStartTimeContainer.classList.add("listingTime");
+                        eventVenueAddressContainer.classList.add("listingVenueAddress");
+                        eventVenueNameContainer.classList.add("listingVenueName");
+
+                        priceContainer.classList.add("listingPriceContainer");
+                        eventPriceMaxContainer.classList.add("listingPriceMax");
+                        eventPriceCurrencyContainer.classList.add("listingPriceCurrency");
+
+                         
+                        // append element into container
+
+                        eventNameContainer.appendChild(eventName)
+                        eventDateContainer.appendChild(eventDate);
+                        eventStartTimeContainer.appendChild(eventStartTime);
+
+                        eventPriceMinContainer.appendChild(eventPriceMin);
+                        eventPriceMaxContainer.appendChild(eventPriceMax);
+                        eventPriceCurrencyContainer.appendChild(eventPriceCurrency);
+
+                        priceContainer.appendChild(eventPriceMinContainer);
+                        priceContainer.appendChild(eventPriceMaxContainer);
+                        priceContainer.appendChild(eventPriceCurrencyContainer);
+
+                        eventUrlContainer.appendChild(eventUrl);
+                        eventVenueAddressContainer.appendChild(eventVenueAddress);
+                        eventVenueNameContainer.appendChild(eventVenueName);
+
+                        /* create buttons */
+                        var btn = document.createElement("button");
+                        btn.innerHTML = '<i class="fa-regular fa-heart fa-xl" style="color:red;"></i>';
+                        btn.classList.add("addBtn");
+                        btn.onclick = function () {
+                            btn.innerHTML = '<i class="fa-solid fa-heart fa-xl" style="color:red;"></i>';
                              
-                                            // alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
+                        // alert("Name: " + eventNameContainer.innerHTML + "Date: " + eventDateContainer.innerHTML + "Time: " + eventStartTimeContainer.innerHTML);
                   
-                                                document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
-                                                document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
-                                                document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
-                                                document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer.innerHTML;
-                                                document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
-                                                document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
-                                                document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
-                                                document.getElementById("FavouriteEventVenue").value = eventVenueContainer.innerHTML;
-                                                var auto_refresh = setInterval(function() { submitform(); }, 2000);
+                        document.getElementById("FavouriteEventName").value = eventNameContainer.innerHTML;
+                        document.getElementById("FavouriteEventDate").value = eventDateContainer.innerHTML;
+                        document.getElementById("FavouriteEventTime").value = eventStartTimeContainer.innerHTML;
+                        document.getElementById("FavouriteEventPriceMin").value = eventPriceMinContainer.innerHTML;
+                        document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
+                        document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
+                        document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
+                        document.getElementById("FavouriteEventVenue").value = priceContainer.innerHTML;
+                        var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
-                                        };
+                        };
 
-                                        //append element into node(li)
-                                        node.appendChild(eventNameContainer);
-                                        node.appendChild(eventDateContainer);
-                                        node.appendChild(eventStartTimeContainer);
-                                        node.appendChild(eventPriceMinContainer);
-                                        node.appendChild(eventPriceMaxContainer);
-                                        node.appendChild(eventPriceCurrencyContainer);
-                                        node.appendChild(eventUrlContainer);
-                                        node.appendChild(eventVenueContainer);
-                                        node.appendChild(btn);
+                        //append element into node(li)
+                        node.appendChild(eventNameContainer);
+                        node.appendChild(eventDateContainer);
+                        node.appendChild(eventStartTimeContainer);
+                       
+                  
+                        node.appendChild(priceContainer);
+                        node.appendChild(eventVenueAddressContainer);
+                        node.appendChild(eventVenueNameContainer);
+                        
+                        node.appendChild(eventUrlContainer);
+                        node.appendChild(btn);
 
 
-                                        /****** insert li to ul(eventContainer) ******/
-                                        eventContainer.appendChild(node);
+                        /****** insert li to ul(eventContainer) ******/
+                        eventContainer.appendChild(node);
                        
 
                                         /******  Get the obeject to string for infowindow ******/
