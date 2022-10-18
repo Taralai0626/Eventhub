@@ -65,7 +65,8 @@ namespace EventHub_App.Controllers
             {
                 _context.Add(favouriteEvent);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction();
+
             }
             return View(favouriteEvent);
         }

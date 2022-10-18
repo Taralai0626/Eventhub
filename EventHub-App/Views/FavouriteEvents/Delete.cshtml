@@ -6,66 +6,13 @@
 
 <h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Are you sure you want to delete this event from your favourites?</h3>
 <div>
-    <h4>FavouriteEvent</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FavouriteEventName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FavouriteEventName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FavouriteEventDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FavouriteEventDate)
-        </dd>
 
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FavouriteEventTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FavouriteEventTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FavouriteEventPriceMin)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FavouriteEventPriceMin)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FavouriteEventPriceMax)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FavouriteEventPriceMax)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FavouriteEventPriceCurrency)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FavouriteEventPriceCurrency)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FavouriteEventUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FavouriteEventUrl)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FavouriteEventVenue)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FavouriteEventVenue)
-        </dd>
-
-    </dl>
-    
     <form asp-action="Delete">
         <input type="hidden" asp-for="id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
 </div>
+

@@ -1,74 +1,163 @@
-@model IEnumerable<EventHub_App.Models.FavouriteEvent>
+﻿@model IEnumerable<EventHub_App.Models.FavouriteEvent>
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Favourite Events</h1>
+<script src="https://kit.fontawesome.com/e67acba296.js" crossorigin="anonymous"></script>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FavouriteEventName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FavouriteEventDate)
-            </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.FavouriteEventTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FavouriteEventPriceMin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FavouriteEventPriceMax)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FavouriteEventPriceCurrency)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FavouriteEventUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FavouriteEventVenue)
-            </th>
+<div class="position-relative">
+    <!--TicketMaster API-->
+    <div id="ticketMasterContainer" class="w-100">
+        <div>
+            <ul id="eventContainer">
+                @foreach (var item in Model)
+                {
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FavouriteEventName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FavouriteEventDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FavouriteEventTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FavouriteEventPriceMin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FavouriteEventPriceMax)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FavouriteEventPriceCurrency)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FavouriteEventUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FavouriteEventVenue)
-            </td>
-            <td>
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-            </td>
-        </tr>
+                    <li class="listingLi">
+
+                        <h3>
+                            @Html.DisplayFor(modelItem => item.FavouriteEventName)
+                        </h3>
+                        <p class="listingDate">
+                            @Html.DisplayFor(modelItem => item.FavouriteEventDate)
+                        </p>
+                        <p class="listingTime">
+                            @Html.DisplayFor(modelItem => item.FavouriteEventTime)
+                        </p>
+                        <p>
+
+                        </p>
+                        <span class="listingPriceContainer">
+                            @Html.DisplayFor(modelItem => item.FavouriteEventPriceMin)
+                        </span>
+                        <span class="listingPriceMax">
+                            @Html.DisplayFor(modelItem => item.FavouriteEventPriceMax)
+                        </span>
+                        <span class="listingPriceCurrency">
+                            @Html.DisplayFor(modelItem => item.FavouriteEventPriceCurrency)
+                        </span>
+                        <p>
+
+                        </p>
+                        <p class="listingVenueAddress">
+                            @Html.DisplayFor(modelItem => item.FavouriteEventVenue)
+                        </p>
+                        <p class="listingVenueName">
+
+                        </p>
+                        <a href="@Html.DisplayFor(modelItem => item.FavouriteEventUrl)" target="_blank" class="btn btn-primary" id="detailBtn">View Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.id" class="addBtn"><i class="fa-solid fa-x fa-xl" style="color: #1d3557;"></i></a>
+
+                    </li>
+
+                }
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+@section Styles
+    {
+    <style type="text/css">
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #accbe1
+        }
+
+        /*Heart buttons*/
+        .addBtn {
+            background-color: transparent;
+            border: none;
+            position: absolute;
+            top: 10px;
+            right: 15px;
+        }
+
+        #eventContainer, #eventContainer2 {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #ticketMasterContainer {
+            position: absolute;
+        }
+
+            #ticketMasterContainer h3 {
+                font-size: 1.2em;
+                color: #455a64;
+            }
+
+            #ticketMasterContainer h2 {
+                font-family: 'Francois One', sans-serif;
+            }
+
+        /*each event listing container*/
+        .listingLi {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0px 5px 10px grey;
+            width: 100%;
+            padding: 10px 20px;
+            position: relative;
+            margin: 20px auto;
+        }
+
+        /*each event listing's date*/
+        .listingDate {
+            display: inline-block;
+        }
+
+            .listingDate::before {
+                content: '📅';
+            }
+
+        /*each event listing's time*/
+        .listingTime {
+            display: inline-block;
+            margin-left: 30px;
+        }
+
+            .listingTime::before {
+                content: '🕖';
+            }
+
+        /*each event listing's venue address*/
+        .listingVenueAddress, .listingVenueName {
+            display: inline-block;
+        }
+
+        .listingVenueName {
+            margin-left: 30px;
+        }
+
+        .listingVenueAddress::before {
+            content: '📍';
+        }
+
+        /*each event listing's Price*/
+
+        .listingPriceContainer::before {
+            content: '💰';
+        }
+
+        .listingPriceMax::before {
+            content: ' - ';
+        }
+
+        #detailBtn {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+    </style>
 }
-    </tbody>
-</table>
+
+
+
+
+

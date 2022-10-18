@@ -274,7 +274,8 @@
                         document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
                         document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
                         document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
-                        document.getElementById("FavouriteEventVenue").value = priceContainer.innerHTML;
+                                document.getElementById("FavouriteEventVenue").value = eventVenueAddressContainer.innerHTML + "," + eventVenueNameContainer.innerHTML;
+
                         var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
                         };
@@ -369,7 +370,7 @@
                         //eventContainer3.innerHTML = '';
                         var array2 = data.results;
 
-                        console.log('array: ', array2);
+                        console.log('array2: ', array2);
 
                         //make each events as an individual object
 
@@ -540,7 +541,8 @@
                                 document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer2.innerHTML;
                                 document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer2.innerHTML;
                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer2.innerHTML;
-                                document.getElementById("FavouriteEventVenue").value = priceContainer2.innerHTML;
+                               document.getElementById("FavouriteEventVenue").value = eventVenueAddressContainer2.innerHTML + "," +eventVenueNameContainer2.innerHTML;
+
                                 var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
                         };
@@ -608,7 +610,7 @@
 
 
                         //get lat and lon for map pins
-                        console.log("each event lat is: " + element._embedded.venues[0].location.latitude + " and lon is: " + element._embedded.venues[0].location.longitude);
+                        console.log("deafault TM " + individualArray);
 
                         //create element
                         var node = document.createElement("li");
@@ -684,7 +686,8 @@
                                 document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
                                 document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
-                                document.getElementById("FavouriteEventVenue").value = priceContainer.innerHTML;
+                               document.getElementById("FavouriteEventVenue").value = eventVenueAddressContainer.innerHTML + "," +eventVenueNameContainer.innerHTML;
+
                                 var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
                         };
@@ -772,6 +775,7 @@
 
                     //eventContainer3.innerHTML = '';
                     var array2 = data.results;
+                    console.log(array2)
 
                     console.log('array: ', array2);
 
@@ -782,7 +786,8 @@
 
                         var individualArray2 = [element.title, parseFloat(element.location[1]), parseFloat(element.location[0])];
                         eventPin.push(individualArray2);
-                        console.log(individualArray2)
+                        //console.log(individualArray2)
+                        console.log("deafault other " + individualArray2);
 
                         var eventName3 = element.title.toString();
                         var category3 = element.category.toString();
@@ -928,7 +933,8 @@
                                 document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer2.innerHTML;
                                 document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer2.innerHTML;
                                 document.getElementById("FavouriteEventUrl").value = eventUrlContainer2.innerHTML;
-                                document.getElementById("FavouriteEventVenue").value = priceContainer2.innerHTML;
+                               document.getElementById("FavouriteEventVenue").value = eventVenueAddressContainer2.innerHTML + "," +eventVenueNameContainer2.innerHTML;
+
                                 var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
                         };
@@ -1101,7 +1107,8 @@
                         document.getElementById("FavouriteEventPriceMax").value = eventPriceMaxContainer.innerHTML;
                         document.getElementById("FavouriteEventPriceCurrency").value = eventPriceCurrencyContainer.innerHTML;
                         document.getElementById("FavouriteEventUrl").value = eventUrlContainer.innerHTML;
-                        document.getElementById("FavouriteEventVenue").value = priceContainer.innerHTML;
+                        document.getElementById("FavouriteEventVenue").value = eventVenueAddressContainer.innerHTML + "," +eventVenueNameContainer.innerHTML;
+
                         var auto_refresh = setInterval(function() { submitform(); }, 2000);
 
                         };
