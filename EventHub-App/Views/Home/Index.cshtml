@@ -9,7 +9,7 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz_qxllhGeL9ZGB7kNBoXaOj0IVYNB1Sw&callback=initMap&libraries=places&v=weekly"
+    <script src="https://maps.googleapis.com/maps/api/js?key=APIKEY&callback=initMap&libraries=places&v=weekly"
             defer></script>
     <script type="module" src="./index.js"></script>
 
@@ -155,7 +155,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today + "T00:00:00," + tomrrow + "T00:00:00",
+                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=APIKEY&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today + "T00:00:00," + tomrrow + "T00:00:00",
                     async: true,
                     dataType: "json",
                     success: function (json) {
@@ -305,7 +305,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today2 + "T00:00:00," + eventInAWeek + "T00:00:00",
+                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=APIKEY&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today2 + "T00:00:00," + eventInAWeek + "T00:00:00",
                     async: true,
                     dataType: "json",
                     success: function (json) {
@@ -402,7 +402,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today + "T00:00:00," + tomrrow + "T00:00:00",
+                url: "https://app.ticketmaster.com/discovery/v2/events?apikey=APIKEY&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today + "T00:00:00," + tomrrow + "T00:00:00",
                 async: true,
                 dataType: "json",
                 success: function (json) {
@@ -555,7 +555,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today2 + "T00:00:00," + eventInAWeek + "T00:00:00",
+                url: "https://app.ticketmaster.com/discovery/v2/events?apikey=APIKEY&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today2 + "T00:00:00," + eventInAWeek + "T00:00:00",
                 async: true,
                 dataType: "json",
                 success: function (json) {
