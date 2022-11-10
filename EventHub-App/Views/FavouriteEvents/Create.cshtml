@@ -10,7 +10,7 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false" type="text/javascript"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz_qxllhGeL9ZGB7kNBoXaOj0IVYNB1Sw&callback=initMap&libraries=places&v=weekly"
+    <script src="https://maps.googleapis.com/maps/api/js?key=APIKEY&callback=initMap&libraries=places&v=weekly"
             defer></script>
             <script src="https://kit.fontawesome.com/e67acba296.js" crossorigin="anonymous"></script>
     <script type="module" src="./index.js"></script>
@@ -179,7 +179,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today + "T00:00:00," + tomrrow + "T00:00:00",
+                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=APIKEY&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today + "T00:00:00," + tomrrow + "T00:00:00",
                     async: true,
                     dataType: "json",
                     success: function (json) {
@@ -362,7 +362,7 @@
                     dataType: "json",
                     url: "https://api.predicthq.com/v1/events/?within=1mi%40" + outputLat + "," + outputLon + "&active.gte=" + today3 + "&active.lte=" + tomrrow3 + "&category=performing-arts,concerts,expos&sort=rank",
                     headers: {
-                        'Authorization': 'Bearer SD70g3g43BUE_I7x0_m4jFOhY4jZEHBm-LBcIDGl'
+                        'Authorization': 'Bearer APIKEY'
                     },
                     success: function (data, status, xhr) {
                         console.log('data: ', data);
@@ -447,7 +447,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today2 + "T00:00:00," + eventInAWeek + "T00:00:00",
+                    url: "https://app.ticketmaster.com/discovery/v2/events?apikey=APIKEY&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today2 + "T00:00:00," + eventInAWeek + "T00:00:00",
                     async: true,
                     dataType: "json",
                     success: function (json) {
@@ -590,7 +590,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today + "T00:00:00," + tomrrow + "T00:00:00",
+                url: "https://app.ticketmaster.com/discovery/v2/events?apikey=APIKEY&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today + "T00:00:00," + tomrrow + "T00:00:00",
                 async: true,
                 dataType: "json",
                 success: function (json) {
@@ -768,7 +768,7 @@
                 dataType: "json",
                 url: "https://api.predicthq.com/v1/events/?within=3mi%40" + outputLat + "," + outputLon + "&active.gte=" + today + "&active.lte=" + tomrrow + "&category=performing-arts,concerts,expos&sort=rank",
                 headers: {
-                    'Authorization': 'Bearer SD70g3g43BUE_I7x0_m4jFOhY4jZEHBm-LBcIDGl'
+                    'Authorization': 'Bearer APIKEY'
                 },
                 success: function (data, status, xhr) {
                     console.log('data: ', data);
@@ -837,7 +837,7 @@
 
             $.ajax({
                 type: "GET",
-                url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today2 + "T00:00:00," + eventInAWeek + "T00:00:00",
+                url: "https://app.ticketmaster.com/discovery/v2/events?apikey=APIKEY&size=10&radius=30&unit=km&latlong=" + outputLat + "," + outputLon + "&localStartEndDateTime=" + today2 + "T00:00:00," + eventInAWeek + "T00:00:00",
                 async: true,
                 dataType: "json",
                 success: function (json) {
@@ -1010,7 +1010,7 @@
 
                             $.ajax({
                                 type: "GET",
-                                url: "https://app.ticketmaster.com/discovery/v2/events?apikey=lgfgprr49bNDRJoqaBD62452TUPhbkEw&size=10&radius=30&unit=km&latlong=" + pos.lat + "," + pos.lng + "&localStartEndDateTime=" + today + "T00:00:00," + tomrrow + "T00:00:00",
+                                url: "https://app.ticketmaster.com/discovery/v2/events?apikey=APIKEY&size=10&radius=30&unit=km&latlong=" + pos.lat + "," + pos.lng + "&localStartEndDateTime=" + today + "T00:00:00," + tomrrow + "T00:00:00",
                                 async: true,
                                 dataType: "json",
                                 success: function (json) {
@@ -1195,7 +1195,7 @@
                                 dataType: "json",
                                 url: "https://api.predicthq.com/v1/events/?within=3mi%40" + pos.lat + "," + pos.lng + "&active.gte=" + today3 + "&active.lte=" + tomrrow3 + "&category=performing-arts,concerts,expos&sort=rank",
                                 headers: {
-                                    'Authorization': 'Bearer SD70g3g43BUE_I7x0_m4jFOhY4jZEHBm-LBcIDGl'
+                                    'Authorization': 'Bearer APIKEY'
                                 },
                                 success: function (data, status, xhr) {
                                     console.log('data: ', data);
