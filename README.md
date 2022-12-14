@@ -5,7 +5,7 @@ The purpose of this website is to provide users the ability to search events at 
 <h2>Technology Stack:</h2>
 <ul>
   <li>ASP.NET Core to build a web application with CRUD function.</li>
-  <li>JaveScript</li>
+  <li>JavaScript</li>
   <li>C#</li>
   <li>HTML</li>
   <li>CSS</li>
